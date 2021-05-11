@@ -1,0 +1,140 @@
+
+#####################################################################
+# On exiting this file a shell script automatically reloads i3 with #
+# all them new configurations.                                      #
+#####################################################################
+
+# Put in ~/.config/i3/config
+
+set $mod mod1
+set $sup mod4
+
+# Utilities TODO add dmenu prompt
+
+# system shutdown
+
+# system reboot
+
+# i3lock and suspsend system
+
+bindsym control+$mod+l exec --no-startup-id i3lock \
+    --image=/home/nikin/Pictures/Wallpapers/batman-grinding.png \
+    && systemctl suspend
+
+# System Shortcuts
+
+bindsym control+$mod+t exec --no-startup-id i3-sensible-terminal
+
+bindsym control+$mod+w exec --no-startup-id firefox
+
+bindsym $sup+d exec --no-startup-id dmenu_run
+
+bindsym $sup+z exec --no-stratup-id tabbed -c zathura -e > /dev/null
+
+bindsym $sup+q kill
+
+# Windows
+
+# change focus
+
+bindsym $sup+h focus left
+bindsym $sup+j focus down
+bindsym $sup+k focus up
+bindsym $sup+l focus right
+
+# prevent focus change on mouse hover
+
+focus_follows_mouse no
+
+# move windows
+
+bindsym $sup+shift+h move left
+bindsym $sup+shift+j move down
+bindsym $sup+shift+k move up
+bindsym $sup+shift+l move right
+
+# split windows vertically or horizontally
+
+bindsym $sup+control+h split v
+bindsym $sup+control+v split h
+
+# resizing windows
+
+bindsym $sup+r mode "resize"
+
+
+mode "resize" {
+    bindsym Left  resize shrink width 10 px
+    bindsym Down  resize grow height 10 px
+    bindsym Up    resize shrink height 10 px
+    bindsym Right resize grow width 10 px
+
+    # back to normal
+
+    bindsym Escape mode "default"
+}
+
+# workspaces
+
+# start-off with workspace 0:
+workspace 0 output primary
+
+# workspace switches
+
+bindsym $sup+0 workspace 0:
+bindsym $sup+1 workspace 1:
+bindsym $sup+2 workspace 2:
+bindsym $sup+3 workspace 3:
+bindsym $sup+4 workspace 4:
+bindsym $sup+5 workspace 5:
+bindsym $sup+6 workspace 6:
+bindsym $sup+7 workspace 7:
+bindsym $sup+8 workspace 8:
+bindsym $sup+9 workspace 9:
+
+# move focused windows to workspace
+
+bindsym $sup+shift+0 move container to workspace 0:
+bindsym $sup+shift+1 move container to workspace 1:
+bindsym $sup+shift+2 move container to workspace 2:
+bindsym $sup+shift+3 move container to workspace 3:
+bindsym $sup+shift+4 move container to workspace 4:
+bindsym $sup+shift+5 move container to workspace 5:
+bindsym $sup+shift+6 move container to workspace 6:
+bindsym $sup+shift+7 move container to workspace 7:
+bindsym $sup+shift+8 move container to workspace 8:
+bindsym $sup+shift+9 move container to workspace 9:
+
+# swtich workspaces left or right
+
+bindsym control+$mod+Right workspace next
+bindsym control+$mod+Left workspace prev
+
+
+# enter fullscreen mode for the focused container
+bindsym $sup+f fullscreen toggle
+
+# Appearance
+
+font pango:Monospace 0
+
+###########################################
+# i3blocks isn't installed.               #
+# Use aptitude to get it.                 #
+#                                         #
+# bar {                                   #
+#     status_command i3blocks             #
+#     position top                        #
+#     workspace_buttons yes               #
+#     strip_workspace_numbers yes         #
+#     font pango:SauceCodePro Nerd Font 8 #
+#     separator_symbol "-"                #
+#     mode hide                           #
+# }                                       #
+###########################################
+
+exec /usr/bin/compton --config /home/nikin/.config/compton.conf
+
+exec_always feh --bg-scale /home/nikin/Pictures/Wallpapers/minimal.jpeg
+
+exec_always /home/nikin/.screenlayout/my_monitor_setup.sh
