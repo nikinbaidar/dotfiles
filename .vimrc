@@ -1,11 +1,15 @@
+"        _ _    _       _           _     _
+"  _ __ (_) | _(_)_ __ | |__   __ _(_) __| | __ _ _ __
+" | '_ \| | |/ / | '_ \| '_ \ / _` | |/ _` |/ _` | '__|
+" | | | | |   <| | | | | |_) | (_| | | (_| | (_| | |
+" |_| |_|_|_|\_\_|_| |_|_.__/ \__,_|_|\__,_|\__,_|_|
 
-" my .vimrc
+" github: nikinbaidarr
 
 " General Setup -
     set nocompatible
     set noswapfile
     set nowrap
-    set lazyredraw " opts for speed
     set incsearch
     set hlsearch
     set number relativenumber
@@ -15,7 +19,6 @@
     set showcmd
     set confirm
     set splitright
-    set splitbelow
     set tabstop=4
     set shiftwidth=4
     set softtabstop=4
@@ -26,23 +29,26 @@
     set path+=**
 
 " Appearance -
-    colorscheme ron
+    syntax on
+    colorscheme jellybeans
     function! CustomColors()
         if &filetype == 'vimwiki'|| &filetype == 'tex'
             syntax enable
+            hi LineNr ctermfg=245 guifg=#d0d0d0
+            hi VimwikiHeader1 ctermfg=187 guifg=#d7d7af
+            hi VimwikiHeader2 ctermfg=158 guifg=#afffd7
+            hi VimwikiHeader3 ctermfg=116 guifg=#87d7d7
+            hi VimwikiLink ctermfg=195 cterm=NONE
+            hi VimwikiTODO ctermfg=189 cterm=bold ctermbg=NONE
         endif
-        hi LineNr ctermfg=245 guifg=#d0d0d0
-        hi VimwikiHeader1 ctermfg=187 guifg=#d7d7af
-        hi VimwikiHeader2 ctermfg=158 guifg=#afffd7
-        hi VimwikiHeader3 ctermfg=116 guifg=#87d7d7
-        hi VimwikiLink ctermfg=195 cterm=NONE
-        hi VimwikiTODO ctermfg=189 cterm=bold ctermbg=NONE
     endfunction
 
 " Netrw Setup -
+    let g:netrw_banner=0
+    let g:netrw_winsize=25
     let g:netrw_liststyle=3
-    let g:netrw_browse_split=4
-    let g:netrw_list_hide='.*\aux$,.*\log$,.*\out$,.*\.toc$,.*\.maf$,.*\.mtc0$,.*\mtc1$,.*\.mtc2$,.*\.mtc3$,.*\.out$,\(^\|\s\s\)\zs\.\S\+'
+    let g:netrw_browse_split=0
+    let g:netrw_list_hide='.*\.aux$,.*\.pdf$,.*\log$,.*\out$,.*\.toc$,.*\.maf$,.*\.mtc0$,.*\mtc1$,.*\.mtc2$,.*\.mtc3$,.*\.out$,\(^\|\s\s\)\zs\.\S\+'
     let g:netrw_bufsettings = 'noma nomod nu nobl nowrap ro'
 
 " Vim Plug -
@@ -54,19 +60,20 @@
     Plug 'tpope/vim-surround'
     Plug 'tpope/vim-repeat'
     Plug 'luochen1990/rainbow'
-    " Plug 'ap/vim-css-color'
     call plug#end()
 
 " Configuration -
     let mapleader = "\<Space>"
+    let g:tex_flavor="latex"
     let g:vimwiki_list = [{'path':'~/Notes'}]
     let g:vimwiki_table_mappings=0
-    let g:rainbow_active = 1
-    let g:rainbow_conf = {'guifgs': ['yellow', 'cyan', 'mediumpurple','lightgreen'], 'ctermfgs': ['yellow', 'cyan', 'magenta','lightgreen'], 'separately':{'html':0}}
     let g:UltiSnipsExpandTrigger="<tab>"
     let g:UltiSnipsJumpForwardTrigger="<C-h>"
     let g:UltiSnipsEditSplit="vertical"
-    let g:tex_flavor="latex"
+    let g:rainbow_active = 1
+    let g:rainbow_conf = {'guifgs': ['yellow', 'cyan', 'mediumpurple',
+                \  'lightgreen'], 'ctermfgs': ['yellow', 'cyan', 'magenta',
+                \  'lightgreen'], 'separately':{'html':0}}
 
 " Custom Plugins -
     function! ToggleComment()
@@ -203,18 +210,16 @@
         map <silent><leader><leader> :nohlsearch<CR>
     endfunction
 
-    map <silent><leader>b :call ToggleNetrw()<CR>
-    nnoremap <F3> :set termguicolors!<CR>
-
 " Auto Commands -
     augroup RunOnEvent
         autocmd!
         autocmd VimEnter * if !argc() && getcwd() =~ '/home/nikin/Code/*/*' || getcwd() =~ '/home/nikin/sketchbook/*/*' | Sex | endif
         autocmd FileType * call VimMappings() | setlocal formatoptions-=c formatoptions-=r formatoptions-=o | call CustomColors() | set colorcolumn=81
         autocmd FileType c,cpp setlocal comments-=:// comments+=f://
-        autocmd FileType html,css setlocal shiftwidth=2 tabstop=2 softtabstop=2 | EmmetInstall
+        " autocmd FileType html,css setlocal shiftwidth=2 tabstop=2 softtabstop=2
         autocmd FileType help wincmd L
-        autocmd FileType vimwiki :call Notetaking() | :call ReloadTex() | syn match markdownError "\w\@<=\w\@="
+        autocmd FileType vimwiki :call Notetaking() | call ReloadTex() | syn match markdownError "\w\@<=\w\@="
+        " autocmd FileType vimwiki :call Notetaking() | :call ReloadTex() | syn match markdownError "\w\@<=\w\@="
         autocmd FileType tex let b:surround_{char2nr("'")} = "`\r'" | let b:surround_{char2nr("\"")} = "``\r''"
         autocmd FileType pdf :call ReadPDF()
         autocmd FileType arduino command! Upload :w! | execute ("!clear && arduino-cli compile --fqbn arduino:avr:uno % && arduino-cli upload --port /dev/ttyACM0 --fqbn arduino:avr:uno %")
@@ -238,12 +243,13 @@
     abbr adn and
     abbr ture true
     abbr fasle false
+    abbr teh the
+    abbr THe The
+      abbr singal signal
 
 " Notetaking -
     function! Notetaking()
 
-      setlocal spell
-      setlocal colorcolumn=
       setlocal wrap
       setlocal linebreak
       setlocal breakindent
@@ -253,17 +259,6 @@
       setlocal hidden
       setlocal complete+=kspell
       setlocal spellcapcheck=\_[\])'"   ]\+
-
-
-      function! Terminal()
-          cd ~
-          set noautochdir
-          :below vertical terminal
-          execute ("wincmd h")
-          set autochdir
-          vertical resize 75
-          execute ("wincmd l")
-      endfunction
 
       function! PeekImage()
           :normal! $x3jYpl2df]i Ypja--4k$i--p2l2jR
@@ -289,18 +284,13 @@
           endif
       endfunction
 
-      nnoremap <leader>mt :normal! I_*g_a*_<CR>
-      nnoremap <leader>s :normal! I   <CR>
       nnoremap <leader>o :normal! magqip`a<CR>
-      nnoremap <leader>; :call Terminal()<CR>
-      nnoremap <leader>l :normal! I[[A]]<CR>
       nnoremap <F2> :Latex<CR><CR><CR>
       nnoremap <F6> :open *.pdf<CR>
       nnoremap <silent><leader>n :call MakeNotes()<CR> :'<,'>! boxes -d stone<CR>
 
       inoremap <C-\> <C-[>:call CodeBlock()<CR>o
 
-      vnoremap <silent><leader>\ di<C-t><C-t><C-t><C-t>{{{python}}}<C-[>k^Pk
       vnoremap <leader>i :! boxes -d peek<CR> :call PeekImage()<CR>
       vnoremap <leader>cp :! boxes -d pound-cmt<CR>
 
@@ -309,7 +299,18 @@
       abbr bupt •
       abbr putp ▸
       abbr putt ✔
-      abbr teh the
-      abbr singal signal
 
     endfunction
+
+    autocmd BufWritePre *.html,*.css, :silent !bash /home/nikin/.reloadCurrentFirefoxTab.sh
+" function! Refresh_firefox()
+  " if &modified
+    " write
+    " silent !echo  'vimYo = content.window.pageYOffset;
+          " \ vimXo = content.window.pageXOffset;
+          " \ BrowserReload();
+          " \ content.window.scrollTo(vimXo,vimYo);
+          " \ repl.quit();'  |
+          " \ nc -w 1 localhost 4242 2>&1 > /dev/null
+  " endif
+" endfunction
