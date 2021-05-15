@@ -17,17 +17,19 @@ set $sup mod4
 
 # i3lock and suspsend system
 
-bindsym control+$mod+l exec --no-startup-id i3lock \
-    --image=/home/nikin/Pictures/Wallpapers/batman-grinding.png \
+bindsym control+$mod+l exec --no-startup-id i3lock --no-unlock-indicator \
+    --image=/home/nikin/Pictures/Wallpapers/arch.png \
     && systemctl suspend
 
 # System Shortcuts
 
-bindsym control+$mod+t exec --no-startup-id i3-sensible-terminal
+bindsym control+$mod+t exec --no-startup-id xterm
 
 bindsym control+$mod+w exec --no-startup-id firefox
 
-bindsym $sup+d exec --no-startup-id dmenu_run
+bindsym $sup+d exec --no-startup-id rofi -show run
+
+bindsym $sup+p exec --no-startup-id rofi -show
 
 bindsym $sup+z exec --no-stratup-id tabbed -c zathura -e > /dev/null
 
@@ -77,7 +79,7 @@ mode "resize" {
 # workspaces
 
 # start-off with workspace 0:
-workspace 0 output primary
+workspace 0: output primary
 
 # workspace switches
 
@@ -119,8 +121,6 @@ bindsym $sup+f fullscreen toggle
 font pango:Monospace 0
 
 ###########################################
-# i3blocks isn't installed.               #
-# Use aptitude to get it.                 #
 #                                         #
 # bar {                                   #
 #     status_command i3blocks             #
@@ -129,12 +129,11 @@ font pango:Monospace 0
 #     strip_workspace_numbers yes         #
 #     font pango:SauceCodePro Nerd Font 8 #
 #     separator_symbol "-"                #
-#     mode hide                           #
 # }                                       #
 ###########################################
 
-exec /usr/bin/compton --config /home/nikin/.config/compton.conf
+exec /usr/bin/picom --config /home/nikin/.config/picom.conf
 
-exec_always feh --bg-scale /home/nikin/Pictures/Wallpapers/minimal.jpeg
+exec_always feh --bg-scale --randomize /home/nikin/Pictures/Wallpapers/*
 
 exec_always /home/nikin/.screenlayout/my_monitor_setup.sh

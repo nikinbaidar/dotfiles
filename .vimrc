@@ -50,6 +50,10 @@
 
 " Vim Plugins -
     " This Plugins are managerd via. Vim Plug
+
+    " curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+        " https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
     filetype plugin on
     call plug#begin('~/.vim/plugged')
     Plug 'tpope/vim-surround'
