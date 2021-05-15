@@ -166,7 +166,7 @@
         " Switch Splits
         nnoremap <silent><C-h> <C-w>h
         nnoremap <silent><C-j> <C-w>j
-        nnoremap <buffer><C-k> <C-w>k
+        nnoremap <silent><C-k> <C-w>k
         nnoremap <buffer><C-l> <C-w>l
         nnoremap <leader>e :edit %<CR>
         " Switch Buffers
