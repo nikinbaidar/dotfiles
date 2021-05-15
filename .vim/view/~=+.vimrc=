@@ -17,9 +17,11 @@ vnoremap <buffer> <silent> ]] m':exe "normal! gv"|call search('^\s*\(fu\%[nct
 nnoremap <buffer> <silent> ]] m':call search('^\s*\(fu\%[nction]\|def\)\>', "W")
 let s:cpo_save=&cpo
 set cpo&vim
-nnoremap <buffer> <C-K> k
 nnoremap <buffer> <C-H> h
+nnoremap <buffer> <silent> <S-Down> :Nexplore
+nnoremap <buffer> <silent> <S-Up> :Pexplore
 nnoremap <buffer> <C-L> l
+nnoremap <buffer> <C-K> k
 let &cpo=s:cpo_save
 unlet s:cpo_save
 setlocal keymap=
@@ -28,7 +30,7 @@ setlocal autoindent
 setlocal backupcopy=
 setlocal balloonexpr=netrw#BalloonHelp()
 setlocal nobinary
-setlocal nobreakindent
+setlocal breakindent
 setlocal breakindentopt=
 setlocal bufhidden=
 setlocal buflisted
@@ -37,8 +39,8 @@ setlocal nocindent
 setlocal cinkeys=0{,0},0),0],:,0#,!^F,o,O,e
 setlocal cinoptions=
 setlocal cinwords=if,else,while,do,for,switch
-setlocal colorcolumn=
-setlocal comments=sO:\"\ -,mO:\"\ \ ,sO:#\ -,mO:#\ \ ,eO:##,:\",b:#
+setlocal colorcolumn=81
+setlocal comments=sO:\"\ -,mO:\"\ \ ,eO:\"\",:\"
 setlocal commentstring=\"%s
 setlocal complete=.,w,b,u,t,i
 setlocal concealcursor=
@@ -80,11 +82,11 @@ setlocal imsearch=-1
 setlocal include=
 setlocal includeexpr=
 setlocal indentexpr=GetVimIndent()
-setlocal indentkeys=0{,0},0),0],:,!^F,o,O,e,=end,=},=else,=cat,=fina,=END,0\\,0=\"\\\ 
+setlocal indentkeys=0{,0},0),0],:,!^F,o,O,e,=end,=},=else,=cat,=finall,=END,0\\,0=\"\\\ 
 setlocal noinfercase
 setlocal iskeyword=@,48-57,_,192-255
 setlocal keywordprg=:help
-setlocal nolinebreak
+setlocal linebreak
 setlocal nolisp
 setlocal lispwords=
 setlocal nolist
@@ -134,7 +136,7 @@ setlocal tags=
 setlocal termwinkey=
 setlocal termwinscroll=10000
 setlocal termwinsize=
-setlocal textwidth=78
+setlocal textwidth=80
 setlocal thesaurus=
 setlocal noundofile
 setlocal undolevels=-123456
@@ -143,38 +145,43 @@ setlocal vartabstop=
 setlocal wincolor=
 setlocal nowinfixheight
 setlocal nowinfixwidth
-setlocal nowrap
+setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-4,27fold
-4,27fold
-28,46fold
-47,87fold
-88,100fold
-101,113fold
-115,166fold
-167,189fold
-190,195fold
-196,203fold
-114,204fold
-205,251fold
-252,279fold
-280,284fold
-299,308fold
-309,312fold
-313,319fold
-320,332fold
-285,358fold
-2,358fold
+9,36fold
+37,50fold
+51,62fold
+63,77fold
+79,134fold
+135,155fold
+78,156fold
+157,195fold
+196,222fold
+223,228fold
+235,244fold
+245,259fold
+260,273fold
+229,275fold
+7,275fold
 let &fdl = &fdl
-2
+7
 normal! zo
-let s:l = 218 - ((217 * winheight(0) + 20) / 40)
+78
+normal! zo
+78
+normal! zc
+229
+normal! zo
+229
+normal! zc
+7
+normal! zc
+let s:l = 8 - ((7 * winheight(0) + 20) / 41)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 218
-normal! 01|
+keepjumps 8
+normal! 0
 let &g:so = s:so_save | let &g:siso = s:siso_save
 nohlsearch
 doautoall SessionLoadPost
