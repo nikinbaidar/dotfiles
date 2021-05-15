@@ -2,8 +2,6 @@ set window-height 3000
 set window-width 3000
 set guioptions ""
 
-set default-bg "#e4e4e4"
-
 set statusbar-fg "#B0B0B0"
 set statusbar-bg "#202020"
 
