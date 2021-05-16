@@ -4,7 +4,7 @@
 " | | | | |   <| | | | | |_) | (_| | | (_| | (_| | |
 " |_| |_|_|_|\_\_|_| |_|_.__/ \__,_|_|\__,_|\__,_|_|
 
-" github: nikinbaidarr
+" .vimrc
 
 " General Setup -
     set nocompatible
@@ -41,18 +41,19 @@
 
     function! VimwikiColors()
         syntax enable
-        hi VimwikiHeader1 ctermfg=187 guifg=#d7d7af
-        hi VimwikiHeader2 ctermfg=158 guifg=#afffd7
-        hi VimwikiHeader3 ctermfg=116 guifg=#87d7d7
+        hi VimwikiHeader1 ctermfg=187
+        hi VimwikiHeader2 ctermfg=158
+        hi VimwikiHeader3 ctermfg=116
         hi VimwikiLink ctermfg=195 cterm=NONE
         hi VimwikiTODO ctermfg=189 cterm=bold ctermbg=NONE
     endfunction
 
 " Vim Plugins -
-    " This Plugins are managerd via. Vim Plug
+
+    " These Plugins are managerd via. Vim Plug
 
     " curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-        " https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    " https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
     filetype plugin on
     call plug#begin('~/.vim/plugged')
@@ -68,8 +69,7 @@
     let g:tex_flavor="latex"
     let g:netrw_banner=0
     let g:netrw_winsize=25
-    let g:netrw_list_hide='.*\.aux$,.*\.pdf$,.*\log$,.*\out$,.*\.toc$,.*\.maf$,.*\.mtc0$,.*\mtc1$,.*\.mtc2$,.*\.mtc3$,.*\.out$,\(^\|\s\s\)\zs\.\S\+'
-    let g:netrw_bufsettings='noma nomod nu nobl nowrap ro'
+    let g:netrw_list_hide='*\.pdf$,\(^\|\s\s\)\zs\.\S\+'
     let g:vimwiki_list = [{'path':'~/Notes'}]
     let g:vimwiki_table_mappings=0
     let g:UltiSnipsExpandTrigger="<tab>"
@@ -167,12 +167,6 @@
         nnoremap <M-S-Down> :normal! yyp<CR>
         nnoremap <C-s> :w ++enc=utf-8<CR>
         nnoremap <F9> :call CodeRunner()<CR>
-        " Switch Splits
-        nnoremap <silent><C-h> <C-w>h
-        nnoremap <silent><C-j> <C-w>j
-        nnoremap <silent><C-k> <C-w>k
-        nnoremap <buffer><C-l> <C-w>l
-        nnoremap <leader>e :edit %<CR>
         " Switch Buffers
         nnoremap <C-Left> :bprevious<CR>
         nnoremap <C-Right> :bnext<CR>
@@ -206,9 +200,6 @@
         autocmd FileType pdf OpenPdfs
         autocmd BufWinEnter *.* silent loadview | set foldopen-=hor
         autocmd BufWritePre * %s/\s\+$//e " strip trailing spaces on save
-        autocmd BufWritePre *.html,*.css, :silent !bash $HOME/.reloadFirefox.sh
-        autocmd BufEnter * highlight OverLength ctermfg=red ctermbg=black
-        autocmd BufEnter * match OverLength /\%82v.*/
         " Block Commenting On Certain Files: FIXED
         autocmd BufEnter *.html vnoremap <silent><leader>\ dO<!----><C-[>k$p
         autocmd BufEnter *.css vnoremap <silent><leader>\ dO/**/<C-[>k$p
@@ -265,6 +256,7 @@
 
       inoremap <C-\> <C-[>:call InsertCodeBlock()<CR>o
       nnoremap <leader>o :normal! magqip`a<CR>
+
       " LaTeX compiling & PDF related bindings
       nnoremap <F2> :CompilePricnipalTexFile<CR><CR><CR>
       nnoremap <F6> :open *.pdf<CR>
