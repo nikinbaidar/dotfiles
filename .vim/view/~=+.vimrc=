@@ -1,8 +1,35 @@
 let s:so_save = &g:so | let s:siso_save = &g:siso | setg so=0 siso=0 | setl so=-1 siso=-1
 argglobal
+let s:cpo_save=&cpo
+set cpo&vim
+inoremap <buffer> <silent> <M-(> =AutoPairsMoveCharacter('(')
+inoremap <buffer> <silent> <M-)> =AutoPairsMoveCharacter(')')
+inoremap <buffer> <silent> <M-[> =AutoPairsMoveCharacter('[')
+inoremap <buffer> <silent> <M-]> =AutoPairsMoveCharacter(']')
+inoremap <buffer> <silent> <M-{> =AutoPairsMoveCharacter('{')
+inoremap <buffer> <silent> <M-}> =AutoPairsMoveCharacter('}')
+inoremap <buffer> <silent> <M-"> =AutoPairsMoveCharacter('"')
+inoremap <buffer> <silent> <M-'> =AutoPairsMoveCharacter('''')
+inoremap <buffer> <silent> <BS> =AutoPairsDelete()
+inoremap <buffer> <silent> <C-H> =AutoPairsDelete()
+inoremap <buffer> <silent> <M-e> =AutoPairsFastWrap()
+inoremap <buffer> <silent> <M-b> =AutoPairsBackInsert()
+inoremap <buffer> <silent> <expr> <M-p> AutoPairsToggle()
+inoremap <buffer> <silent> <M-n> :call AutoPairsJump()a
 nnoremap <buffer>  h
-nnoremap <buffer>  k
-nnoremap <buffer>  l
+inoremap <buffer> <silent> ¨ =AutoPairsMoveCharacter('(')
+inoremap <buffer> <silent> © =AutoPairsMoveCharacter(')')
+inoremap <buffer> <silent> ¢ =AutoPairsMoveCharacter('"')
+inoremap <buffer> <silent> § =AutoPairsMoveCharacter('''')
+inoremap <buffer> <silent> Û =AutoPairsMoveCharacter('[')
+inoremap <buffer> <silent> Û =AutoPairsMoveCharacter('[')
+inoremap <buffer> <silent> Ý =AutoPairsMoveCharacter(']')
+inoremap <buffer> <silent> û =AutoPairsMoveCharacter('{')
+inoremap <buffer> <silent> ý =AutoPairsMoveCharacter('}')
+inoremap <buffer> <silent> å =AutoPairsFastWrap()
+inoremap <buffer> <silent> â =AutoPairsBackInsert()
+inoremap <buffer> <silent> <expr> ð AutoPairsToggle()
+inoremap <buffer> <silent> î :call AutoPairsJump()a
 vnoremap <buffer> <silent> [" :exe "normal! gv"|call search('\%(^\s*".*\n\)\%(^\s*"\)\@!', "bW")
 nnoremap <buffer> <silent> [" :call search('\%(^\s*".*\n\)\%(^\s*"\)\@!', "bW")
 vnoremap <buffer> <silent> [] m':exe "normal! gv"|call search('^\s*end\(f\%[unction]\|def\)\>', "bW")
@@ -15,20 +42,29 @@ vnoremap <buffer> <silent> ][ m':exe "normal! gv"|call search('^\s*end\(f\%[u
 nnoremap <buffer> <silent> ][ m':call search('^\s*end\(f\%[unction]\|def\)\>', "W")
 vnoremap <buffer> <silent> ]] m':exe "normal! gv"|call search('^\s*\(fu\%[nction]\|def\)\>', "W")
 nnoremap <buffer> <silent> ]] m':call search('^\s*\(fu\%[nction]\|def\)\>', "W")
-let s:cpo_save=&cpo
-set cpo&vim
 nnoremap <buffer> <C-H> h
-nnoremap <buffer> <silent> <S-Down> :Nexplore
-nnoremap <buffer> <silent> <S-Up> :Pexplore
-nnoremap <buffer> <C-L> l
-nnoremap <buffer> <C-K> k
+noremap <buffer> <silent> <M-p> :call AutoPairsToggle()
+noremap <buffer> <silent> <M-n> :call AutoPairsJump()
+inoremap <buffer> <silent>  =AutoPairsDelete()
+inoremap <buffer> <silent>   =AutoPairsSpace()
+inoremap <buffer> <silent> " =AutoPairsInsert('"')
+inoremap <buffer> <silent> ' =AutoPairsInsert('''')
+inoremap <buffer> <silent> ( =AutoPairsInsert('(')
+inoremap <buffer> <silent> ) =AutoPairsInsert(')')
+noremap <buffer> <silent> ð :call AutoPairsToggle()
+noremap <buffer> <silent> î :call AutoPairsJump()
+inoremap <buffer> <silent> [ =AutoPairsInsert('[')
+inoremap <buffer> <silent> ] =AutoPairsInsert(']')
+inoremap <buffer> <silent> ` =AutoPairsInsert('`')
+inoremap <buffer> <silent> { =AutoPairsInsert('{')
+inoremap <buffer> <silent> } =AutoPairsInsert('}')
 let &cpo=s:cpo_save
 unlet s:cpo_save
 setlocal keymap=
 setlocal noarabic
 setlocal autoindent
 setlocal backupcopy=
-setlocal balloonexpr=netrw#BalloonHelp()
+setlocal balloonexpr=
 setlocal nobinary
 setlocal breakindent
 setlocal breakindentopt=
@@ -50,7 +86,7 @@ setlocal nocopyindent
 setlocal cryptmethod=
 setlocal nocursorbind
 setlocal nocursorcolumn
-setlocal nocursorline
+setlocal cursorline
 setlocal cursorlineopt=both
 setlocal define=
 setlocal dictionary=
@@ -73,7 +109,7 @@ setlocal foldminlines=1
 setlocal foldnestmax=20
 setlocal foldtext=foldtext()
 setlocal formatexpr=
-setlocal formatoptions=tcq
+setlocal formatoptions=tq
 setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
 setlocal formatprg=
 setlocal grepprg=
@@ -84,7 +120,7 @@ setlocal includeexpr=
 setlocal indentexpr=GetVimIndent()
 setlocal indentkeys=0{,0},0),0],:,!^F,o,O,e,=end,=},=else,=cat,=finall,=END,0\\,0=\"\\\ 
 setlocal noinfercase
-setlocal iskeyword=@,48-57,_,192-255
+setlocal iskeyword=@,48-57,_,192-255,#
 setlocal keywordprg=:help
 setlocal linebreak
 setlocal nolisp
@@ -148,40 +184,27 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-9,36fold
-37,50fold
-51,62fold
-63,77fold
-79,134fold
-135,155fold
-78,156fold
-157,195fold
-196,222fold
-223,228fold
-235,244fold
-245,259fold
-260,273fold
-229,275fold
-7,275fold
+9,51fold
+52,55fold
+56,73fold
+74,87fold
+89,144fold
+145,165fold
+88,166fold
+167,200fold
+201,223fold
+224,229fold
+239,248fold
+249,264fold
+265,280fold
+230,282fold
 let &fdl = &fdl
-7
-normal! zo
-78
-normal! zo
-78
-normal! zc
-229
-normal! zo
-229
-normal! zc
-7
-normal! zc
-let s:l = 8 - ((7 * winheight(0) + 20) / 41)
+let s:l = 18 - ((17 * winheight(0) + 20) / 41)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 8
-normal! 0
+keepjumps 18
+normal! 01|
 let &g:so = s:so_save | let &g:siso = s:siso_save
 nohlsearch
 doautoall SessionLoadPost

@@ -1,14 +1,17 @@
 #! /bin/bash
-# ~/.bashrc: executed by bash(1) for non-login shells.
+
+#  _               _
+# | |__   __ _ ___| |__  _ __ ___
+# | '_ \ / _` / __| '_ \| '__/ __|
+# | |_) | (_| \__ \ | | | | | (__
+# |_.__/ \__,_|___/_| |_|_|  \___|
+
 
 # If not running interactively, don't do anything
+
 [[ $- != *i* ]] && return
 
-if [ "$color_prompt" = yes ]; then
-    PS1='\[\033[01;31m\]\u\[\033[00m\]@\h:\W\$ '
-else
-    PS1='\[\033[01;31m\]\u\[\033[00m\]@\h:\W\$ '
-fi
+PS1='\[\033[01;31m\]\u\[\033[00m\]@\h:\w\$ '
 
 # Aliash definitions
 # Instead of adding all of you aliases here directly,

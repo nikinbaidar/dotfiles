@@ -1,149 +1,189 @@
 let s:so_save = &g:so | let s:siso_save = &g:siso | setg so=0 siso=0 | setl so=-1 siso=-1
 argglobal
-balt ~/Notes/.texfiles.wiki
 let s:cpo_save=&cpo
 set cpo&vim
-inoremap <buffer> <silent> <S-CR> :VimwikiReturn 2 2
-imap <buffer> <C-L><C-M> <Plug>VimwikiListToggle
-imap <buffer> <C-L><C-K> <Plug>VimwikiListPrevSymbol
-imap <buffer> <C-L><C-J> <Plug>VimwikiListNextSymbol
-imap <buffer> <C-T> <Plug>VimwikiIncreaseLvlSingleItem
 imap <buffer> <C-D> <Plug>VimwikiDecreaseLvlSingleItem
+imap <buffer> <C-T> <Plug>VimwikiIncreaseLvlSingleItem
+imap <buffer> <C-L><C-J> <Plug>VimwikiListNextSymbol
+imap <buffer> <C-L><C-K> <Plug>VimwikiListPrevSymbol
+imap <buffer> <C-L><C-M> <Plug>VimwikiListToggle
+inoremap <buffer> <silent> <S-CR> :VimwikiReturn 2 2
+inoremap <buffer> <silent> <M-n> :call AutoPairsJump()a
+inoremap <buffer> <silent> <expr> <M-p> AutoPairsToggle()
+inoremap <buffer> <silent> <M-b> =AutoPairsBackInsert()
+inoremap <buffer> <silent> <M-e> =AutoPairsFastWrap()
+inoremap <buffer> <silent> <C-H> =AutoPairsDelete()
+inoremap <buffer> <silent> <BS> =AutoPairsDelete()
+inoremap <buffer> <silent> <M-'> =AutoPairsMoveCharacter('''')
+inoremap <buffer> <silent> <M-"> =AutoPairsMoveCharacter('"')
+inoremap <buffer> <silent> <M-}> =AutoPairsMoveCharacter('}')
+inoremap <buffer> <silent> <M-{> =AutoPairsMoveCharacter('{')
+inoremap <buffer> <silent> <M-]> =AutoPairsMoveCharacter(']')
+inoremap <buffer> <silent> <M-[> =AutoPairsMoveCharacter('[')
+inoremap <buffer> <silent> <M-)> =AutoPairsMoveCharacter(')')
+inoremap <buffer> <silent> <M-(> =AutoPairsMoveCharacter('(')
 nmap <buffer> 	 <Plug>VimwikiNextLink
 nnoremap <buffer>  l
-vmap <buffer>  <Plug>VimwikiNormalizeLinkVisualCR
 nmap <buffer>  <Plug>VimwikiFollowLink
-nmap <buffer>  wr <Plug>VimwikiRenameFile
-nmap <buffer>  wd <Plug>VimwikiDeleteFile
-nmap <buffer>  wn <Plug>VimwikiGoto
-nmap <buffer>  whh <Plug>Vimwiki2HTMLBrowse
+vmap <buffer>  <Plug>VimwikiNormalizeLinkVisualCR
 nmap <buffer>  wh <Plug>Vimwiki2HTML
-vmap <buffer> + <Plug>VimwikiNormalizeLinkVisual
+nmap <buffer>  whh <Plug>Vimwiki2HTMLBrowse
+nmap <buffer>  wn <Plug>VimwikiGoto
+nmap <buffer>  wd <Plug>VimwikiDeleteFile
+nmap <buffer>  wr <Plug>VimwikiRenameFile
 nmap <buffer> + <Plug>VimwikiNormalizeLink
+vmap <buffer> + <Plug>VimwikiNormalizeLinkVisual
 nmap <buffer> - <Plug>VimwikiRemoveHeaderLevel
 nmap <buffer> <D-CR> <Plug>VimwikiTabnewLink
 nmap <buffer> = <Plug>VimwikiAddHeaderLevel
+inoremap <buffer> <silent> § =AutoPairsMoveCharacter('''')
+inoremap <buffer> <silent> ¢ =AutoPairsMoveCharacter('"')
+inoremap <buffer> <silent> © =AutoPairsMoveCharacter(')')
+inoremap <buffer> <silent> ¨ =AutoPairsMoveCharacter('(')
+inoremap <buffer> <silent> î :call AutoPairsJump()a
+inoremap <buffer> <silent> <expr> ð AutoPairsToggle()
+inoremap <buffer> <silent> â =AutoPairsBackInsert()
+inoremap <buffer> <silent> å =AutoPairsFastWrap()
+inoremap <buffer> <silent> ý =AutoPairsMoveCharacter('}')
+inoremap <buffer> <silent> û =AutoPairsMoveCharacter('{')
+inoremap <buffer> <silent> Ý =AutoPairsMoveCharacter(']')
+inoremap <buffer> <silent> Û =AutoPairsMoveCharacter('[')
 nmap <buffer> O <Plug>VimwikiListO
-nmap <buffer> [= <Plug>VimwikiGoToPrevSiblingHeader
-nmap <buffer> [[ <Plug>VimwikiGoToPrevHeader
 nmap <buffer> [u <Plug>VimwikiGoToParentHeader
-nmap <buffer> ]= <Plug>VimwikiGoToNextSiblingHeader
-nmap <buffer> ]] <Plug>VimwikiGoToNextHeader
+nmap <buffer> [[ <Plug>VimwikiGoToPrevHeader
+nmap <buffer> [= <Plug>VimwikiGoToPrevSiblingHeader
 nmap <buffer> ]u <Plug>VimwikiGoToParentHeader
-vmap <buffer> al <Plug>VimwikiTextObjListChildrenV
-omap <buffer> al <Plug>VimwikiTextObjListChildren
-vmap <buffer> ac <Plug>VimwikiTextObjColumnV
-omap <buffer> ac <Plug>VimwikiTextObjColumn
-vmap <buffer> a\ <Plug>VimwikiTextObjTableCellV
-omap <buffer> a\ <Plug>VimwikiTextObjTableCell
-vmap <buffer> aH <Plug>VimwikiTextObjHeaderSubV
-omap <buffer> aH <Plug>VimwikiTextObjHeaderSub
-vmap <buffer> ah <Plug>VimwikiTextObjHeaderV
+nmap <buffer> ]] <Plug>VimwikiGoToNextHeader
+nmap <buffer> ]= <Plug>VimwikiGoToNextSiblingHeader
 omap <buffer> ah <Plug>VimwikiTextObjHeader
-nmap <buffer> gw1 <Plug>VimwikiTableAlignW1
-nmap <buffer> gww <Plug>VimwikiTableAlignW
-nmap <buffer> gq1 <Plug>VimwikiTableAlignQ1
-nmap <buffer> gqq <Plug>VimwikiTableAlignQ
-noremap <buffer> <silent> gLA :VimwikiChangeSymbolInListTo A)
-noremap <buffer> <silent> glA :VimwikiChangeSymbolTo A)
-noremap <buffer> <silent> gLa :VimwikiChangeSymbolInListTo a)
-noremap <buffer> <silent> gla :VimwikiChangeSymbolTo a)
-noremap <buffer> <silent> gLI :VimwikiChangeSymbolInListTo I)
-noremap <buffer> <silent> glI :VimwikiChangeSymbolTo I)
-noremap <buffer> <silent> gLi :VimwikiChangeSymbolInListTo i)
-noremap <buffer> <silent> gli :VimwikiChangeSymbolTo i)
-noremap <buffer> <silent> gL1 :VimwikiChangeSymbolInListTo 1.
-noremap <buffer> <silent> gl1 :VimwikiChangeSymbolTo 1.
-noremap <buffer> <silent> gL# :VimwikiChangeSymbolInListTo #
-noremap <buffer> <silent> gl# :VimwikiChangeSymbolTo #
-noremap <buffer> <silent> gL* :VimwikiChangeSymbolInListTo *
-noremap <buffer> <silent> gl* :VimwikiChangeSymbolTo *
-noremap <buffer> <silent> gL- :VimwikiChangeSymbolInListTo -
-noremap <buffer> <silent> gl- :VimwikiChangeSymbolTo -
-nmap <buffer> gL <Plug>VimwikiRemoveCBInList
-nmap <buffer> gl <Plug>VimwikiRemoveSingleCB
-nmap <buffer> gLR <Plug>VimwikiRenumberAllLists
-nmap <buffer> gLr <Plug>VimwikiRenumberAllLists
-nmap <buffer> glr <Plug>VimwikiRenumberList
-nmap <buffer> gLL <Plug>VimwikiIncreaseLvlWholeItem
-nmap <buffer> gLl <Plug>VimwikiIncreaseLvlWholeItem
-nmap <buffer> gLH <Plug>VimwikiDecreaseLvlWholeItem
-nmap <buffer> gLh <Plug>VimwikiDecreaseLvlWholeItem
-nmap <buffer> gll <Plug>VimwikiIncreaseLvlSingleItem
-nmap <buffer> glh <Plug>VimwikiDecreaseLvlSingleItem
-vmap <buffer> glp <Plug>VimwikiDecrementListItem
-nmap <buffer> glp <Plug>VimwikiDecrementListItem
-vmap <buffer> gln <Plug>VimwikiIncrementListItem
-nmap <buffer> gln <Plug>VimwikiIncrementListItem
-vmap <buffer> glx <Plug>VimwikiToggleRejectedListItem
-nmap <buffer> glx <Plug>VimwikiToggleRejectedListItem
+vmap <buffer> ah <Plug>VimwikiTextObjHeaderV
+omap <buffer> aH <Plug>VimwikiTextObjHeaderSub
+vmap <buffer> aH <Plug>VimwikiTextObjHeaderSubV
+omap <buffer> a\ <Plug>VimwikiTextObjTableCell
+vmap <buffer> a\ <Plug>VimwikiTextObjTableCellV
+omap <buffer> ac <Plug>VimwikiTextObjColumn
+vmap <buffer> ac <Plug>VimwikiTextObjColumnV
+omap <buffer> al <Plug>VimwikiTextObjListChildren
+vmap <buffer> al <Plug>VimwikiTextObjListChildrenV
 nmap <buffer> gnt <Plug>VimwikiNextTask
-vmap <buffer> il <Plug>VimwikiTextObjListSingleV
-omap <buffer> il <Plug>VimwikiTextObjListSingle
-vmap <buffer> ic <Plug>VimwikiTextObjColumnInnerV
-omap <buffer> ic <Plug>VimwikiTextObjColumnInner
-vmap <buffer> i\ <Plug>VimwikiTextObjTableCellInnerV
-omap <buffer> i\ <Plug>VimwikiTextObjTableCellInner
-vmap <buffer> iH <Plug>VimwikiTextObjHeaderSubContentV
-omap <buffer> iH <Plug>VimwikiTextObjHeaderSubContent
-vmap <buffer> ih <Plug>VimwikiTextObjHeaderContentV
+nmap <buffer> glx <Plug>VimwikiToggleRejectedListItem
+vmap <buffer> glx <Plug>VimwikiToggleRejectedListItem
+nmap <buffer> gln <Plug>VimwikiIncrementListItem
+vmap <buffer> gln <Plug>VimwikiIncrementListItem
+nmap <buffer> glp <Plug>VimwikiDecrementListItem
+vmap <buffer> glp <Plug>VimwikiDecrementListItem
+nmap <buffer> glh <Plug>VimwikiDecreaseLvlSingleItem
+nmap <buffer> gll <Plug>VimwikiIncreaseLvlSingleItem
+nmap <buffer> gLh <Plug>VimwikiDecreaseLvlWholeItem
+nmap <buffer> gLH <Plug>VimwikiDecreaseLvlWholeItem
+nmap <buffer> gLl <Plug>VimwikiIncreaseLvlWholeItem
+nmap <buffer> gLL <Plug>VimwikiIncreaseLvlWholeItem
+nmap <buffer> glr <Plug>VimwikiRenumberList
+nmap <buffer> gLr <Plug>VimwikiRenumberAllLists
+nmap <buffer> gLR <Plug>VimwikiRenumberAllLists
+nmap <buffer> gl <Plug>VimwikiRemoveSingleCB
+nmap <buffer> gL <Plug>VimwikiRemoveCBInList
+noremap <buffer> <silent> gl- :VimwikiChangeSymbolTo -
+noremap <buffer> <silent> gL- :VimwikiChangeSymbolInListTo -
+noremap <buffer> <silent> gl* :VimwikiChangeSymbolTo *
+noremap <buffer> <silent> gL* :VimwikiChangeSymbolInListTo *
+noremap <buffer> <silent> gl# :VimwikiChangeSymbolTo #
+noremap <buffer> <silent> gL# :VimwikiChangeSymbolInListTo #
+noremap <buffer> <silent> gl1 :VimwikiChangeSymbolTo 1.
+noremap <buffer> <silent> gL1 :VimwikiChangeSymbolInListTo 1.
+noremap <buffer> <silent> gli :VimwikiChangeSymbolTo i)
+noremap <buffer> <silent> gLi :VimwikiChangeSymbolInListTo i)
+noremap <buffer> <silent> glI :VimwikiChangeSymbolTo I)
+noremap <buffer> <silent> gLI :VimwikiChangeSymbolInListTo I)
+noremap <buffer> <silent> gla :VimwikiChangeSymbolTo a)
+noremap <buffer> <silent> gLa :VimwikiChangeSymbolInListTo a)
+noremap <buffer> <silent> glA :VimwikiChangeSymbolTo A)
+noremap <buffer> <silent> gLA :VimwikiChangeSymbolInListTo A)
+nmap <buffer> gqq <Plug>VimwikiTableAlignQ
+nmap <buffer> gq1 <Plug>VimwikiTableAlignQ1
+nmap <buffer> gww <Plug>VimwikiTableAlignW
+nmap <buffer> gw1 <Plug>VimwikiTableAlignW1
 omap <buffer> ih <Plug>VimwikiTextObjHeaderContent
+vmap <buffer> ih <Plug>VimwikiTextObjHeaderContentV
+omap <buffer> iH <Plug>VimwikiTextObjHeaderSubContent
+vmap <buffer> iH <Plug>VimwikiTextObjHeaderSubContentV
+omap <buffer> i\ <Plug>VimwikiTextObjTableCellInner
+vmap <buffer> i\ <Plug>VimwikiTextObjTableCellInnerV
+omap <buffer> ic <Plug>VimwikiTextObjColumnInner
+vmap <buffer> ic <Plug>VimwikiTextObjColumnInnerV
+omap <buffer> il <Plug>VimwikiTextObjListSingle
+vmap <buffer> il <Plug>VimwikiTextObjListSingleV
 nmap <buffer> o <Plug>VimwikiListo
-nnoremap <buffer> <silent> <Plug>VimwikiGoToPrevSiblingHeader :call vimwiki#base#goto_sibling(-1)
-nnoremap <buffer> <silent> <Plug>VimwikiGoToNextSiblingHeader :call vimwiki#base#goto_sibling(+1)
-nnoremap <buffer> <silent> <Plug>VimwikiGoToPrevHeader :call vimwiki#base#goto_prev_header()
-nnoremap <buffer> <silent> <Plug>VimwikiGoToNextHeader :call vimwiki#base#goto_next_header()
-nnoremap <buffer> <silent> <Plug>VimwikiGoToParentHeader :call vimwiki#base#goto_parent_header()
-nnoremap <buffer> <silent> <Plug>VimwikiRemoveHeaderLevel :call vimwiki#base#RemoveHeaderLevel(v:count)
-nnoremap <buffer> <silent> <Plug>VimwikiAddHeaderLevel :call vimwiki#base#AddHeaderLevel(v:count)
-vnoremap <buffer> <silent> <Plug>VimwikiTextObjListSingleV :call vimwiki#lst#TO_list_item(1, 1)
-onoremap <buffer> <silent> <Plug>VimwikiTextObjListSingle :call vimwiki#lst#TO_list_item(1, 0)
-vnoremap <buffer> <silent> <Plug>VimwikiTextObjListChildrenV :call vimwiki#lst#TO_list_item(0, 1)
-onoremap <buffer> <silent> <Plug>VimwikiTextObjListChildren :call vimwiki#lst#TO_list_item(0, 0)
-vnoremap <buffer> <silent> <Plug>VimwikiTextObjColumnInnerV :call vimwiki#base#TO_table_col(1, 1)
-onoremap <buffer> <silent> <Plug>VimwikiTextObjColumnInner :call vimwiki#base#TO_table_col(1, 0)
-vnoremap <buffer> <silent> <Plug>VimwikiTextObjColumnV :call vimwiki#base#TO_table_col(0, 1)
-onoremap <buffer> <silent> <Plug>VimwikiTextObjColumn :call vimwiki#base#TO_table_col(0, 0)
-vnoremap <buffer> <silent> <Plug>VimwikiTextObjTableCellInnerV :call vimwiki#base#TO_table_cell(1, 1)
-onoremap <buffer> <silent> <Plug>VimwikiTextObjTableCellInner :call vimwiki#base#TO_table_cell(1, 0)
-vnoremap <buffer> <silent> <Plug>VimwikiTextObjTableCellV :call vimwiki#base#TO_table_cell(0, 1)
-onoremap <buffer> <silent> <Plug>VimwikiTextObjTableCell :call vimwiki#base#TO_table_cell(0, 0)
-vnoremap <buffer> <silent> <Plug>VimwikiTextObjHeaderSubContentV :call vimwiki#base#TO_header(1, 1, v:count1)
-onoremap <buffer> <silent> <Plug>VimwikiTextObjHeaderSubContent :call vimwiki#base#TO_header(1, 1, v:count1)
-vnoremap <buffer> <silent> <Plug>VimwikiTextObjHeaderSubV :call vimwiki#base#TO_header(0, 1, v:count1)
-onoremap <buffer> <silent> <Plug>VimwikiTextObjHeaderSub :call vimwiki#base#TO_header(0, 1, v:count1)
-vnoremap <buffer> <silent> <Plug>VimwikiTextObjHeaderContentV :call vimwiki#base#TO_header(1, 0, v:count1)
-onoremap <buffer> <silent> <Plug>VimwikiTextObjHeaderContent :call vimwiki#base#TO_header(1, 0, v:count1)
-vnoremap <buffer> <silent> <Plug>VimwikiTextObjHeaderV :call vimwiki#base#TO_header(0, 0, v:count1)
-onoremap <buffer> <silent> <Plug>VimwikiTextObjHeader :call vimwiki#base#TO_header(0, 0, v:count1)
-nmap <buffer> <M-Right> <Plug>VimwikiTableMoveColumnRight
-nmap <buffer> <M-Left> <Plug>VimwikiTableMoveColumnLeft
-nnoremap <buffer> <silent> <Plug>VimwikiTableAlignW1 :VimwikiTableAlignW 2
-nnoremap <buffer> <silent> <Plug>VimwikiTableAlignW :VimwikiTableAlignW
-nnoremap <buffer> <silent> <Plug>VimwikiTableAlignQ1 :VimwikiTableAlignQ 2
-nnoremap <buffer> <silent> <Plug>VimwikiTableAlignQ :VimwikiTableAlignQ
-vmap <buffer> <C-@> <Plug>VimwikiToggleListItem
-vmap <buffer> <Nul> <Plug>VimwikiToggleListItem
+nnoremap <buffer> <C-L> l
+nmap <buffer> <S-CR> <Plug>VimwikiSplitLink
+nmap <buffer> <C-CR> <Plug>VimwikiVSplitLink
+nmap <buffer> <C-S-CR> <Plug>VimwikiTabnewLink
+nmap <buffer> <BS> <Plug>VimwikiGoBackLink
+nmap <buffer> <S-Tab> <Plug>VimwikiPrevLink
+nmap <buffer> <C-Down> <Plug>VimwikiDiaryNextDay
+nmap <buffer> <C-Up> <Plug>VimwikiDiaryPrevDay
+nnoremap <buffer> <silent> <Plug>VimwikiListo :call vimwiki#u#count_exe('call vimwiki#lst#kbd_o()')
+nnoremap <buffer> <silent> <Plug>VimwikiListO :call vimwiki#u#count_exe('call vimwiki#lst#kbd_O()')
+nmap <buffer> <C-Space> <Plug>VimwikiToggleListItem
+vmap <buffer> <C-Space> <Plug>VimwikiToggleListItem
 nmap <buffer> <C-@> <Plug>VimwikiToggleListItem
 nmap <buffer> <Nul> <Plug>VimwikiToggleListItem
-vmap <buffer> <C-Space> <Plug>VimwikiToggleListItem
-nmap <buffer> <C-Space> <Plug>VimwikiToggleListItem
-nnoremap <buffer> <silent> <Plug>VimwikiListO :call vimwiki#u#count_exe('call vimwiki#lst#kbd_O()')
-nnoremap <buffer> <silent> <Plug>VimwikiListo :call vimwiki#u#count_exe('call vimwiki#lst#kbd_o()')
-nmap <buffer> <C-Up> <Plug>VimwikiDiaryPrevDay
-nmap <buffer> <C-Down> <Plug>VimwikiDiaryNextDay
-nmap <buffer> <S-Tab> <Plug>VimwikiPrevLink
-nmap <buffer> <BS> <Plug>VimwikiGoBackLink
-nmap <buffer> <C-S-CR> <Plug>VimwikiTabnewLink
-nmap <buffer> <C-CR> <Plug>VimwikiVSplitLink
-nmap <buffer> <S-CR> <Plug>VimwikiSplitLink
-nnoremap <buffer> <C-L> l
+vmap <buffer> <C-@> <Plug>VimwikiToggleListItem
+vmap <buffer> <Nul> <Plug>VimwikiToggleListItem
+nnoremap <buffer> <silent> <Plug>VimwikiTableAlignQ :VimwikiTableAlignQ
+nnoremap <buffer> <silent> <Plug>VimwikiTableAlignQ1 :VimwikiTableAlignQ 2
+nnoremap <buffer> <silent> <Plug>VimwikiTableAlignW :VimwikiTableAlignW
+nnoremap <buffer> <silent> <Plug>VimwikiTableAlignW1 :VimwikiTableAlignW 2
+nmap <buffer> <M-Left> <Plug>VimwikiTableMoveColumnLeft
+nmap <buffer> <M-Right> <Plug>VimwikiTableMoveColumnRight
+onoremap <buffer> <silent> <Plug>VimwikiTextObjHeader :call vimwiki#base#TO_header(0, 0, v:count1)
+vnoremap <buffer> <silent> <Plug>VimwikiTextObjHeaderV :call vimwiki#base#TO_header(0, 0, v:count1)
+onoremap <buffer> <silent> <Plug>VimwikiTextObjHeaderContent :call vimwiki#base#TO_header(1, 0, v:count1)
+vnoremap <buffer> <silent> <Plug>VimwikiTextObjHeaderContentV :call vimwiki#base#TO_header(1, 0, v:count1)
+onoremap <buffer> <silent> <Plug>VimwikiTextObjHeaderSub :call vimwiki#base#TO_header(0, 1, v:count1)
+vnoremap <buffer> <silent> <Plug>VimwikiTextObjHeaderSubV :call vimwiki#base#TO_header(0, 1, v:count1)
+onoremap <buffer> <silent> <Plug>VimwikiTextObjHeaderSubContent :call vimwiki#base#TO_header(1, 1, v:count1)
+vnoremap <buffer> <silent> <Plug>VimwikiTextObjHeaderSubContentV :call vimwiki#base#TO_header(1, 1, v:count1)
+onoremap <buffer> <silent> <Plug>VimwikiTextObjTableCell :call vimwiki#base#TO_table_cell(0, 0)
+vnoremap <buffer> <silent> <Plug>VimwikiTextObjTableCellV :call vimwiki#base#TO_table_cell(0, 1)
+onoremap <buffer> <silent> <Plug>VimwikiTextObjTableCellInner :call vimwiki#base#TO_table_cell(1, 0)
+vnoremap <buffer> <silent> <Plug>VimwikiTextObjTableCellInnerV :call vimwiki#base#TO_table_cell(1, 1)
+onoremap <buffer> <silent> <Plug>VimwikiTextObjColumn :call vimwiki#base#TO_table_col(0, 0)
+vnoremap <buffer> <silent> <Plug>VimwikiTextObjColumnV :call vimwiki#base#TO_table_col(0, 1)
+onoremap <buffer> <silent> <Plug>VimwikiTextObjColumnInner :call vimwiki#base#TO_table_col(1, 0)
+vnoremap <buffer> <silent> <Plug>VimwikiTextObjColumnInnerV :call vimwiki#base#TO_table_col(1, 1)
+onoremap <buffer> <silent> <Plug>VimwikiTextObjListChildren :call vimwiki#lst#TO_list_item(0, 0)
+vnoremap <buffer> <silent> <Plug>VimwikiTextObjListChildrenV :call vimwiki#lst#TO_list_item(0, 1)
+onoremap <buffer> <silent> <Plug>VimwikiTextObjListSingle :call vimwiki#lst#TO_list_item(1, 0)
+vnoremap <buffer> <silent> <Plug>VimwikiTextObjListSingleV :call vimwiki#lst#TO_list_item(1, 1)
+nnoremap <buffer> <silent> <Plug>VimwikiAddHeaderLevel :call vimwiki#base#AddHeaderLevel(v:count)
+nnoremap <buffer> <silent> <Plug>VimwikiRemoveHeaderLevel :call vimwiki#base#RemoveHeaderLevel(v:count)
+nnoremap <buffer> <silent> <Plug>VimwikiGoToParentHeader :call vimwiki#base#goto_parent_header()
+nnoremap <buffer> <silent> <Plug>VimwikiGoToNextHeader :call vimwiki#base#goto_next_header()
+nnoremap <buffer> <silent> <Plug>VimwikiGoToPrevHeader :call vimwiki#base#goto_prev_header()
+nnoremap <buffer> <silent> <Plug>VimwikiGoToNextSiblingHeader :call vimwiki#base#goto_sibling(+1)
+nnoremap <buffer> <silent> <Plug>VimwikiGoToPrevSiblingHeader :call vimwiki#base#goto_sibling(-1)
+noremap <buffer> <silent> <M-n> :call AutoPairsJump()
+noremap <buffer> <silent> <M-p> :call AutoPairsToggle()
 imap <buffer>  <Plug>VimwikiDecreaseLvlSingleItem
-imap <buffer>  <Plug>VimwikiListToggle
-imap <buffer>  <Plug>VimwikiListPrevSymbol
+inoremap <buffer> <silent>  =AutoPairsDelete()
 imap <buffer> <NL> <Plug>VimwikiListNextSymbol
+imap <buffer>  <Plug>VimwikiListPrevSymbol
+imap <buffer>  <Plug>VimwikiListToggle
 inoremap <buffer> <silent>  :VimwikiReturn 1 5
 imap <buffer>  <Plug>VimwikiIncreaseLvlSingleItem
+inoremap <buffer> <silent>   =AutoPairsSpace()
+inoremap <buffer> <silent> " =AutoPairsInsert('"')
+inoremap <buffer> <silent> ' =AutoPairsInsert('''')
+inoremap <buffer> <silent> ( =AutoPairsInsert('(')
+inoremap <buffer> <silent> ) =AutoPairsInsert(')')
+noremap <buffer> <silent> î :call AutoPairsJump()
+noremap <buffer> <silent> ð :call AutoPairsToggle()
+inoremap <buffer> <silent> [ =AutoPairsInsert('[')
+inoremap <buffer> <silent> ] =AutoPairsInsert(']')
+inoremap <buffer> <silent> ` =AutoPairsInsert('`')
+inoremap <buffer> <silent> { =AutoPairsInsert('{')
+inoremap <buffer> <silent> } =AutoPairsInsert('}')
 let &cpo=s:cpo_save
 unlet s:cpo_save
 setlocal keymap=
@@ -171,7 +211,7 @@ setlocal completefunc=
 setlocal nocopyindent
 setlocal cryptmethod=
 setlocal nocursorbind
-setlocal cursorcolumn
+setlocal nocursorcolumn
 setlocal nocursorline
 setlocal cursorlineopt=both
 setlocal define=^\\s*#\\s*define
@@ -212,6 +252,7 @@ setlocal linebreak
 setlocal nolisp
 setlocal lispwords=
 setlocal nolist
+setlocal listchars=
 setlocal makeencoding=
 setlocal makeprg=
 setlocal matchpairs=(:),{:},[:]
@@ -269,13 +310,14 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-1,66fold
-let s:l = 1 - ((0 * winheight(0) + 20) / 40)
+let &fdl = &fdl
+let s:l = 3 - ((2 * winheight(0) + 20) / 41)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 1
+keepjumps 3
 normal! 0
+lcd ~
 let &g:so = s:so_save | let &g:siso = s:siso_save
 nohlsearch
 doautoall SessionLoadPost

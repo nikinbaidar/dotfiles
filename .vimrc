@@ -1,52 +1,57 @@
-"        _ _    _       _           _     _
-"  _ __ (_) | _(_)_ __ | |__   __ _(_) __| | __ _ _ __
-" | '_ \| | |/ / | '_ \| '_ \ / _` | |/ _` |/ _` | '__|
-" | | | | |   <| | | | | |_) | (_| | | (_| | (_| | |
-" |_| |_|_|_|\_\_|_| |_|_.__/ \__,_|_|\__,_|\__,_|_|
+"        _
+" __   _(_)_ __ ___  _ __ ___
+" \ \ / / | '_ ` _ \| '__/ __|
+"  \ V /| | | | | | | | | (__
+"   \_/ |_|_| |_| |_|_|  \___|
 
-" .vimrc
+" Convention over configuration
 
 " General Setup -
     set nocompatible
     set noswapfile
-    set number relativenumber
+
+    set showcmd
+
+    " For Moving Around:
+    set number
+    set relativenumber
+    set mouse=n " Enable mouse scrolling in --Normal--
+    set cursorline
+
+    " Line Wrapping:
     set wrap
     set linebreak
     set textwidth=80
-    set colorcolumn=81
-    set autoindent
-    set breakindent
+    " set colorcolumn=81
+
+    " Indentations:
+    filetype indent on
     set tabstop=4
     set shiftwidth=4
     set softtabstop=4
+    set expandtab
+    set autoindent
+    set smartindent
+    set breakindent
+
+    " Searching:
     set incsearch
     set hlsearch
-    set hidden
     set ignorecase
     set wildmenu
     set wildmode=list
-    set showcmd
-    set confirm
+    set autochdir " remove this if you remove vimwiki
+    set path+=**
+
+    " Splits And Buffers:
     set splitright
     set splitbelow
-    set expandtab
-    set autochdir
-    set laststatus=1
-    set path+=**
+    set hidden
+    set confirm
 
 " Appearance -
     syntax on
-    filetype indent on
     colorscheme jellybeans
-
-    function! VimwikiColors()
-        syntax enable
-        hi VimwikiHeader1 ctermfg=187
-        hi VimwikiHeader2 ctermfg=158
-        hi VimwikiHeader3 ctermfg=116
-        hi VimwikiLink ctermfg=195 cterm=NONE
-        hi VimwikiTODO ctermfg=189 cterm=bold ctermbg=NONE
-    endfunction
 
 " Vim Plugins -
 
@@ -57,27 +62,28 @@
 
     filetype plugin on
     call plug#begin('~/.vim/plugged')
-    Plug 'tpope/vim-surround'
-    Plug 'tpope/vim-repeat'
-    Plug 'vimwiki/vimwiki'
     Plug 'SirVer/ultisnips'
     Plug 'honza/vim-snippets'
+    Plug 'jiangmiao/auto-pairs'
+    Plug 'tpope/vim-surround'
+    Plug 'tpope/vim-repeat'
     Plug 'luochen1990/rainbow'
+    Plug 'vimwiki/vimwiki'
     call plug#end()
 
 " Configurations -
-    let g:tex_flavor="latex"
-    let g:netrw_banner=0
-    let g:netrw_winsize=25
-    let g:netrw_list_hide='*\.pdf$,\(^\|\s\s\)\zs\.\S\+'
+    filetype indent on
+    let g:netrw_banner = 0
+    let g:netrw_list_hide = '*\.pdf$,\(^\|\s\s\)\zs\.\S\+'
+    let g:netrw_bufsettings = 'nu' " Show numbers on netrw buffer
+    let g:UltiSnipsExpandTrigger = "<tab>"
+    let g:UltiSnipsJumpForwardTrigger = "<C-h>"
     let g:vimwiki_list = [{'path':'~/Notes'}]
-    let g:vimwiki_table_mappings=0
-    let g:UltiSnipsExpandTrigger="<tab>"
-    let g:UltiSnipsJumpForwardTrigger="<C-h>"
     let g:rainbow_active = 1
     let g:rainbow_conf = {'guifgs': ['yellow', 'cyan', 'mediumpurple',
                 \  'lightgreen'], 'ctermfgs': ['yellow', 'cyan', 'magenta',
                 \  'lightgreen'], 'separately':{'html':0}}
+    let g:tex_flavor="latex"
 
 " Custom Functions -
     function! ToggleComment()
@@ -161,26 +167,27 @@
 " Mappings -
         let mapleader = "\<Space>"
         " Normal Mode Mappings:
-        nnoremap <M-Up> :normal! kmajdd`aP<CR>
-        nnoremap <M-Down> :normal! ddp<CR>
-        nnoremap <M-S-Up> :normal! yyP<CR>
-        nnoremap <M-S-Down> :normal! yyp<CR>
+        nnoremap <M-k> :normal! kmajdd`aP<CR>
+        nnoremap <M-j> :normal! ddp<CR>
+        nnoremap <M-S-k> :normal! yyP<CR>
+        nnoremap <M-S-j> :normal! yyp<CR>
         nnoremap <C-s> :w ++enc=utf-8<CR>
         nnoremap <F9> :call CodeRunner()<CR>
+        " Switch Splits FIXED
+        nnoremap <leader>h <C-w>h
+        nnoremap <leader>j <C-w>j
+        nnoremap <leader>k <C-w>k
+        nnoremap <leader>l <C-w>l
         " Switch Buffers
         nnoremap <C-Left> :bprevious<CR>
         nnoremap <C-Right> :bnext<CR>
 
         " Insert Mode Mappings:
-        inoremap <M-Up> <C-o>:normal! kmajdd`aP<CR>
-        inoremap <M-Down> <C-o>:normal! ddp<CR>
-        inoremap <M-S-Up> <C-o>:normal! yyP<CR>
-        inoremap <M-S-Down> <C-o>:normal! yyp<CR>
         inoremap <C-a> <C-o>:normal! ^<CR>
         inoremap <C-e> <C-o>:normal! $<CR>
         inoremap <C-u> <C-o>:normal! d^<CR>
         inoremap <C-k> <C-o>:normal! d$<CR>
-        inoremap <C-j> <C-o>o
+        inoremap <C-l> <Del>
         inoremap <F9> <C-o>:call CodeRunner()<CR>
         " Autocompletion
         inoremap <expr> k pumvisible()?"<C-p>":"k"
@@ -194,19 +201,18 @@
 " Auto Commands -
     augroup RunOnEvent
         autocmd!
-        autocmd FileType * set formatoptions=trq
+        autocmd FileType * set formatoptions=tq
         autocmd FileType c,cpp setlocal comments-=:// comments+=f://
+        autocmd FileType vimwiki :call Notetaking()
+        autocmd FileType tex let b:surround_{char2nr("'")} = "`\r'"
+            \ | let b:surround_{char2nr("\"")} = "``\r''"
         autocmd FileType help wincmd L
-        autocmd FileType pdf OpenPdfs
+        autocmd FileType pdf OpenPdfs " Works only from vimwiki
         autocmd BufWinEnter *.* silent loadview | set foldopen-=hor
         autocmd BufWritePre * %s/\s\+$//e " strip trailing spaces on save
-        " Block Commenting On Certain Files: FIXED
+        " Block Commenting On Certain Files: TODO Remove this and bind boxes
         autocmd BufEnter *.html vnoremap <silent><leader>\ dO<!----><C-[>k$p
         autocmd BufEnter *.css vnoremap <silent><leader>\ dO/**/<C-[>k$p
-        autocmd FileType tex let b:surround_{char2nr("'")} = "`\r'"
-            \ | let b:surround_{char2nr("\"")} = "``\r''" | syntax enable
-        autocmd FileType vimwiki :call Notetaking() | call ReloadTex()
-            \ | call VimwikiColors()
     augroup END
 
     if has("autocmd")
@@ -223,20 +229,24 @@
 
 " Notetaking -
     function! Notetaking()
-        setlocal textwidth=70
+
+        syntax enable
+
+        setlocal textwidth=70 " FIXME??
         setlocal complete+=kspell
         setlocal spellcapcheck=\_[\])'"   ]\+
 
-        function! ReloadTex()
-            if (getcwd() =~ '/home/nikin/Notes/*/*/*' && &filetype=='vimwiki')
-                let g=expand('%<:p')
-                let b=char2nr(g[0])
-                if (b >= 97 && b < 123)
-                    set filetype=tex
-                endif
+        " Explicitly Reload LaTeX Files:
+        if (getcwd() =~ '/home/nikin/Notes/*/*/*' && &filetype=='vimwiki')
+            let g=expand('%<:p')
+            let b=char2nr(g[0])
+            if (b >= 97 && b < 123)
+                set filetype=tex
+                syntax enable
             endif
-        endfunction
+        endif
 
+        " Insert Code Blocks w/ Proper Syntax Highlighting:
         function! InsertCodeBlock()
             " Insert code blocks with proper highlighting:
             if getcwd() =~ 'home/Nikin/Notes/JavaScript/*/*'
@@ -252,20 +262,21 @@
           endif
       endfunction
 
-      "Mappings For Notetaking Purposes:
+      " Some Mappings For Notetaking Purposes:
 
-      inoremap <C-\> <C-[>:call InsertCodeBlock()<CR>o
+      " Reflow Paragraph
       nnoremap <leader>o :normal! magqip`a<CR>
 
-      " LaTeX compiling & PDF related bindings
-      nnoremap <F2> :CompilePricnipalTexFile<CR><CR><CR>
-      nnoremap <F6> :open *.pdf<CR>
-
-      " The following command is mapped to <F2>
-      command! CompilePricnipalTexFile :w! | cd .. |
+      " LaTeX Compiling
+      nnoremap <F2> :CompileParent<CR><CR><CR>
+      command! CompileParent :w! | cd .. |
             \ execute ("! clear && pdflatex -shell-escape [a-z]*.tex") | cd -
 
-      " The following command pertains to <F6>
-      command!  OpenPdfs execute ("silent ! zathura --fork %") | bdelete | e %
+      " Opening PDFs : Invoke Appropirately
+      nnoremap <F6> :open *.pdf<CR>
+      command!  OpenPdfs execute ("silent ! zathura --fork %")
+            \ | bdelete | edit %
+
+      inoremap <C-\> <C-[>:call InsertCodeBlock()<CR>o
 
     endfunction
