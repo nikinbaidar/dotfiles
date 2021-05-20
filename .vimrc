@@ -3,45 +3,48 @@
 " \ \ / / | '_ ` _ \| '__/ __|
 "  \ V /| | | | | | | | | (__
 "   \_/ |_|_| |_| |_|_|  \___|
-
-" Convention over configuration
+"
+" Remember: Convention over configuration
+"
+" + It is a text editor, not an IDE
+" + It probably has that feature built-in
+" + Use only plugins that are functional
+" + Read the documentation, it'll save you hours
+" + You should know exactly what each line in your vimrc does
+" + Don't seek mastery, seek proficiency
+" + Visual clutter drains mental energy
 
 " General Setup -
-    set nocompatible
     set noswapfile
-
     set showcmd
 
-    " For Moving Around:
-    set number
-    set relativenumber
-    set mouse=n " Enable mouse scrolling in --Normal--
+    " Searching: Files, Commands and Patterns
+    set hlsearch
+    set incsearch
+    set ignorecase
+    set wildmenu
+    set wildmode=list,full
+    set autochdir
+    set path+=**
+
+    " Easy Movements:
     set cursorline
+    set number relativenumber
+    set mouse=n
 
     " Line Wrapping:
     set wrap
     set linebreak
     set textwidth=80
-    " set colorcolumn=81
+    set colorcolumn=81
 
-    " Indentations:
-    filetype indent on
+    " Indentations: See help retab
     set tabstop=4
     set shiftwidth=4
     set softtabstop=4
     set expandtab
     set autoindent
-    set smartindent
     set breakindent
-
-    " Searching:
-    set incsearch
-    set hlsearch
-    set ignorecase
-    set wildmenu
-    set wildmode=list
-    set autochdir " remove this if you remove vimwiki
-    set path+=**
 
     " Splits And Buffers:
     set splitright
@@ -54,38 +57,34 @@
     colorscheme jellybeans
 
 " Vim Plugins -
+    " Managed by Vim Plug
 
-    " These Plugins are managerd via. Vim Plug
+    filetype plugin indent on
 
-    " curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-    " https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
-    filetype plugin on
     call plug#begin('~/.vim/plugged')
     Plug 'SirVer/ultisnips'
     Plug 'honza/vim-snippets'
-    Plug 'jiangmiao/auto-pairs'
     Plug 'tpope/vim-surround'
     Plug 'tpope/vim-repeat'
+    Plug 'jiangmiao/auto-pairs'
     Plug 'luochen1990/rainbow'
     Plug 'vimwiki/vimwiki'
     call plug#end()
 
 " Configurations -
-    filetype indent on
     let g:netrw_banner = 0
-    let g:netrw_list_hide = '*\.pdf$,\(^\|\s\s\)\zs\.\S\+'
-    let g:netrw_bufsettings = 'nu' " Show numbers on netrw buffer
+    let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
+    let g:netrw_bufsettings = 'number'
     let g:UltiSnipsExpandTrigger = "<tab>"
     let g:UltiSnipsJumpForwardTrigger = "<C-h>"
-    let g:vimwiki_list = [{'path':'~/Notes'}]
     let g:rainbow_active = 1
     let g:rainbow_conf = {'guifgs': ['yellow', 'cyan', 'mediumpurple',
                 \  'lightgreen'], 'ctermfgs': ['yellow', 'cyan', 'magenta',
                 \  'lightgreen'], 'separately':{'html':0}}
+    let g:vimwiki_table_mappings = 0
     let g:tex_flavor="latex"
 
-" Custom Functions -
+" Custom Plugins -
     function! ToggleComment()
         let ft = &filetype
         if ft == "vim"
@@ -166,53 +165,46 @@
 
 " Mappings -
         let mapleader = "\<Space>"
+
         " Normal Mode Mappings:
         nnoremap <M-k> :normal! kmajdd`aP<CR>
         nnoremap <M-j> :normal! ddp<CR>
         nnoremap <M-S-k> :normal! yyP<CR>
         nnoremap <M-S-j> :normal! yyp<CR>
-        nnoremap <C-s> :w ++enc=utf-8<CR>
+        nnoremap <silent><leader><Space> :nohlsearch<CR>
+        nnoremap <silent><leader>/ :call ToggleComment()<CR>
         nnoremap <F9> :call CodeRunner()<CR>
-        " Switch Splits FIXED
+        " Switch Splits
         nnoremap <leader>h <C-w>h
         nnoremap <leader>j <C-w>j
         nnoremap <leader>k <C-w>k
         nnoremap <leader>l <C-w>l
-        " Switch Buffers
-        nnoremap <C-Left> :bprevious<CR>
-        nnoremap <C-Right> :bnext<CR>
+        " Switching and Deleting Buffers
+        nnoremap <leader>s :buffers<CR>:buffer<Home>
+        nnoremap <leader>d :buffers<CR>:bdelete<Home>
 
         " Insert Mode Mappings:
         inoremap <C-a> <C-o>:normal! ^<CR>
         inoremap <C-e> <C-o>:normal! $<CR>
         inoremap <C-u> <C-o>:normal! d^<CR>
         inoremap <C-k> <C-o>:normal! d$<CR>
-        inoremap <C-l> <Del>
         inoremap <F9> <C-o>:call CodeRunner()<CR>
         " Autocompletion
         inoremap <expr> k pumvisible()?"<C-p>":"k"
         inoremap <expr> j pumvisible()?"<C-n>":"j"
         inoremap <expr> q pumvisible()?"<C-e>":"q"
 
-        " Global Mappings:
-        map <silent><leader>/ :call ToggleComment()<CR>
-        map <silent><leader><Space> :nohlsearch<CR>
-
 " Auto Commands -
     augroup RunOnEvent
         autocmd!
         autocmd FileType * set formatoptions=tq
-        autocmd FileType c,cpp setlocal comments-=:// comments+=f://
         autocmd FileType vimwiki :call Notetaking()
+        " The following autocmd works with vim_surround plugin
         autocmd FileType tex let b:surround_{char2nr("'")} = "`\r'"
             \ | let b:surround_{char2nr("\"")} = "``\r''"
-        autocmd FileType help wincmd L
-        autocmd FileType pdf OpenPdfs " Works only from vimwiki
-        autocmd BufWinEnter *.* silent loadview | set foldopen-=hor
+        autocmd FileType pdf OpenPdfs
+        autocmd BufWinEnter *.* silent loadview
         autocmd BufWritePre * %s/\s\+$//e " strip trailing spaces on save
-        " Block Commenting On Certain Files: TODO Remove this and bind boxes
-        autocmd BufEnter *.html vnoremap <silent><leader>\ dO<!----><C-[>k$p
-        autocmd BufEnter *.css vnoremap <silent><leader>\ dO/**/<C-[>k$p
     augroup END
 
     if has("autocmd")
@@ -233,11 +225,13 @@
         syntax enable
 
         setlocal textwidth=70 " FIXME??
+        setlocal spell
         setlocal complete+=kspell
         setlocal spellcapcheck=\_[\])'"   ]\+
 
         " Explicitly Reload LaTeX Files:
-        if (getcwd() =~ '/home/nikin/Notes/*/*/*' && &filetype=='vimwiki')
+        if (getcwd() =~ '/home/nikin/markdown_notes/*/*/*' ||
+          \ getcwd() =~ '/home/nikin/notes/*/*/*' && &filetype=='vimwiki')
             let g=expand('%<:p')
             let b=char2nr(g[0])
             if (b >= 97 && b < 123)

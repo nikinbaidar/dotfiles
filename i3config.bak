@@ -1,48 +1,52 @@
+#  _ _____                  __ _
+# (_)___ /  ___ ___  _ __  / _(_) __ _
+# | | |_ \ / __/ _ \| '_ \| |_| |/ _` |
+# | |___) | (_| (_) | | | |  _| | (_| |
+# |_|____/ \___\___/|_| |_|_| |_|\__, |
+#                                |___/
+#
+# xmodmap:
+# shift       Shift
+# lock        Caps_Lock
+# 30 lines: 85
 
-#####################################################################
-# On exiting this file a shell script automatically reloads i3 with #
-# all them new configurations.                                      #
-#####################################################################
+# Defining Variables:
 
-# Put in ~/.config/i3/config
-
-set $mod mod1
+set $control control
+set $alt mod1
 set $sup mod4
 
-# Utilities TODO add dmenu prompt
+set $left  h
+set $down  j
+set $up    k
+set $right l
 
-# system shutdown
-
-# system reboot
+set $wider    w
+set $narrower n
+set $taller   t
+set $shorter  s
 
 # i3lock and suspsend system
 
-bindsym control+$mod+l exec --no-startup-id i3lock --no-unlock-indicator \
-    --image=/home/nikin/Pictures/Wallpapers/arch.png \
-    && systemctl suspend
+bindsym $control+$alt+l exec --no-startup-id i3lock --no-unlock-indicator \
+    --image=/home/nikin/pictures/wallpapers/arch.png && systemctl suspend
 
 # System Shortcuts
 
-bindsym control+$mod+t exec --no-startup-id xterm
-
-bindsym control+$mod+w exec --no-startup-id firefox
-
-bindsym $sup+d exec --no-startup-id rofi -show run
-
-bindsym $sup+p exec --no-startup-id rofi -show
-
-bindsym $sup+z exec tabbed -c zathura -e > /dev/null
-
-bindsym $sup+q kill
+bindsym $sup+d          exec rofi -show run
+bindsym $sup+p          exec rofi -show
+bindsym $sup+Return     exec xterm
+bindsym $control+$alt+w exec firefox
+bindsym $sup+z          exec tabbed -c zathura -e > /dev/null
 
 # Windows
 
 # change focus
 
-bindsym $sup+h focus left
-bindsym $sup+j focus down
-bindsym $sup+k focus up
-bindsym $sup+l focus right
+bindsym $sup+$up    focus up
+bindsym $sup+$down  focus down
+bindsym $sup+$right focus right
+bindsym $sup+$left  focus left
 
 # prevent focus change on mouse hover
 
@@ -50,35 +54,32 @@ focus_follows_mouse no
 
 # move windows
 
-bindsym $sup+shift+h move left
-bindsym $sup+shift+j move down
-bindsym $sup+shift+k move up
-bindsym $sup+shift+l move right
-
-# split windows vertically or horizontally
-
-bindsym $sup+control+h split v
-bindsym $sup+control+v split h
+bindsym $sup+shift+$up    move up
+bindsym $sup+shift+$down  move down
+bindsym $sup+shift+$right move right
+bindsym $sup+shift+$left  move left
 
 # resizing windows
 
-bindsym $sup+r mode "resize"
+bindsym $sup+$wider    resize grow   width  10 px
+bindsym $sup+$narrower resize shrink width  10 px
+bindsym $sup+$taller   resize grow   height 10 px
+bindsym $sup+$shorter  resize shrink height 10 px
 
+# toggle split position vertically or horizontally
 
-mode "resize" {
-    bindsym Left  resize shrink width 10 px
-    bindsym Down  resize grow height 10 px
-    bindsym Up    resize shrink height 10 px
-    bindsym Right resize grow width 10 px
+bindsym $sup+space split toggle
 
-    # back to normal
+# close windows
 
-    bindsym Escape mode "default"
-}
+bindsym $sup+q kill
 
-# workspaces
+bindsym --release $sup+shift+q exec xkill
+
+# Workspaces
 
 # start-off with workspace 0:
+
 workspace 0: output primary
 
 # workspace switches
@@ -109,31 +110,19 @@ bindsym $sup+shift+9 move container to workspace 9:
 
 # swtich workspaces left or right
 
-bindsym control+$mod+Right workspace next
-bindsym control+$mod+Left workspace prev
-
+bindsym $alt+$left  workspace prev
+bindsym $alt+$right workspace next
 
 # enter fullscreen mode for the focused container
+
 bindsym $sup+f fullscreen toggle
 
 # Appearance
 
 font pango:Monospace 0
 
-###########################################
-#                                         #
-# bar {                                   #
-#     status_command i3blocks             #
-#     position top                        #
-#     workspace_buttons yes               #
-#     strip_workspace_numbers yes         #
-#     font pango:SauceCodePro Nerd Font 8 #
-#     separator_symbol "-"                #
-# }                                       #
-###########################################
-
 exec /usr/bin/picom --config /home/nikin/.config/picom.conf
 
-exec_always feh --bg-scale --randomize /home/nikin/Pictures/Wallpapers/*
+exec_always feh --bg-scale --randomize /home/nikin/pictures/wallpapers/*
 
 exec_always /home/nikin/.screenlayout/my_monitor_setup.sh

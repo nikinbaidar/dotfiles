@@ -13,6 +13,8 @@
 
 PS1='\[\033[01;31m\]\u\[\033[00m\]@\h:\w\$ '
 
+export EDITOR=vim
+
 # Aliash definitions
 # Instead of adding all of you aliases here directly,
 # Put all your aliases into a separate file like ~/.bash_aliases

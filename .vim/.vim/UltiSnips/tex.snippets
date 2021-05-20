@@ -1,0 +1,182 @@
+snippet iff "multi-line comments, ignored by latex compiler" b
+\iffalse
+	$0
+\fi
+endsnippet
+
+snippet fig "Figure environment" b
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=${1:0.5}\textwidth]{${2:name}}
+\end{figure}
+endsnippet
+
+snippet sec "Section"
+\section{${1:${VISUAL:section name}}}
+endsnippet
+
+snippet sub "Subsection"
+\subsection{${1:${VISUAL:subsection name}}}
+endsnippet
+
+snippet ssub "Subsubsection"
+\subsubsection{${1:${VISUAL:subsubsection name}}}
+endsnippet
+
+snippet vs "Vertical Space"
+\vspace{${1:-10}pt}
+endsnippet
+
+snippet hs "Horizontal Space"
+\hspace{${1:2}pt}
+endsnippet
+
+snippet enlarge "Squeeze Contents"
+\enlargethispage{\baselineskip}
+endsnippet
+
+snippet href "Creating Cross references"
+\hyperref[${1:Reference Label}]{\textcolor{blue}{${2:Reference anchor}}}
+endsnippet
+
+snippet noitem "Itemize w/o separation" b
+\begin{itemize}[nosep]
+	\item $0
+\end{itemize}
+endsnippet
+
+snippet noenum "Enumerate w/o separation" b
+\begin{enumerate}[nosep]
+	\item $0
+\end{enumerate}
+endsnippet
+
+snippet bin "description"
+\bigintsss
+endsnippet
+
+
+snippet homework "assignments"
+\title{${1: Subject Title}}
+\author{Assignment ${2:Assignment Number} ${3:Assignment Title}\\\\[0.5cm] Nikin BAIDAR (B4)}
+\date{\today}
+endsnippet
+
+snippet cbeas "Main tex files for notes"
+
+\documentclass[fleqn,openany]{book}
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[a4 paper,margin=1in,footskip=0.5in]{geometry}
+\usepackage[table]{xcolor}
+\usepackage{pdfpages}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{tocloft}
+\usepackage{soul}
+\usepackage{float}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{enumitem}
+\usepackage{amsmath}
+\usepackage{multicol}
+\usepackage[hidelinks,linktoc=all]{hyperref}
+
+\setlength\cftparskip{-1pt}
+\setlength\cftbeforechapskip{1pt}
+\setlength\cftaftertoctitleskip{2pt}
+
+\setlength{\columnsep}{1cm}
+\setlength{\columnseprule}{1pt}
+\def\columnseprulecolor{\color{black}}
+
+\definecolor{BloodRed}{RGB}{175,0,0}
+\definecolor{ChartReuse3}{RGB}{95,175,0}
+\definecolor{LightCyan}{RGB}{215,255,255}
+
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1.5em}
+
+\sethlcolor{LightCyan}
+
+\pagestyle{fancy}
+
+\fancyhf{}
+\rhead{\nouppercase\rightmark}
+\lhead{\nouppercase\leftmark}
+\cfoot{\thepage}
+
+\titleformat{\chapter}[frame]{\bfseries\huge}{}{0.5em}{}
+\titleformat{\section}{\bfseries\huge}{}{0em}{}
+\titleformat{\subsubsection}{\bfseries\large}{}{0em}{}
+
+\titlespacing*{\chapter}{0pt}{-30pt}{30pt}
+\titlespacing*{\section}{0pt}{2pt}{10pt}
+\titlespacing*{\subsection}{0pt}{2pt}{0pt}
+\titlespacing*{\subsubsection}{0pt}{2pt}{0pt}
+
+\graphicspath{{.img/}}
+
+\renewcommand{\theenumii}{\roman{enumii}}
+
+\begin{document}
+
+\begin{titlepage}
+  \begin{center}
+    \vspace*{2.5cm}
+    {\Huge\color{red}\textbf{${1:Title}}}\\\\
+    \vspace{1cm}
+    {\Large\color{BloodRed}\textbf{Prof: ${2:Lecturer}}}\\\\
+    \vspace{1.5cm}
+    {\Large\color{ChartReuse3}\textbf{SEMESTER VI}}\\\\
+  \end{center}
+\end{titlepage}
+
+% \tableofcontents
+% \addcontentsline{}{}{}
+% \addtocontents{toc}{~\hfill\textbf{Page}\par}
+
+\includepdf[page={-}]{${3:syllabus}.pdf}
+\setcounter{page}{1}
+
+\chapter{${4:Chapter Name}}
+\input{${5:directory-to-chapter/section-name}}
+% \include{}
+
+\end{document}
+endsnippet
+
+snippet doc "Define a document class, article by default"
+\documentclass[fleqn]{${1:article}}
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[a4 paper,top=${1:1}in,left=${2:1}in,footskip=0.5in]{geometry}
+
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1.5em}
+
+\begin{document}
+
+\end{document}
+endsnippet
+
+snippet table "table environment"
+
+  \begin{table}[H]
+  % \newcolumntype{s}{>{\columncolor[HTML]{afffd7}}c|}
+  \begin{tabularx}{0.95\textwidth} {
+    | >{\centering\arraybackslash}X
+    | >{\centering\arraybackslash}X
+    | >{\centering\arraybackslash}X |}
+
+    \hline
+  \end{tabularx}
+\end{table}
+
+endsnippet
+
+
