@@ -4,73 +4,106 @@
 # | |___) | (_| (_) | | | |  _| | (_| |
 # |_|____/ \___\___/|_| |_|_| |_|\__, |
 #                                |___/
-#
-# xmodmap:
-# shift       Shift
-# lock        Caps_Lock
-# 30 lines: 85
 
-# Defining Variables:
+# Variable declarations:
 
-set $control control
-set $alt mod1
-set $sup mod4
+set $Ctrl control
+set $Alt  mod1
+set $sup  mod4
 
-set $left  h
-set $down  j
-set $up    k
 set $right l
+set $up    k
+set $down  j
+set $left  h
+
+set $parent p
+set $child  c
 
 set $wider    w
 set $narrower n
 set $taller   t
 set $shorter  s
 
-# i3lock and suspsend system
+set $CR Return
 
-bindsym $control+$alt+l exec --no-startup-id i3lock --no-unlock-indicator \
-    --image=/home/nikin/pictures/wallpapers/arch.png && systemctl suspend
+# Scripts
 
-# System Shortcuts
+## prompts: shutdown, log out
 
-bindsym $sup+d          exec rofi -show run
-bindsym $sup+p          exec rofi -show
-bindsym $sup+Return     exec xterm
-bindsym $control+$alt+w exec firefox
-bindsym $sup+z          exec tabbed -c zathura -e > /dev/null
+bindsym $Ctrl+$Alt+P exec bash ~/scripts/promptPowerdown.sh
 
-# Windows
+bindsym $Ctrl+$Alt+S exec bash ~/scripts/promptSignoff.sh
 
-# change focus
+## i3lock and suspsend system
 
-bindsym $sup+$up    focus up
-bindsym $sup+$down  focus down
-bindsym $sup+$right focus right
-bindsym $sup+$left  focus left
+bindsym $Ctrl+$Alt+L exec systemctl suspend && i3lock --no-unlock-indicator \
+       --nofork --image=/home/nikin/pictures/lockscreen_imgs/one.png && \
+       setxkbmap -option caps:swapescape
 
-# prevent focus change on mouse hover
+# Application Shortcuts
+
+set $journal /home/nikin/notes/journal/
+
+bindsym $sup+d   exec bash ~/scripts/thisScriptDoesNothing.sh
+bindsym $sup+$CR exec xterm
+bindsym $sup+r   exec rofi -show run
+bindsym $sup+b   exec firefox
+bindsym $sup+z   exec tabbed -c zathura -e
+bindsym $sup+m   exec xterm cmus
+bindsym $sup+t   exec xterm -T floatthis -e vim $journal/todo.md
+bindsym $sup+n   exec xterm -T floatthis -e vim $journal/scribbles.md
+
+# Utilites
+
+## volume control FIXME
+
+## screenshots
+
+bindsym $sup+x exec scrot '%Y-%m-%d:%H%M%S.png' --border --focused \
+    --exec 'mv $f "/home/nikin/pictures/screenshots/"'
+
+bindsym $sup+shift+x exec scrot '%Y-%m-%d:%H%M%S.png' --border \
+    --exec 'mv $f "/home/nikin/pictures/screenshots/"'
+
+# Containers
+
+## change focus
+
+bindsym $sup+$up     focus up
+bindsym $sup+$down   focus down
+bindsym $sup+$left   focus left
+bindsym $sup+$right  focus right
+
+bindsym $sup+shift+$parent focus parent
+bindsym $sup+shift+$child  focus child
+
+## prevent focus change on mouse hover
 
 focus_follows_mouse no
 
-# move windows
+## move focused containers
 
 bindsym $sup+shift+$up    move up
 bindsym $sup+shift+$down  move down
-bindsym $sup+shift+$right move right
 bindsym $sup+shift+$left  move left
+bindsym $sup+shift+$right move right
 
-# resizing windows
+## resizing focused containers
 
-bindsym $sup+$wider    resize grow   width  10 px
-bindsym $sup+$narrower resize shrink width  10 px
-bindsym $sup+$taller   resize grow   height 10 px
-bindsym $sup+$shorter  resize shrink height 10 px
+bindsym $sup+shift+$wider    resize grow   width  10 px
+bindsym $sup+shift+$narrower resize shrink width  10 px
+bindsym $sup+shift+$taller   resize grow   height 10 px
+bindsym $sup+shift+$shorter  resize shrink height 10 px
 
-# toggle split position vertically or horizontally
+## toggle split position for currently focused containers
 
 bindsym $sup+space split toggle
 
-# close windows
+## enter fullscreen mode for the focused container
+
+bindsym $sup+f fullscreen toggle
+
+## close focused container
 
 bindsym $sup+q kill
 
@@ -78,11 +111,11 @@ bindsym --release $sup+shift+q exec xkill
 
 # Workspaces
 
-# start-off with workspace 0:
+## start-off with workspace 0
 
-workspace 0: output primary
+workspace 0 output primary
 
-# workspace switches
+## workspace switches
 
 bindsym $sup+0 workspace 0:
 bindsym $sup+1 workspace 1:
@@ -95,7 +128,7 @@ bindsym $sup+7 workspace 7:
 bindsym $sup+8 workspace 8:
 bindsym $sup+9 workspace 9:
 
-# move focused windows to workspace
+## move focused containers to workspace
 
 bindsym $sup+shift+0 move container to workspace 0:
 bindsym $sup+shift+1 move container to workspace 1:
@@ -108,21 +141,17 @@ bindsym $sup+shift+7 move container to workspace 7:
 bindsym $sup+shift+8 move container to workspace 8:
 bindsym $sup+shift+9 move container to workspace 9:
 
-# swtich workspaces left or right
-
-bindsym $alt+$left  workspace prev
-bindsym $alt+$right workspace next
-
-# enter fullscreen mode for the focused container
-
-bindsym $sup+f fullscreen toggle
-
 # Appearance
 
 font pango:Monospace 0
 
 exec /usr/bin/picom --config /home/nikin/.config/picom.conf
 
-exec_always feh --bg-scale --randomize /home/nikin/pictures/wallpapers/*
+exec_always feh --bg-fill --no-fehbg --randomize \
+    /home/nikin/pictures/wallpapers/*
 
-exec_always /home/nikin/.screenlayout/my_monitor_setup.sh
+exec_always /home/nikin/.config/screenlayout/my_monitor_setup.sh
+
+## floating configs
+
+for_window [ title="floatthis" ] floating enable
