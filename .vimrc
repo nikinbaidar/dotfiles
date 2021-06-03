@@ -19,8 +19,6 @@
     set showcmd
 
     " Searching: Files, Commands and Patterns
-    set hlsearch
-    set incsearch
     set ignorecase
     set wildmenu
     set wildmode=list,full
@@ -171,7 +169,7 @@
         nnoremap <M-j> :normal! ddp<CR>
         nnoremap <M-S-k> :normal! yyP<CR>
         nnoremap <M-S-j> :normal! yyp<CR>
-        nnoremap <silent><leader><Space> :nohlsearch<CR>
+        nnoremap <leader>o :normal! magqip`a<CR>
         nnoremap <silent><leader>/ :call ToggleComment()<CR>
         nnoremap <F9> :call CodeRunner()<CR>
         " Switch Splits
@@ -180,19 +178,24 @@
         nnoremap <leader>k <C-w>k
         nnoremap <leader>l <C-w>l
         " Switching and Deleting Buffers
-        nnoremap <leader>s :buffers<CR>:buffer<Home>
-        nnoremap <leader>d :buffers<CR>:bdelete<Home>
+        nnoremap <leader>s :buffers<CR>:buffer<Space>
+        nnoremap <leader>d :buffers<CR>:bdelete<Space>
+        nnoremap <leader><Space> :buffers<CR>:bdelete<Home>
 
         " Insert Mode Mappings:
         inoremap <C-a> <C-o>:normal! ^<CR>
         inoremap <C-e> <C-o>:normal! $<CR>
         inoremap <C-u> <C-o>:normal! d^<CR>
         inoremap <C-k> <C-o>:normal! d$<CR>
-        inoremap <F9> <C-o>:call CodeRunner()<CR>
+        inoremap <F9>  <C-o>:call CodeRunner()<CR>
         " Autocompletion
         inoremap <expr> k pumvisible()?"<C-p>":"k"
         inoremap <expr> j pumvisible()?"<C-n>":"j"
         inoremap <expr> q pumvisible()?"<C-e>":"q"
+
+        " Command Mode Mappings:
+        cnoremap <C-p> <Up>
+        cnoremap <C-n> <Down>
 
 " Auto Commands -
     augroup RunOnEvent
@@ -210,7 +213,7 @@
     if has("autocmd")
         " Automatically jump to the last cursor position on entering vim
         autocmd BufReadPost * if line("'\"") > 0 && line ("'\"") <= line("$")
-            \ | execute "normal g'\"" | endif
+            \ | execute "normal g'\"zz" | endif
     endif
 
 " Abbreviations -
@@ -218,19 +221,23 @@
     abbr fasle false
     abbr adn and
     abbr teh the
+    " Inserting Dates:
+    iab <expr> today strftime("%a %b %d %Y")
+    iab tomorrow <C-r>=system('date -d tomorrow +\%a\ \%b\ \%d\ \%Y')<CR><BS>
 
 " Notetaking -
     function! Notetaking()
 
         syntax enable
 
+        setlocal shiftwidth=2
         setlocal textwidth=70 " FIXME??
         setlocal spell
         setlocal complete+=kspell
         setlocal spellcapcheck=\_[\])'"   ]\+
 
         " Explicitly Reload LaTeX Files:
-        if (getcwd() =~ '/home/nikin/markdown_notes/*/*/*' ||
+        if (getcwd() =~ '/home/nikin/markdown_notes/[A-Z]*/*/*' ||
           \ getcwd() =~ '/home/nikin/notes/*/*/*' && &filetype=='vimwiki')
             let g=expand('%<:p')
             let b=char2nr(g[0])
@@ -257,9 +264,6 @@
       endfunction
 
       " Some Mappings For Notetaking Purposes:
-
-      " Reflow Paragraph
-      nnoremap <leader>o :normal! magqip`a<CR>
 
       " LaTeX Compiling
       nnoremap <F2> :CompileParent<CR><CR><CR>
