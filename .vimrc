@@ -17,6 +17,7 @@
 " General Setup -
     set noswapfile
     set showcmd
+    set timeoutlen=150 " opts for speed
 
     " Searching: Files, Commands and Patterns
     set ignorecase
@@ -34,7 +35,7 @@
     set wrap
     set linebreak
     set textwidth=80
-    set colorcolumn=81
+    " set colorcolumn=81
 
     " Indentations: See help retab
     set tabstop=4
@@ -65,7 +66,7 @@
     Plug 'tpope/vim-surround'
     Plug 'tpope/vim-repeat'
     Plug 'jiangmiao/auto-pairs'
-    Plug 'luochen1990/rainbow'
+    " Plug 'luochen1990/rainbow'
     Plug 'vimwiki/vimwiki'
     call plug#end()
 
@@ -180,13 +181,13 @@
         " Switching and Deleting Buffers
         nnoremap <leader>s :buffers<CR>:buffer<Space>
         nnoremap <leader>d :buffers<CR>:bdelete<Space>
-        nnoremap <leader><Space> :buffers<CR>:bdelete<Home>
 
         " Insert Mode Mappings:
         inoremap <C-a> <C-o>:normal! ^<CR>
         inoremap <C-e> <C-o>:normal! $<CR>
         inoremap <C-u> <C-o>:normal! d^<CR>
         inoremap <C-k> <C-o>:normal! d$<CR>
+        inoremap <C-j> <C-o>o
         inoremap <F9>  <C-o>:call CodeRunner()<CR>
         " Autocompletion
         inoremap <expr> k pumvisible()?"<C-p>":"k"
@@ -201,10 +202,10 @@
     augroup RunOnEvent
         autocmd!
         autocmd FileType * set formatoptions=tq
-        autocmd FileType vimwiki :call Notetaking()
+        autocmd FileType vimwiki :call Notetaking() "| syntax enable
         " The following autocmd works with vim_surround plugin
         autocmd FileType tex let b:surround_{char2nr("'")} = "`\r'"
-            \ | let b:surround_{char2nr("\"")} = "``\r''"
+            \ | let b:surround_{char2nr("\"")} = "``\r''" | syntax enable
         autocmd FileType pdf OpenPdfs
         autocmd BufWinEnter *.* silent loadview
         autocmd BufWritePre * %s/\s\+$//e " strip trailing spaces on save
@@ -272,8 +273,11 @@
 
       " Opening PDFs : Invoke Appropirately
       nnoremap <F6> :open *.pdf<CR>
-      command!  OpenPdfs execute ("silent ! zathura --fork %")
+
+      command!  OpenPdfs execute ("silent ! zathura --fork % " )
             \ | bdelete | edit %
+
+      command!  Hex execute ("split" ) | edit .
 
       inoremap <C-\> <C-[>:call InsertCodeBlock()<CR>o
 
