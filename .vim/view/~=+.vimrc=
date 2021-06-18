@@ -42,9 +42,9 @@ vnoremap <buffer> <silent> ][ m':exe "normal! gv"|call search('^\s*end\(f\%[u
 nnoremap <buffer> <silent> ][ m':call search('^\s*end\(f\%[unction]\|def\)\>', "W")
 vnoremap <buffer> <silent> ]] m':exe "normal! gv"|call search('^\s*\(fu\%[nction]\|def\)\>', "W")
 nnoremap <buffer> <silent> ]] m':call search('^\s*\(fu\%[nction]\|def\)\>', "W")
-nnoremap <buffer> <C-H> h
 noremap <buffer> <silent> <M-p> :call AutoPairsToggle()
 noremap <buffer> <silent> <M-n> :call AutoPairsJump()
+nnoremap <buffer> <C-H> h
 inoremap <buffer> <silent>  =AutoPairsDelete()
 inoremap <buffer> <silent>   =AutoPairsSpace()
 inoremap <buffer> <silent> " =AutoPairsInsert('"')
@@ -75,7 +75,7 @@ setlocal nocindent
 setlocal cinkeys=0{,0},0),0],:,0#,!^F,o,O,e
 setlocal cinoptions=
 setlocal cinwords=if,else,while,do,for,switch
-setlocal colorcolumn=81
+setlocal colorcolumn=0
 setlocal comments=sO:\"\ -,mO:\"\ \ ,eO:\"\",:\"
 setlocal commentstring=\"%s
 setlocal complete=.,w,b,u,t,i
@@ -109,7 +109,7 @@ setlocal foldminlines=1
 setlocal foldnestmax=20
 setlocal foldtext=foldtext()
 setlocal formatexpr=
-setlocal formatoptions=tq
+setlocal formatoptions=tqr
 setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
 setlocal formatprg=
 setlocal grepprg=
@@ -155,7 +155,7 @@ setlocal nosmartindent
 setlocal softtabstop=4
 setlocal nospell
 setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
-setlocal spellfile=
+setlocal spellfile=~/.vim/spell/en.utf-8.add
 setlocal spelllang=en
 setlocal spelloptions=
 setlocal statusline=
@@ -184,27 +184,25 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-9,51fold
-52,55fold
-56,73fold
-74,87fold
+17,50fold
+51,60fold
+61,72fold
+73,86fold
 89,144fold
-145,165fold
-88,166fold
-167,200fold
-201,223fold
-224,229fold
-239,248fold
-249,264fold
-265,280fold
-230,282fold
+145,168fold
+87,169fold
+170,208fold
+209,228fold
+229,239fold
+240,302fold
 let &fdl = &fdl
-let s:l = 18 - ((17 * winheight(0) + 20) / 41)
+let s:l = 2 - ((1 * winheight(0) + 20) / 41)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 18
-normal! 01|
+keepjumps 2
+normal! 0
+lcd ~
 let &g:so = s:so_save | let &g:siso = s:siso_save
 nohlsearch
 doautoall SessionLoadPost

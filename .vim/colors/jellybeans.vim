@@ -458,9 +458,10 @@ call s:X("PmenuSel","101010","eeeeee","",s:termBlack,"White")
 call s:X("Visual","","404040","","",s:termBlack)
 call s:X("Cursor",s:background_color,"b0d0f0","","","")
 
-call s:X("LineNr","605958",s:background_color,"NONE",s:termBlack,"")
-call s:X("CursorLineNr","ccc5c4","","NONE","White","")
-call s:X("Comment","888888","","italic","Grey","")
+call s:X("LineNr","bcbcbc",s:background_color,"NONE",s:termBlack,"")
+call s:X("CursorLineNr","ffffff","","","White","")
+call s:X("Comment","928374","","italic","245","")
+hi Comment cterm=italic
 call s:X("Todo","c7c7c7","","bold","White",s:termBlack)
 
 call s:X("StatusLine","dddddd","000000","italic","","White")
@@ -496,7 +497,7 @@ call s:X("NonText","606060",s:background_color,"",s:termBlack,"")
 
 call s:X("SpecialKey","444444","1c1c1c","",s:termBlack,"")
 
-call s:X("Search","f0a0c0","302028","","Magenta","")
+call s:X("Search","000000","ffffff","","Magenta","")
 
 call s:X("Directory","dad085","","","Yellow","")
 call s:X("ErrorMsg","","902020","","","DarkRed")
@@ -508,7 +509,7 @@ call s:X("Question","65C254","","","Green","")
 " Spell Checking
 
 call s:X("SpellBad","","902020","underline","","DarkRed")
-call s:X("SpellCap","","0000df","underline","","Blue")
+call s:X("SpellCap","","","","","")
 call s:X("SpellRare","","540063","underline","","DarkMagenta")
 call s:X("SpellLocal","","2D7067","underline","","Green")
 

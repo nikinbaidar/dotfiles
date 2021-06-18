@@ -13,7 +13,10 @@
 
 PS1='\[\033[01;31m\]\u\[\033[00m\]@\h:\w\$ '
 
+# Setting environment variables
+
 export EDITOR=vim
+export PATH=$PATH:/opt/afni
 
 # Aliash definitions
 # Instead of adding all of you aliases here directly,

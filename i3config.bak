@@ -31,14 +31,8 @@ set $CR Return
 ## prompts: shutdown, log out
 
 bindsym $Ctrl+$Alt+P exec bash ~/scripts/promptPowerdown.sh
-
 bindsym $Ctrl+$Alt+S exec bash ~/scripts/promptSignoff.sh
-
-## i3lock and suspsend system
-
-bindsym $Ctrl+$Alt+L exec systemctl suspend && i3lock --no-unlock-indicator \
-       --nofork --image=/home/nikin/pictures/lockscreen_imgs/one.png && \
-       setxkbmap -option caps:swapescape
+bindsym $Ctrl+$Alt+L exec bash ~/scripts/sleep.sh
 
 # Application Shortcuts
 
@@ -47,6 +41,7 @@ set $journal /home/nikin/notes/journal/
 bindsym $sup+d   exec bash ~/scripts/thisScriptDoesNothing.sh
 bindsym $sup+$CR exec xterm
 bindsym $sup+r   exec rofi -show run
+bindsym $sup+a   exec rofi -show
 bindsym $sup+b   exec firefox
 bindsym $sup+z   exec tabbed -c zathura -e
 bindsym $sup+m   exec xterm cmus
@@ -155,3 +150,4 @@ exec_always /home/nikin/.config/screenlayout/my_monitor_setup.sh
 ## floating configs
 
 for_window [ title="floatthis" ] floating enable
+# for_window [ title="AFNI" ] floating enable

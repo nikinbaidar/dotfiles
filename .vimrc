@@ -1,11 +1,11 @@
-"        _
-" __   _(_)_ __ ___  _ __ ___
-" \ \ / / | '_ ` _ \| '__/ __|
-"  \ V /| | | | | | | | | (__
-"   \_/ |_|_| |_| |_|_|  \___|
-"
-" Remember: Convention over configuration
-"
+"         _
+"  _   __(_)___ ___  __________
+" | | / / / __ `__ \/ ___/ ___/
+" | |/ / / / / / / / /  / /__
+" |___/_/_/ /_/ /_/_/   \___/
+
+" REMEMBER : Convention over configuration
+
 " + It is a text editor, not an IDE
 " + It probably has that feature built-in
 " + Use only plugins that are functional
@@ -15,29 +15,27 @@
 " + Visual clutter drains mental energy
 
 " General Setup -
-    set noswapfile
-    set showcmd
-    set timeoutlen=150 " opts for speed
 
-    " Searching: Files, Commands and Patterns
+    filetype plugin indent on
+
+    set noswapfile
+
+    set showcmd
+
     set ignorecase
     set wildmenu
     set wildmode=list,full
     set autochdir
     set path+=**
 
-    " Easy Movements:
     set cursorline
     set number relativenumber
     set mouse=n
 
-    " Line Wrapping:
     set wrap
     set linebreak
     set textwidth=80
-    " set colorcolumn=81
 
-    " Indentations: See help retab
     set tabstop=4
     set shiftwidth=4
     set softtabstop=4
@@ -45,20 +43,22 @@
     set autoindent
     set breakindent
 
-    " Splits And Buffers:
     set splitright
     set splitbelow
     set hidden
     set confirm
 
 " Appearance -
+
     syntax on
-    colorscheme jellybeans
+    let $tty = system("ps hotty $$")
+    if ($tty[0] ==# 'p') " # for case-sensitivity use ? for the opposite
+        colorscheme jellybeans
+    else
+        colorscheme murphy
+    endif
 
-" Vim Plugins -
-    " Managed by Vim Plug
-
-    filetype plugin indent on
+" Vim Plugins via. vim-plug -
 
     call plug#begin('~/.vim/plugged')
     Plug 'SirVer/ultisnips'
@@ -66,14 +66,15 @@
     Plug 'tpope/vim-surround'
     Plug 'tpope/vim-repeat'
     Plug 'jiangmiao/auto-pairs'
-    " Plug 'luochen1990/rainbow'
+    Plug 'kezhenxu94/vim-mysql-plugin'
     Plug 'vimwiki/vimwiki'
     call plug#end()
 
-" Configurations -
-    let g:netrw_banner = 0
+" Configs -
+
+    " let g:netrw_banner = 0
     let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
-    let g:netrw_bufsettings = 'number'
+    let g:netrw_bufsettings = 'number nowrap'
     let g:UltiSnipsExpandTrigger = "<tab>"
     let g:UltiSnipsJumpForwardTrigger = "<C-h>"
     let g:rainbow_active = 1
@@ -84,6 +85,7 @@
     let g:tex_flavor="latex"
 
 " Custom Plugins -
+
     function! ToggleComment()
         let ft = &filetype
         if ft == "vim"
@@ -122,11 +124,11 @@
                 normal! I%% 
             endif
 
-        elseif ft == "css"
+        elseif (ft == "css" || ft == "sql")
              if getline('.') =~ "^\\s*/ *"
-                normal! ^3xg_2Xx^
+                normal! ma^3xg_2Xx^`a3h
             elseif getline('.') != ""
-                normal! I/* g_a */
+                normal! maI/* g_a */`a3l
             endif
 
         elseif ft == "html"
@@ -141,8 +143,8 @@
     endfunction
 
     function! CodeRunner()
-        let ft = &filetype
         :write
+        let ft = &filetype
         if ft == "python"
             :!clear && python3 %
         elseif ft == "javascript"
@@ -157,12 +159,16 @@
             :!clear ; pdflatex -shell-escape %
         elseif ft == "tex"
             :!clear ; pdflatex -shell-escape %
+        elseif ft == "sql"
+            let @d = 'mavip rs`a'
+            :normal! @d
         else
             echo "Undefined CodeRunner"
         endif
     endfunction
 
 " Mappings -
+
         let mapleader = "\<Space>"
 
         " Normal Mode Mappings:
@@ -178,6 +184,7 @@
         nnoremap <leader>j <C-w>j
         nnoremap <leader>k <C-w>k
         nnoremap <leader>l <C-w>l
+        nnoremap <leader><Space> :normal! `h<CR>
         " Switching and Deleting Buffers
         nnoremap <leader>s :buffers<CR>:buffer<Space>
         nnoremap <leader>d :buffers<CR>:bdelete<Space>
@@ -197,12 +204,14 @@
         " Command Mode Mappings:
         cnoremap <C-p> <Up>
         cnoremap <C-n> <Down>
+        cnoremap <C-a> <C-b>
 
 " Auto Commands -
+
     augroup RunOnEvent
         autocmd!
         autocmd FileType * set formatoptions=tq
-        autocmd FileType vimwiki :call Notetaking() "| syntax enable
+        autocmd FileType vimwiki call Notetaking()
         " The following autocmd works with vim_surround plugin
         autocmd FileType tex let b:surround_{char2nr("'")} = "`\r'"
             \ | let b:surround_{char2nr("\"")} = "``\r''" | syntax enable
@@ -218,67 +227,76 @@
     endif
 
 " Abbreviations -
+
     abbr ture true
     abbr fasle false
     abbr adn and
     abbr teh the
+    abbr tima ✓
     " Inserting Dates:
     iab <expr> today strftime("%a %b %d %Y")
     iab tomorrow <C-r>=system('date -d tomorrow +\%a\ \%b\ \%d\ \%Y')<CR><BS>
 
-" Notetaking -
+" Notetaking
+
+    setlocal textwidth=70 " FIXME??
+    setlocal cursorcolumn
+    setlocal spell
+    setlocal complete+=kspell
+    setlocal spellcapcheck=\_[\])'"   ]\+
+
     function! Notetaking()
 
-        syntax enable
+      " PDF Related Configs:
 
-        setlocal shiftwidth=2
-        setlocal textwidth=70 " FIXME??
-        setlocal spell
-        setlocal complete+=kspell
-        setlocal spellcapcheck=\_[\])'"   ]\+
+      " Explicitly Reload LaTeX Files
 
-        " Explicitly Reload LaTeX Files:
         if (getcwd() =~ '/home/nikin/markdown_notes/[A-Z]*/*/*' ||
-          \ getcwd() =~ '/home/nikin/notes/*/*/*' && &filetype=='vimwiki')
+                    \ getcwd() =~ '/home/nikin/notes/*/*/*' &&
+                    \ &filetype=='vimwiki')
             let g=expand('%<:p')
             let b=char2nr(g[0])
             if (b >= 97 && b < 123)
                 set filetype=tex
                 syntax enable
+                setlocal textwidth=70 " FIXME??
             endif
         endif
 
-        " Insert Code Blocks w/ Proper Syntax Highlighting:
-        function! InsertCodeBlock()
-            " Insert code blocks with proper highlighting:
-            if getcwd() =~ 'home/Nikin/Notes/JavaScript/*/*'
-                :normal! I{{{javascript>>...o}}}k
-            elseif getcwd() =~ 'home/Nikin/Notes/C++/*/*'
-                :normal! I{{{cpp>>...o}}}k
-            elseif getcwd() =~ 'home/Nikin/Notes/HTML & CSS/HTML*/*'
-                :normal! I{{{html>>...o}}}k
-            elseif getcwd() =~ 'home/Nikin/Notes/HTML & CSS/CSS*/*'
-                :normal! I{{{css>>...o}}}k
-            else
-                :echo "Undefined Code Block"
-          endif
+      " LaTeX Compiling
+
+      nnoremap <F2> :call CompileParent()<CR><CR><CR>
+      function! CompileParent()
+          :write!
+          :cd ..
+          execute (" ! clear && pdflatex -shell-escape [a-z]*.tex")
+          cd -
       endfunction
 
-      " Some Mappings For Notetaking Purposes:
-
-      " LaTeX Compiling
-      nnoremap <F2> :CompileParent<CR><CR><CR>
-      command! CompileParent :w! | cd .. |
-            \ execute ("! clear && pdflatex -shell-escape [a-z]*.tex") | cd -
-
-      " Opening PDFs : Invoke Appropirately
+      " opens pdfs when invoked appropirately
       nnoremap <F6> :open *.pdf<CR>
-
       command!  OpenPdfs execute ("silent ! zathura --fork % " )
             \ | bdelete | edit %
 
-      command!  Hex execute ("split" ) | edit .
 
       inoremap <C-\> <C-[>:call InsertCodeBlock()<CR>o
+
+      " Insert Code Blocks w/ Proper Syntax Highlighting:
+      function! InsertCodeBlock()
+          " Insert code blocks with proper highlighting:
+          if getcwd() =~ 'home/Nikin/Notes/JavaScript/*/*'
+              :normal! I{{{javascript>>...o}}}k
+          elseif getcwd() =~ 'home/Nikin/Notes/C++/*/*'
+              :normal! I{{{cpp>>...o}}}k
+          elseif getcwd() =~ 'home/Nikin/Notes/HTML & CSS/HTML*/*'
+              :normal! I{{{html>>...o}}}k
+          elseif getcwd() =~ 'home/Nikin/Notes/HTML & CSS/CSS*/*'
+              :normal! I{{{css>>...o}}}k
+          else
+              :echo "Undefined Code Block"
+          endif
+      endfunction
+
+      command!  Hex execute ("split" ) | edit .
 
     endfunction

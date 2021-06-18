@@ -20,41 +20,29 @@ alias aliasconfig="vim ~/.bash_aliases && source ~/.bashrc"
 
 # functional aliases
 
-alias lock="i3lock --no-unlock-indicator \
-    --image=/home/nikin/Pictures/Wallpapers/arch-linux-wallpaper.png"
-
 alias zathura="zathura --fork 2> /dev/null"
 
-alias nevernote="vim ~/Notes/.index.wiki && /usr/bin/clear -x && rfiles"
-
-alias rfiles="cd ~/Notes && rm -f texput.log */[a-z]*.aux */[a-z]*.log \
+alias rfiles="cd ~/notes && rm -f texput.log */[a-z]*.aux */[a-z]*.log \
     */[a-z]*.out */[a-z]*.toc */[a-z]*.maf */[a-z]*.mtc* */[a-z]*.nav \
     */[a-z]*.snm */*/[a-z]*.aux */*/[a-z]*.log */*/[a-z]*.out \
     */*/[a-z]*.toc */*/[a-z]*.nav */*/[a-z]*.snm */[a-z]*.maf\
     */*/[a-z]*.mtc* ; rm -rf */_minted* && cd - >/dev/null"
 
-alias zeronote="vim ~/note/.index.md"
+alias zeronote="vim ~/notes/.index.md && /usr/bin/clear -x && rfiles"
 
-alias syncnotes="cd ~/Notes && git add --all && git commit -m \"Synchronize\" \
+alias syncnotes="cd ~/notes && git add --all && git commit -m \"Synchronize\" \
   		 && git push -u origin master && cd -"
 
-alias updatenikinbaidarr="cd ~/website && git add --all \
+alias updatemysite="cd ~/website && git add --all \
     && git commit -m \"Synchronize\" && git push -u origin master && cd -"
 
 alias clear="echo Press control L | boxes -d nuke"
 
-alias shutdown="shutdown now"
+## Works with .pptx and .docx FIXED DEPRECIATION
+alias convert2pdf="soffice --headless --convert-to pdf"
 
-alias delayshutdown="/usr/bin/shutdown"
+alias swap="setxkbmap -option caps:swapescape"
 
-# code repo shortcuts
-
-alias ino="cd ~/sketchbook      && vim . && cd - > /dev/null"
-alias  js="cd ~/Code/javascript && vim . && cd - > /dev/null"
-alias  py="cd ~/Code/python     && vim . && cd - > /dev/null"
-alias   c="cd ~/Code/c          && vim . && cd - > /dev/null"
-alias cpp="cd ~/Code/cpp        && vim . && cd - > /dev/null"
-alias  wd="cd ~/Code/web-design && vim . && cd - > /dev/null"
+alias showlinks="vim ~/Dropbox/links.md && exit"
 
 # temporary aliases
-
