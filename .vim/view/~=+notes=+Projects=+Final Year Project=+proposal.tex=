@@ -64,6 +64,9 @@ xmap <buffer> aH <Plug>VimwikiTextObjHeaderSubV
 omap <buffer> aH <Plug>VimwikiTextObjHeaderSub
 xmap <buffer> ah <Plug>VimwikiTextObjHeaderV
 omap <buffer> ah <Plug>VimwikiTextObjHeader
+xmap <buffer> glp <Plug>VimwikiDecrementListItem
+xmap <buffer> gln <Plug>VimwikiIncrementListItem
+xmap <buffer> glx <Plug>VimwikiToggleRejectedListItem
 xnoremap <buffer> <silent> gl- :VimwikiChangeSymbolTo -
 nnoremap <buffer> <silent> gl- :VimwikiChangeSymbolTo -
 xnoremap <buffer> <silent> gL- :VimwikiChangeSymbolInListTo -
@@ -103,11 +106,8 @@ nmap <buffer> gLH <Plug>VimwikiDecreaseLvlWholeItem
 nmap <buffer> gLh <Plug>VimwikiDecreaseLvlWholeItem
 nmap <buffer> gll <Plug>VimwikiIncreaseLvlSingleItem
 nmap <buffer> glh <Plug>VimwikiDecreaseLvlSingleItem
-xmap <buffer> glp <Plug>VimwikiDecrementListItem
 nmap <buffer> glp <Plug>VimwikiDecrementListItem
-xmap <buffer> gln <Plug>VimwikiIncrementListItem
 nmap <buffer> gln <Plug>VimwikiIncrementListItem
-xmap <buffer> glx <Plug>VimwikiToggleRejectedListItem
 nmap <buffer> glx <Plug>VimwikiToggleRejectedListItem
 nmap <buffer> gnt <Plug>VimwikiNextTask
 xmap <buffer> il <Plug>VimwikiTextObjListSingleV
@@ -182,8 +182,14 @@ inoremap <buffer> <silent> " =AutoPairsInsert('"')
 inoremap <buffer> <silent> ' =AutoPairsInsert('''')
 inoremap <buffer> <silent> ( =AutoPairsInsert('(')
 inoremap <buffer> <silent> ) =AutoPairsInsert(')')
-noremap <buffer> <silent> î :call AutoPairsJump()
-noremap <buffer> <silent> ð :call AutoPairsToggle()
+onoremap <buffer> <silent> ð :call AutoPairsToggle()
+xnoremap <buffer> <silent> ð :call AutoPairsToggle()
+nnoremap <buffer> <silent> ð :call AutoPairsToggle()
+onoremap <buffer> <silent> î :call AutoPairsJump()
+xnoremap <buffer> <silent> î :call AutoPairsJump()
+nnoremap <buffer> <silent> î :call AutoPairsJump()
+snoremap <buffer> <silent> ð :call AutoPairsToggle()
+snoremap <buffer> <silent> î :call AutoPairsJump()
 inoremap <buffer> <silent> [ =AutoPairsInsert('[')
 inoremap <buffer> <silent> ] =AutoPairsInsert(']')
 inoremap <buffer> <silent> ` =AutoPairsInsert('`')
@@ -284,7 +290,7 @@ setlocal sidescrolloff=-1
 setlocal signcolumn=auto
 setlocal nosmartindent
 setlocal softtabstop=4
-setlocal spell
+setlocal nospell
 setlocal spellcapcheck=_[])'
 setlocal spellfile=~/.vim/spell/en.utf-8.add
 setlocal spelllang=en
@@ -315,14 +321,22 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-27,54fold
+2,30fold
+34,60fold
+66,112fold
+118,231fold
+118,253fold
+272,323fold
+324,457fold
 let &fdl = &fdl
-let s:l = 34 - ((18 * winheight(0) + 20) / 40)
+118
+normal! zo
+let s:l = 480 - ((6 * winheight(0) + 20) / 40)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 34
-normal! 01|
+keepjumps 480
+normal! 060|
 let &g:so = s:so_save | let &g:siso = s:siso_save
 doautoall SessionLoadPost
 " vim: set ft=vim :

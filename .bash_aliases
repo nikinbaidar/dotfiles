@@ -22,13 +22,22 @@ alias aliasconfig="vim ~/.bash_aliases && source ~/.bashrc"
 
 alias zathura="zathura --fork 2> /dev/null"
 
-alias rfiles="cd ~/notes && rm -f texput.log */[a-z]*.aux */[a-z]*.log \
+alias rfiles="cd ~/notes && \
+    rm -f texput.log */[a-z]*.aux */[a-z]*.log \
     */[a-z]*.out */[a-z]*.toc */[a-z]*.maf */[a-z]*.mtc* */[a-z]*.nav \
-    */[a-z]*.snm */*/[a-z]*.aux */*/[a-z]*.log */*/[a-z]*.out \
-    */*/[a-z]*.toc */*/[a-z]*.nav */*/[a-z]*.snm */[a-z]*.maf\
-    */*/[a-z]*.mtc* ; rm -rf */_minted* && cd - >/dev/null"
+    */[a-z]*.snm */[a-z]*.nlo */[a-z]*.idx */[a-z]*.blg */[a-z]*.bbl\
+    */[a-z]*.bcf */[a-z]*.blg */[a-z]*-blx.bib */[a-z]*.run.xml \
+    */[a-z]*.tex.bbl */*/[a-z]*.tex.blg */*/[a-z]*.log */*/[a-z]*.out \
+    */*/[a-z]*.out */*/[a-z]*.toc */*/[a-z]*.maf */*/[a-z]*.mtc* */*/[a-z]*.nav\
+    */*/[a-z]*.snm */*/[a-z]*.nlo */*/[a-z]*.idx */*/[a-z]*.blg */*/[a-z]*.bbl\
+    */*/[a-z]*.bcf */*/[a-z]*.blg */*/[a-z]*-blx.bib */*/[a-z]*.run.xml \
+    */*/[a-z]*.tex.bbl */*/[a-z]*.tex.blg */*/[a-z]*.log */*/[a-z]*.out \
+    ; rm -rf */_minted* \
+    && cd - >/dev/null"
 
 alias zeronote="vim ~/notes/.index.md && /usr/bin/clear -x && rfiles"
+
+alias webdev="bash ~/scripts/webdevpack.sh 2> /dev/null"
 
 alias syncnotes="cd ~/notes && git add --all && git commit -m \"Synchronize\" \
   		 && git push -u origin master && cd -"
@@ -43,6 +52,13 @@ alias convert2pdf="soffice --headless --convert-to pdf"
 
 alias swap="setxkbmap -option caps:swapescape"
 
-alias showlinks="vim ~/Dropbox/links.md && exit"
+alias lock="i3lock --no-unlock-indicator \
+    --image=/home/nikin/pictures/lockscreen_imgs/one.png "
 
 # temporary aliases
+
+alias showlinks="vim ~/Dropbox/links.md && exit"
+
+alias pushproposal="cd ~/notes/Projects/Final\ Year\ Project/ && \
+    git add proposal.tex proposal.pdf && git commit -m \"proposal draft \" \
+    && git push -u origin master"

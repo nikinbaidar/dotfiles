@@ -64,7 +64,7 @@ setlocal keymap=
 setlocal noarabic
 setlocal autoindent
 setlocal backupcopy=
-setlocal balloonexpr=
+setlocal balloonexpr=netrw#BalloonHelp()
 setlocal nobinary
 setlocal breakindent
 setlocal breakindentopt=
@@ -109,7 +109,7 @@ setlocal foldminlines=1
 setlocal foldnestmax=20
 setlocal foldtext=foldtext()
 setlocal formatexpr=
-setlocal formatoptions=tqr
+setlocal formatoptions=tq
 setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
 setlocal formatprg=
 setlocal grepprg=
@@ -185,23 +185,25 @@ setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
 17,50fold
-51,60fold
-61,72fold
-73,86fold
-89,144fold
-145,168fold
-87,169fold
-170,208fold
-209,228fold
-229,239fold
-240,302fold
+51,55fold
+56,67fold
+68,81fold
+84,139fold
+140,163fold
+82,164fold
+165,203fold
+204,228fold
+229,240fold
+241,302fold
 let &fdl = &fdl
-let s:l = 2 - ((1 * winheight(0) + 20) / 41)
+204
+normal! zo
+let s:l = 214 - ((204 * winheight(0) + 20) / 41)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 2
-normal! 0
+keepjumps 214
+normal! 05|
 lcd ~
 let &g:so = s:so_save | let &g:siso = s:siso_save
 nohlsearch

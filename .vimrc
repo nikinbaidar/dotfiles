@@ -4,23 +4,11 @@
 " | |/ / / / / / / / /  / /__
 " |___/_/_/ /_/ /_/_/   \___/
 
-" REMEMBER : Convention over configuration
-
-" + It is a text editor, not an IDE
-" + It probably has that feature built-in
-" + Use only plugins that are functional
-" + Read the documentation, it'll save you hours
-" + You should know exactly what each line in your vimrc does
-" + Don't seek mastery, seek proficiency
-" + Visual clutter drains mental energy
-
 " General Setup -
 
     filetype plugin indent on
 
     set noswapfile
-
-    set showcmd
 
     set ignorecase
     set wildmenu
@@ -30,7 +18,7 @@
 
     set cursorline
     set number relativenumber
-    set mouse=n
+    set mouse=n " enable mouse scrolling
 
     set wrap
     set linebreak
@@ -51,14 +39,9 @@
 " Appearance -
 
     syntax on
-    let $tty = system("ps hotty $$")
-    if ($tty[0] ==# 'p') " # for case-sensitivity use ? for the opposite
-        colorscheme jellybeans
-    else
-        colorscheme murphy
-    endif
+    colorscheme jellybeans
 
-" Vim Plugins via. vim-plug -
+" Vim Plugins -
 
     call plug#begin('~/.vim/plugged')
     Plug 'SirVer/ultisnips'
@@ -163,7 +146,19 @@
             let @d = 'mavip rs`a'
             :normal! @d
         else
-            echo "Undefined CodeRunner"
+            echohl ErrorMsg | echomsg "Undefined CodeRunner!" | echohl NONE
+        endif
+    endfunction
+
+    function! ReloadBrowser()
+        :silent !bash ~/scripts/reloadFirefox.sh
+        :silent !bash ~/scripts/reloadFirefox.sh
+    endfunction
+
+    function! BiblatexCompile()
+        if &filetype == "tex"
+            :! clear ; biber %:r
+            silent call CodeRunner()
         endif
     endfunction
 
@@ -218,6 +213,7 @@
         autocmd FileType pdf OpenPdfs
         autocmd BufWinEnter *.* silent loadview
         autocmd BufWritePre * %s/\s\+$//e " strip trailing spaces on save
+        autocmd BufWritePre *.html,*.css call ReloadBrowser()
     augroup END
 
     if has("autocmd")
@@ -226,6 +222,13 @@
             \ | execute "normal g'\"zz" | endif
     endif
 
+" User-defined Commands -
+
+    command! Vimconfig execute("tabnew ~/.vimrc")
+    command! Notes execute("tabnew ~/notes/.index.md") | source ~/.vimrc
+    command! Dict execute("tabnew ~/notes/Archives/.lexicon.md")
+    command! AddBibliography execute("call BiblatexCompile()")
+
 " Abbreviations -
 
     abbr ture true
@@ -233,23 +236,24 @@
     abbr adn and
     abbr teh the
     abbr tima ✓
+    abbr fmri fMRI
     " Inserting Dates:
     iab <expr> today strftime("%a %b %d %Y")
     iab tomorrow <C-r>=system('date -d tomorrow +\%a\ \%b\ \%d\ \%Y')<CR><BS>
 
 " Notetaking
 
-    setlocal textwidth=70 " FIXME??
-    setlocal cursorcolumn
-    setlocal spell
-    setlocal complete+=kspell
-    setlocal spellcapcheck=\_[\])'"   ]\+
-
     function! Notetaking()
 
-      " PDF Related Configs:
+        setlocal textwidth=70 " FIXME??
+        " setlocal cursorcolumn
+        setlocal spell
+        setlocal complete+=kspell
+        setlocal spellcapcheck=\_[\])'"   ]\+
 
-      " Explicitly Reload LaTeX Files
+        " PDF Related Configs:
+
+        " Explicitly Reload LaTeX Files
 
         if (getcwd() =~ '/home/nikin/markdown_notes/[A-Z]*/*/*' ||
                     \ getcwd() =~ '/home/nikin/notes/*/*/*' &&
@@ -263,40 +267,39 @@
             endif
         endif
 
-      " LaTeX Compiling
+        " LaTeX Compiling
 
-      nnoremap <F2> :call CompileParent()<CR><CR><CR>
-      function! CompileParent()
-          :write!
-          :cd ..
-          execute (" ! clear && pdflatex -shell-escape [a-z]*.tex")
-          cd -
-      endfunction
+        nnoremap <F2> :call CompileParent()<CR><CR><CR>
+        function! CompileParent()
+            :write!
+            :cd ..
+            execute (" ! clear && pdflatex -shell-escape [a-z]*.tex")
+            cd -
+        endfunction
 
-      " opens pdfs when invoked appropirately
-      nnoremap <F6> :open *.pdf<CR>
-      command!  OpenPdfs execute ("silent ! zathura --fork % " )
-            \ | bdelete | edit %
+        " opens pdfs when invoked appropirately
+        nnoremap <F6> :open *.pdf<CR>
+        command!  OpenPdfs execute ("silent ! zathura --fork % " )
+                    \ | bdelete | edit %
 
+        inoremap <C-\> <C-[>:call InsertCodeBlock()<CR>o
 
-      inoremap <C-\> <C-[>:call InsertCodeBlock()<CR>o
+        " Insert Code Blocks w/ Proper Syntax Highlighting:
+        function! InsertCodeBlock()
+            " Insert code blocks with proper highlighting:
+            if getcwd() =~ 'home/Nikin/Notes/JavaScript/*/*'
+                :normal! I{{{javascript>>...o}}}k
+            elseif getcwd() =~ 'home/Nikin/Notes/C++/*/*'
+                :normal! I{{{cpp>>...o}}}k
+            elseif getcwd() =~ 'home/Nikin/Notes/HTML & CSS/HTML*/*'
+                :normal! I{{{html>>...o}}}k
+            elseif getcwd() =~ 'home/Nikin/Notes/HTML & CSS/CSS*/*'
+                :normal! I{{{css>>...o}}}k
+            else
+                :echo "Undefined Code Block"
+            endif
+        endfunction
 
-      " Insert Code Blocks w/ Proper Syntax Highlighting:
-      function! InsertCodeBlock()
-          " Insert code blocks with proper highlighting:
-          if getcwd() =~ 'home/Nikin/Notes/JavaScript/*/*'
-              :normal! I{{{javascript>>...o}}}k
-          elseif getcwd() =~ 'home/Nikin/Notes/C++/*/*'
-              :normal! I{{{cpp>>...o}}}k
-          elseif getcwd() =~ 'home/Nikin/Notes/HTML & CSS/HTML*/*'
-              :normal! I{{{html>>...o}}}k
-          elseif getcwd() =~ 'home/Nikin/Notes/HTML & CSS/CSS*/*'
-              :normal! I{{{css>>...o}}}k
-          else
-              :echo "Undefined Code Block"
-          endif
-      endfunction
-
-      command!  Hex execute ("split" ) | edit .
+        command!  Hex execute ("split" ) | edit .
 
     endfunction
