@@ -1,0 +1,2 @@
+primary #34abb1
+blue #063c6a

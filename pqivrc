@@ -1,0 +1,15 @@
+
+[options]
+hide-info-box=1
+
+[keybindings]
+n { goto_file_relative(1) }
+p { goto_file_relative(-1) }
+= { set_scale_level_relative(1.1) }
+
+@MONTAGE {
+    h { montage_mode_shift_x(-1) }
+    j { montage_mode_shift_y(1) }
+    k { montage_mode_shift_y(-1) }
+    l { montage_mode_shift_x(1) }
+}

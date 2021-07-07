@@ -10,6 +10,8 @@
 
     set noswapfile
 
+    set showcmd
+
     set ignorecase
     set wildmenu
     set wildmode=list,full
@@ -70,83 +72,58 @@
 " Custom Plugins -
 
     function! ToggleComment()
+
         let ft = &filetype
-        if ft == "vim"
-             if getline('.') =~ "^\\s*\" *"
-                normal! ^2x
-            elseif getline('.') != ""
-                normal! I" 
-            endif
 
-        elseif (ft == "javascript" || ft == "c" || ft == "cpp" ||
-                    \ ft == "arduino" || ft == "java" )
-            if getline('.') =~ "^\\s*// *"
-                normal! ^3x
-            elseif getline('.') != ""
-                normal! I// 
-            endif
+        if (ft == "sh" || ft == "r" || ft == "python" ||
+                    \ ft == "sh" || ft == "conf")
 
-        elseif (ft == "python" || ft == "sh" || ft == "conf")
-            if getline('.') =~ "^\\s*# *"
-                normal! ^2x
-            elseif getline('.') != ""
-                normal! I# 
+            if     getline('.') =~ "^\\s*# *"    | normal! ^2x
+            elseif getline('.') != ""            | normal! I# 
             endif
 
         elseif (ft == "matlab" || ft == "tex")
-            if getline('.') =~ "^\\s*% *"
-                normal! ^2x
-            elseif getline('.') != ""
-                normal! I% 
-            endif
-
-        elseif (ft == "vimwiki")
-            if getline('.') =~ "^\\s*%% *"
-                normal! ^3x
-            elseif getline('.') != ""
-                normal! I%% 
+            if     getline('.') =~ "^\\s*% *"    | normal! ^2x
+            elseif getline('.') != ""            | normal! I% 
             endif
 
         elseif (ft == "css" || ft == "sql")
-             if getline('.') =~ "^\\s*/ *"
-                normal! ma^3xg_2Xx^`a3h
-            elseif getline('.') != ""
-                normal! maI/* g_a */`a3l
+            if     getline('.') =~ "^\\s*/ *"    | normal! ma^3xg_2Xx^`a3h
+            elseif getline('.') != ""            | normal! maI/* g_a */`a3l
             endif
 
-        elseif ft == "html"
-            if getline('.') =~ "^\\s*<!-- *"
-                normal! ^5xg_3Xx^
-            elseif getline('.') != ""
-                normal! I<!-- g_a -->
+        elseif (ft == "javascript" || ft == "c" || ft == "cpp" ||
+                    \ ft == "arduino" || ft == "java")
+
+            if     getline('.') =~ "^\\s*// *"   | normal! ^3x
+            elseif getline('.') != ""            | normal! I// 
             endif
-        else
-            echo "Undefined CommentLeader"
+
+        elseif (ft == "html" || ft == "markdown" || ft == "vimwiki")
+            if     getline('.') =~ "^\\s*<!-- *" | normal! ^5xg_3Xx^
+            elseif getline('.') != ""            | normal! I<!-- g_a -->
+            endif
+
+        elseif (ft == "vim")
+            if     getline('.') =~ "^\\s*\" *"   | normal! ^2x
+            elseif getline('.') != ""            | normal! I" 
+            endif
+
+        else | echo "Undefined CommentLeader"
         endif
     endfunction
 
     function! CodeRunner()
-        :write
-        let ft = &filetype
-        if ft == "python"
-            :!clear && python3 %
-        elseif ft == "javascript"
-            :!clear && node %
-        elseif ft == "c"
-            :!clear ; gcc % -o ~/Code/c/coderunner && ~/Code/c/coderunner
-        elseif ft == "cpp"
-            :!clear ; g++ % -o ~/Code/cpp/coderunner && ~/Code/cpp/coderunner
-        elseif ft == "arduino"
-            :!clear ; arduino-cli compile --fqbn arduino:avr:uno %
-        elseif ft == "tex"
-            :!clear ; pdflatex -shell-escape %
-        elseif ft == "tex"
-            :!clear ; pdflatex -shell-escape %
-        elseif ft == "sql"
-            let @d = 'mavip rs`a'
-            :normal! @d
+        : write!
+        let    ft =  &filetype
+        if     ft == "tex"        | ! clear && pdflatex -shell-escape %
+        elseif ft == "python"     | ! python3 %
+        elseif ft == "javascript" | ! node %
+        elseif ft == "c"          | ! gcc % -o ~/code/c/coderunner && ~/code/c/coderunner
+        elseif ft == "cpp"        | ! g++ % -o ~/code/cpp/coderunner && ~/code/cpp/coderunner
+        elseif ft == "sql"        | let @d = 'mavip rs`a' | :normal! @d
         else
-            echohl ErrorMsg | echomsg "Undefined CodeRunner!" | echohl NONE
+            echo "Undefined CodeRunner!"
         endif
     endfunction
 
@@ -155,12 +132,27 @@
         :silent !bash ~/scripts/reloadFirefox.sh
     endfunction
 
-    function! BiblatexCompile()
-        if &filetype == "tex"
+        function! CompileParent()
+            :write!
+            :cd ..
+            :execute (" ! clear && pdflatex [a-z]*.tex")
+            :cd -
+        endfunction
+
+        function! BiblatexCompile()
             :! clear ; biber %:r
             silent call CodeRunner()
-        endif
-    endfunction
+        endfunction
+
+        function! OpenPDF()
+            if (&filetype == "tex")
+                let g:pdffile = expand("%:r").".pdf"
+                execute ("silent ! zathura --fork") g:pdffile
+            elseif (&filetype == 'vimwiki')
+                let g:pdffile = "*.pdf"
+                execute ("silent ! zathura --fork") g:pdffile
+            endif
+        endfunction
 
 " Mappings -
 
@@ -174,12 +166,13 @@
         nnoremap <leader>o :normal! magqip`a<CR>
         nnoremap <silent><leader>/ :call ToggleComment()<CR>
         nnoremap <F9> :call CodeRunner()<CR>
+        nnoremap <F2> :call CompileParent()<CR><CR><CR>
+        nnoremap <F6> :call OpenPDF()<CR>
         " Switch Splits
         nnoremap <leader>h <C-w>h
         nnoremap <leader>j <C-w>j
         nnoremap <leader>k <C-w>k
         nnoremap <leader>l <C-w>l
-        nnoremap <leader><Space> :normal! `h<CR>
         " Switching and Deleting Buffers
         nnoremap <leader>s :buffers<CR>:buffer<Space>
         nnoremap <leader>d :buffers<CR>:bdelete<Space>
@@ -199,7 +192,9 @@
         " Command Mode Mappings:
         cnoremap <C-p> <Up>
         cnoremap <C-n> <Down>
-        cnoremap <C-a> <C-b>
+
+        " Visual Mode Mappings:
+        vnoremap <leader><Space> :! boxes -d blockquote<CR>
 
 " Auto Commands -
 
@@ -210,7 +205,6 @@
         " The following autocmd works with vim_surround plugin
         autocmd FileType tex let b:surround_{char2nr("'")} = "`\r'"
             \ | let b:surround_{char2nr("\"")} = "``\r''" | syntax enable
-        autocmd FileType pdf OpenPdfs
         autocmd BufWinEnter *.* silent loadview
         autocmd BufWritePre * %s/\s\+$//e " strip trailing spaces on save
         autocmd BufWritePre *.html,*.css call ReloadBrowser()
@@ -225,9 +219,11 @@
 " User-defined Commands -
 
     command! Vimconfig execute("tabnew ~/.vimrc")
-    command! Notes execute("tabnew ~/notes/.index.md") | source ~/.vimrc
+    command! Notes execute("tabnew ~/notes/.index.md")
+                \ | execute ("syntax enable")
     command! Dict execute("tabnew ~/notes/Archives/.lexicon.md")
     command! AddBibliography execute("call BiblatexCompile()")
+    command! Opensource execute("cd .. | silent tabnew *.tex | cd -")
 
 " Abbreviations -
 
@@ -246,18 +242,13 @@
     function! Notetaking()
 
         setlocal textwidth=70 " FIXME??
-        " setlocal cursorcolumn
+        setlocal cursorcolumn
         setlocal spell
         setlocal complete+=kspell
         setlocal spellcapcheck=\_[\])'"   ]\+
 
-        " PDF Related Configs:
-
-        " Explicitly Reload LaTeX Files
-
-        if (getcwd() =~ '/home/nikin/markdown_notes/[A-Z]*/*/*' ||
-                    \ getcwd() =~ '/home/nikin/notes/*/*/*' &&
-                    \ &filetype=='vimwiki')
+        " Explicitly Reload tex Files
+        if (getcwd() =~ '/home/nikin/notes/*/*/*')
             let g=expand('%<:p')
             let b=char2nr(g[0])
             if (b >= 97 && b < 123)
@@ -267,39 +258,6 @@
             endif
         endif
 
-        " LaTeX Compiling
-
-        nnoremap <F2> :call CompileParent()<CR><CR><CR>
-        function! CompileParent()
-            :write!
-            :cd ..
-            execute (" ! clear && pdflatex -shell-escape [a-z]*.tex")
-            cd -
-        endfunction
-
-        " opens pdfs when invoked appropirately
-        nnoremap <F6> :open *.pdf<CR>
-        command!  OpenPdfs execute ("silent ! zathura --fork % " )
-                    \ | bdelete | edit %
-
-        inoremap <C-\> <C-[>:call InsertCodeBlock()<CR>o
-
-        " Insert Code Blocks w/ Proper Syntax Highlighting:
-        function! InsertCodeBlock()
-            " Insert code blocks with proper highlighting:
-            if getcwd() =~ 'home/Nikin/Notes/JavaScript/*/*'
-                :normal! I{{{javascript>>...o}}}k
-            elseif getcwd() =~ 'home/Nikin/Notes/C++/*/*'
-                :normal! I{{{cpp>>...o}}}k
-            elseif getcwd() =~ 'home/Nikin/Notes/HTML & CSS/HTML*/*'
-                :normal! I{{{html>>...o}}}k
-            elseif getcwd() =~ 'home/Nikin/Notes/HTML & CSS/CSS*/*'
-                :normal! I{{{css>>...o}}}k
-            else
-                :echo "Undefined Code Block"
-            endif
-        endfunction
-
-        command!  Hex execute ("split" ) | edit .
+        command! Hex execute ("split" ) | edit . " because Hex breaks sometimes
 
     endfunction
