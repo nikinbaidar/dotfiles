@@ -6,6 +6,10 @@ hide-info-box=1
 n { goto_file_relative(1) }
 p { goto_file_relative(-1) }
 = { set_scale_level_relative(1.1) }
+d { command(rm .) }
+
+<Mouse-Scroll-1>  { set_scale_level_relative(1.1) }
+<Mouse-Scroll-2>  { set_scale_level_relative(0.9) }
 
 @MONTAGE {
     h { montage_mode_shift_x(-1) }

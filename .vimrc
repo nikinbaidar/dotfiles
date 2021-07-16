@@ -58,7 +58,7 @@
 " Configs -
 
     " let g:netrw_banner = 0
-    let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
+    " let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
     let g:netrw_bufsettings = 'number nowrap'
     let g:UltiSnipsExpandTrigger = "<tab>"
     let g:UltiSnipsJumpForwardTrigger = "<C-h>"
@@ -202,6 +202,8 @@
         autocmd!
         autocmd FileType * set formatoptions=tq
         autocmd FileType vimwiki call Notetaking()
+        " netrw_browse_split = 0 like behaviour with set hidden
+        autocmd FileType netrw setlocal bufhidden=wipe
         " The following autocmd works with vim_surround plugin
         autocmd FileType tex let b:surround_{char2nr("'")} = "`\r'"
             \ | let b:surround_{char2nr("\"")} = "``\r''" | syntax enable
@@ -219,11 +221,11 @@
 " User-defined Commands -
 
     command! Vimconfig execute("tabnew ~/.vimrc")
-    command! Notes execute("tabnew ~/notes/.index.md")
-                \ | execute ("syntax enable")
     command! Dict execute("tabnew ~/notes/Archives/.lexicon.md")
     command! AddBibliography execute("call BiblatexCompile()")
-    command! Opensource execute("cd .. | silent tabnew *.tex | cd -")
+    command! Parent execute("silent tabnew ../*.tex")
+    command! Notes execute("tabnew ~/notes/.index.md")
+    command! Bookmarks execute("tabnew ~/notes/Archives/.bookmarks.md")
 
 " Abbreviations -
 
@@ -258,6 +260,6 @@
             endif
         endif
 
-        command! Hex execute ("split" ) | edit . " because Hex breaks sometimes
+        command! Hex execute ("split" ) | edit . " Hex breaks syntax
 
     endfunction

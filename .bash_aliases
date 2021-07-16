@@ -21,7 +21,7 @@ alias aliasconfig="vim ~/.bash_aliases && source ~/.bashrc"
 # functional aliases
 
 alias zathura="zathura --fork 2> /dev/null"
-alias mpqiv="pqiv --hide-info-box --auto-montage-mode"
+alias pqiv="pqiv 2> /dev/null"
 
 alias rfiles="cd ~/notes && \
     rm -f texput.log */[a-z]*.aux */[a-z]*.log \
@@ -61,6 +61,6 @@ alias lock="i3lock --no-unlock-indicator \
 
 alias showlinks="vim ~/Dropbox/links.md && exit"
 
-alias pushproposal="cd ~/notes/Projects/Final\ Year\ Project/ && \
-    git add proposal.tex proposal.pdf && git commit -m \"proposal draft \" \
+alias pushproposal="cd ~/notes/Projects/final\ year\ project/ && \
+    git add references.bib proposal.pdf && git commit -m \"proposal draft \" \
     && git push -u origin master"

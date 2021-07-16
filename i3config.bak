@@ -8,8 +8,8 @@
 # Variable declarations:
 
 set $Ctrl control
-set $Alt  mod1
-set $sup  mod4
+set $Alt mod1
+set $Super mod4
 
 set $right l
 set $up    k
@@ -38,15 +38,15 @@ bindsym $Ctrl+$Alt+L exec bash ~/scripts/sleep.sh
 
 set $journal /home/nikin/notes/journal/
 
-bindsym $sup+d   exec bash ~/scripts/thisScriptDoesNothing.sh
-bindsym $sup+$CR exec xterm
-bindsym $sup+r   exec rofi -show run
-bindsym $sup+a   exec rofi -show
-bindsym $sup+b   exec firefox
-bindsym $sup+z   exec tabbed -c zathura -e
-bindsym $sup+m   exec xterm cmus
-bindsym $sup+t   exec xterm -T floatthis -e vim $journal/todo.md
-bindsym $sup+n   exec xterm -T floatthis -e vim $journal/scribbles.md
+bindsym $Super+d   exec bash ~/scripts/thisScriptDoesNothing.sh
+bindsym $Super+$CR exec xterm
+bindsym $Super+r   exec rofi -show run
+bindsym $Super+a   exec rofi -show
+bindsym $Super+b   exec firefox
+bindsym $Super+z   exec tabbed -c zathura -e
+bindsym $Super+m   exec xterm cmus
+bindsym $Super+t   exec xterm -T floatthis -e vim $journal/todo.md
+bindsym $Super+n   exec xterm -T floatthis -e vim $journal/scribbles.md
 
 # Utilites
 
@@ -54,23 +54,24 @@ bindsym $sup+n   exec xterm -T floatthis -e vim $journal/scribbles.md
 
 ## screenshots
 
-bindsym $sup+x exec scrot '%Y-%m-%d:%H%M%S.png' --border --focused \
-    --exec 'mv $f "/home/nikin/pictures/screenshots/"'
+bindsym $Ctrl+Print exec scrot '%Y-%m-%d:%H%M%S.png' \
+    --border --focused --exec 'mv $f "/home/nikin/pictures/screenshots/"'
+# bindsym $Super+shift+x exec bash ~/scripts/grabScreenSelection.sh
 
-bindsym $sup+shift+x exec scrot '%Y-%m-%d:%H%M%S.png' --border \
-    --exec 'mv $f "/home/nikin/pictures/screenshots/"'
+bindsym --release $Super+x exec scrot --select --line style=dash --freeze \
+    '%Y-%m-%d:%H%M%S.png'  --exec 'mv $f "/home/nikin/pictures/screenshots/"'
 
 # Containers
 
 ## change focus
 
-bindsym $sup+$up     focus up
-bindsym $sup+$down   focus down
-bindsym $sup+$left   focus left
-bindsym $sup+$right  focus right
+bindsym $Super+$up     focus up
+bindsym $Super+$down   focus down
+bindsym $Super+$left   focus left
+bindsym $Super+$right  focus right
 
-bindsym $sup+shift+$parent focus parent
-bindsym $sup+shift+$child  focus child
+bindsym $Super+shift+$parent focus parent
+bindsym $Super+shift+$child  focus child
 
 ## prevent focus change on mouse hover
 
@@ -78,63 +79,69 @@ focus_follows_mouse no
 
 ## move focused containers
 
-bindsym $sup+shift+$up    move up
-bindsym $sup+shift+$down  move down
-bindsym $sup+shift+$left  move left
-bindsym $sup+shift+$right move right
+bindsym $Super+shift+$up    move up
+bindsym $Super+shift+$down  move down
+bindsym $Super+shift+$left  move left
+bindsym $Super+shift+$right move right
 
 ## resizing focused containers
 
-bindsym $sup+shift+$wider    resize grow   width  10 px
-bindsym $sup+shift+$narrower resize shrink width  10 px
-bindsym $sup+shift+$taller   resize grow   height 10 px
-bindsym $sup+shift+$shorter  resize shrink height 10 px
+bindsym $Super+shift+$wider    resize grow   width  10 px
+bindsym $Super+shift+$narrower resize shrink width  10 px
+bindsym $Super+shift+$taller   resize grow   height 10 px
+bindsym $Super+shift+$shorter  resize shrink height 10 px
 
 ## toggle split position for currently focused containers
 
-bindsym $sup+space split toggle
+bindsym $Super+space split toggle
+
+## enable stacking layout for currently focused container
+
+bindsym $Super+shift+space split v, layout stacking
 
 ## enter fullscreen mode for the focused container
 
-bindsym $sup+f fullscreen toggle
+bindsym $Super+f fullscreen toggle
 
 ## close focused container
 
-bindsym $sup+q kill
+bindsym $Super+q kill
 
-bindsym --release $sup+shift+q exec xkill
+## force close focused container
+
+bindsym --release $Super+shift+q exec xkill
 
 # Workspaces
 
-## start-off with workspace 0
+## start-off with workspace "0"
 
 workspace 0 output primary
 
 ## workspace switches
 
-bindsym $sup+0 workspace 0:
-bindsym $sup+1 workspace 1:
-bindsym $sup+2 workspace 2:
-bindsym $sup+3 workspace 3:
-bindsym $sup+4 workspace 4:
-bindsym $sup+5 workspace 5:
-bindsym $sup+6 workspace 6:
-bindsym $sup+7 workspace 7:
-bindsym $sup+8 workspace 8:
-bindsym $sup+9 workspace 9:
+bindsym $Super+0 workspace 0:
+bindsym $Super+1 workspace 1:
+bindsym $Super+2 workspace 2:
+bindsym $Super+3 workspace 3:
+bindsym $Super+4 workspace 4:
+bindsym $Super+5 workspace 5:
+bindsym $Super+6 workspace 6:
+bindsym $Super+7 workspace 7:
+bindsym $Super+8 workspace 8:
+bindsym $Super+9 workspace 9:
 
 ## move focused containers to workspace
 
-bindsym $sup+shift+0 move container to workspace 0:
-bindsym $sup+shift+1 move container to workspace 1:
-bindsym $sup+shift+2 move container to workspace 2:
-bindsym $sup+shift+3 move container to workspace 3:
-bindsym $sup+shift+4 move container to workspace 4:
-bindsym $sup+shift+5 move container to workspace 5:
-bindsym $sup+shift+6 move container to workspace 6:
-bindsym $sup+shift+7 move container to workspace 7:
-bindsym $sup+shift+8 move container to workspace 8:
-bindsym $sup+shift+9 move container to workspace 9:
+bindsym $Super+shift+0 move container to workspace 0:
+bindsym $Super+shift+1 move container to workspace 1:
+bindsym $Super+shift+2 move container to workspace 2:
+bindsym $Super+shift+3 move container to workspace 3:
+bindsym $Super+shift+4 move container to workspace 4:
+bindsym $Super+shift+5 move container to workspace 5:
+bindsym $Super+shift+6 move container to workspace 6:
+bindsym $Super+shift+7 move container to workspace 7:
+bindsym $Super+shift+8 move container to workspace 8:
+bindsym $Super+shift+9 move container to workspace 9:
 
 # Appearance
 

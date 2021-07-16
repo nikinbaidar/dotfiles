@@ -75,7 +75,7 @@ setlocal nocindent
 setlocal cinkeys=0{,0},0),0],:,0#,!^F,o,O,e
 setlocal cinoptions=
 setlocal cinwords=if,else,while,do,for,switch
-setlocal colorcolumn=0
+setlocal colorcolumn=
 setlocal comments=sO:\"\ -,mO:\"\ \ ,eO:\"\",:\"
 setlocal commentstring=\"%s
 setlocal complete=.,w,b,u,t,i
@@ -181,30 +181,34 @@ setlocal vartabstop=
 setlocal wincolor=
 setlocal nowinfixheight
 setlocal nowinfixwidth
-setlocal wrap
+setlocal nowrap
 setlocal wrapmargin=0
 silent! normal! zE
-17,50fold
-51,55fold
-56,67fold
-68,81fold
-84,139fold
-140,163fold
-82,164fold
-165,203fold
-204,228fold
-229,240fold
-241,302fold
+7,40fold
+41,45fold
+46,57fold
+58,71fold
+74,115fold
+116,129fold
+130,134fold
+135,141fold
+142,146fold
+147,155fold
+72,156fold
+157,198fold
+199,220fold
+221,229fold
+230,241fold
+242,265fold
 let &fdl = &fdl
-204
+221
 normal! zo
-let s:l = 214 - ((204 * winheight(0) + 20) / 41)
+let s:l = 226 - ((225 * winheight(0) + 20) / 41)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 214
-normal! 05|
-lcd ~
+keepjumps 226
+normal! 053|
 let &g:so = s:so_save | let &g:siso = s:siso_save
 nohlsearch
 doautoall SessionLoadPost
