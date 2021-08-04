@@ -7,3 +7,5 @@ function! CodeRunner()
     :silent !bash ~/scripts/reloadFirefox.sh
     :silent !bash ~/scripts/reloadFirefox.sh
 endfunction
+
+autocmd BufWritePre *.html,*.css call CodeRunner()

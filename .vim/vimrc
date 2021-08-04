@@ -6,12 +6,12 @@
 
 " General Setup -
 
-filetype plugin on
+filetype plugin indent on
 
 set noswapfile
 set showcmd
 set ruler
-set backspace=2
+" set backspace=2
 
 set ignorecase
 set wildmenu wildmode=list,full
@@ -20,7 +20,7 @@ set path+=**
 
 set cursorline
 set number relativenumber
-set mouse=n " enable mouse scrolling
+set mouse=a
 
 set wrap
 set linebreak
@@ -35,24 +35,25 @@ set breakindent
 
 set splitright
 set splitbelow
-set hidden
 set confirm
 
 " Appearance -
 
 syntax on
 colorscheme jellybeans
+if $TERM == 'linux'
+    colorscheme murphy
+endif
 
 " Vim Plugins -
 
-" These plugins are managed via vim-plug
 call plug#begin('~/.vim/plugged')
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'mattn/emmet-vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
-" Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-repeat'
 Plug 'jiangmiao/auto-pairs'
 Plug 'vimwiki/vimwiki'
 Plug 'kezhenxu94/vim-mysql-plugin'
@@ -75,10 +76,8 @@ nnoremap <M-k> :normal! km5jdd`5P<CR>
 nnoremap <M-j> :normal! ddp<CR>
 nnoremap <M-S-k> :normal! yyP<CR>
 nnoremap <M-S-j> :normal! yyp<CR>
-nnoremap <leader>o :normal! magqip`a<CR>
-" These functions are defined in .vim/after/ftplugin directory
+nnoremap <leader><Space> :normal! magqip`a<CR>
 nnoremap <F9> :call CodeRunner()<CR>
-nnoremap <F6> :call OpenPDF()<CR>
 " Switch Splits
 nnoremap <leader>h <C-w>h
 nnoremap <leader>j <C-w>j
@@ -102,17 +101,12 @@ inoremap <expr> q pumvisible()?"<C-e>":"q"
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
 
-" Visual Mode Mappings:
-vnoremap <leader><Space> :! boxes -d blockquote<CR>
-
 " Auto Commands -
 
 augroup RunOnEvent
     autocmd!
-    autocmd VimEnter set formatoptions=tqc
-    autocmd BufWinEnter [a-z]*,[A-Z]* silent loadview
+    autocmd Filetype * set formatoptions=tqcnj1]p
     autocmd BufWritePre * %s/\s\+$//e " strip trailing spaces
-    autocmd BufWritePre ~/website/*.html,~/website/*.css call CodeRunner()
 augroup END
 
 if has("autocmd")
@@ -121,13 +115,12 @@ if has("autocmd")
                 \ | execute "normal g'\"zz" | endif
 endif
 
-" User-defined Commands -
+" User-defined Commands
 
 command! Vimconfig execute("tabnew ~/.vim/vimrc")
-command! Notes execute("tabnew ~/notes/.index.md")
 command! Wordbook execute("tabnew ~/notes/Archives/.lexicon.md")
 command! Bookmarks execute("tabnew ~/notes/Archives/.bookmarks.md")
-command! ConfigFTP execute("tabnew ~/.vim/after/ftplugin")
+command! Ftconfig execute("tabnew ~/.vim/after/ftplugin")
 
 " Abbreviations -
 
@@ -135,7 +128,6 @@ abbr ture true
 abbr fasle false
 abbr adn and
 abbr teh the
-abbr tima ✓
 abbr fmri fMRI
 " Inserting Dates:
 iab <expr> today strftime("%a %b %d %Y")

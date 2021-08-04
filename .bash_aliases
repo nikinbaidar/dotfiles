@@ -9,12 +9,16 @@
 # enable color support for ls and grep
 
 alias ls="ls --color=auto"
-
 alias grep="grep --color=auto"
+
+# augmented sys commands
+
+alias datetime="date -d now"
 
 # edit config files and reload them expicitly
 
 alias i3config="vim ~/.config/i3/config && i3-msg reload > /dev/null"
+alias vimconfig="vim ~/.vim/vimrc"
 alias bashconfig="vim ~/.bashrc && source ~/.bashrc"
 alias aliasconfig="vim ~/.bash_aliases && source ~/.bashrc"
 
@@ -23,21 +27,7 @@ alias aliasconfig="vim ~/.bash_aliases && source ~/.bashrc"
 alias zathura="zathura --fork 2> /dev/null"
 alias pqiv="pqiv 2> /dev/null"
 
-alias rfiles="cd ~/notes && \
-    rm -f texput.log */[a-z]*.aux */[a-z]*.log \
-    */[a-z]*.out */[a-z]*.toc */[a-z]*.maf */[a-z]*.mtc* */[a-z]*.nav \
-    */[a-z]*.snm */[a-z]*.nlo */[a-z]*.idx */[a-z]*.blg */[a-z]*.bbl\
-    */[a-z]*.bcf */[a-z]*.blg */[a-z]*-blx.bib */[a-z]*.run.xml \
-    */[a-z]*.tex.bbl */*/[a-z]*.aux */*/[a-z]*.log */*/[a-z]*.tex.blg \
-    */*/[a-z]*.log */*/[a-z]*.out \
-    */*/[a-z]*.out */*/[a-z]*.toc */*/[a-z]*.maf */*/[a-z]*.mtc* */*/[a-z]*.nav\
-    */*/[a-z]*.snm */*/[a-z]*.nlo */*/[a-z]*.idx */*/[a-z]*.blg */*/[a-z]*.bbl\
-    */*/[a-z]*.bcf */*/[a-z]*.blg */*/[a-z]*-blx.bib */*/[a-z]*.run.xml \
-    */*/[a-z]*.tex.bbl */*/[a-z]*.tex.blg */*/[a-z]*.log */*/[a-z]*.out \
-    ; rm -rf */_minted* \
-    && cd - >/dev/null"
-
-alias zeronote="vim ~/notes/.index.md && /usr/bin/clear -x && rfiles"
+alias notes="ranger ~/notes && /usr/bin/clear -x"
 
 alias webdev="bash ~/scripts/webdevpack.sh 2> /dev/null"
 
@@ -52,15 +42,17 @@ alias clear="echo Press control L | boxes -d nuke"
 ## Works with .pptx and .docx FIXED DEPRECIATION
 alias convert2pdf="soffice --headless --convert-to pdf"
 
-alias swap="setxkbmap -option caps:swapescape && fg"
+alias swap="setxkbmap -option caps:swapescape && fg 2> /dev/null"
 
-alias lock="i3lock --no-unlock-indicator \
-    --image=/home/nikin/pictures/lockscreen_imgs/one.png "
+# alias lockscreen="i3-msg fullscreen && tty-clock -f %a\ %b\ %d\ %Y -cnstC7 -d0"
+
+alias clock="i3-msg fullscreen > /dev/null && tty-clock -ctDC7 -d0 \
+    && i3-msg fullscreen > /dev/null"
 
 # temporary aliases
 
 alias showlinks="vim ~/Dropbox/links.md && exit"
 
 alias pushproposal="cd ~/notes/Projects/final\ year\ project/ && \
-    git add references.bib proposal.pdf && git commit -m \"proposal draft \" \
+    git add --all && git commit -m \"proposal draft \" \
     && git push -u origin master"

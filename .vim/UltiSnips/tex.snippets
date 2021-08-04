@@ -8,6 +8,11 @@ $0
 }
 endsnippet
 
+snippet disp "displaystyle"
+\displaystyle
+endsnippet
+
+
 snippet iff "multi-line comments, ignored by latex compiler" b
 \iffalse
 	$0
@@ -94,6 +99,18 @@ snippet table "table environment"
   \end{tabularx}
 \end{table}
 
+endsnippet
+
+snippet tabular "table environment 2"
+\hspace*{20pt}
+\begin{tabular}{|c|c|c|}
+  \hline
+  S & R & Q(t+1) \\ \hline
+  0 & 0 & Q(t) \\ \hline
+  0 & 1 & 0 \\ \hline
+  1 & 0 & 1 \\ \hline
+  1 & 1 & - \\ \hline
+\end{tabular}
 endsnippet
 
 snippet notes "main tex files for latex notes"

@@ -2,17 +2,19 @@ set window-height 3000
 set window-width 3000
 set guioptions ""
 
+set default-bg "#c6c6c6"
+
 set statusbar-fg "#B0B0B0"
 set statusbar-bg "#202020"
 
 set inputbar-fg "#B0B0B0"
 set inputbar-bg "#202020"
 
-set notification-error-bg "#AC4142"
-set notification-error-fg "#151515"
+set notification-error-bg ""
+set notification-error-fg ""
 
-set notification-warning-bg "#AC4142"
-set notification-warning-fg "#151515"
+set notification-warning-bg ""
+set notification-warning-fg ""
 
 set highlight-active-color "#6A9FB5"
 set completion-highlight-fg "#151515"
