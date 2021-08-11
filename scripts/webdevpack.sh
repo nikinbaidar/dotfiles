@@ -14,7 +14,7 @@ active_window_name=$(i3-msg focus right >/dev/null && \
 if [[ $active_window_name == *"Mozilla Firefox" ]]; then
     # Firefox is running
     firefox_tabtitle=$(echo $active_window_name | cut -f1 -d' ')
-    if [[ ! $firefox_tabtitle == "Nikin" ]]; then
+    if [[ ! $firefox_tabtitle == "Notes" ]]; then
         open_main_index
     else
         i3-msg focus left > /dev/null
@@ -23,4 +23,4 @@ else
     open_main_index
 fi
 
-vim -S /home/nikin/website/home.vim
+vim /home/nikin/website/index.html

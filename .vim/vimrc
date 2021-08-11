@@ -11,7 +11,7 @@ filetype plugin indent on
 set noswapfile
 set showcmd
 set ruler
-" set backspace=2
+set backspace=2
 
 set ignorecase
 set wildmenu wildmode=list,full

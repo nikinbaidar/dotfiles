@@ -4,8 +4,10 @@ setlocal softtabstop=2
 setlocal expandtab
 
 function! CodeRunner()
-    :silent !bash ~/scripts/reloadFirefox.sh
-    :silent !bash ~/scripts/reloadFirefox.sh
+    if &modified
+        write
+        silent !bash $HOME/scripts/reloadFirefox.sh
+    endif
 endfunction
 
-autocmd BufWritePre *.html,*.css call CodeRunner()
+autocmd BufWriteCmd *.html,*.css call CodeRunner()

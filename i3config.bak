@@ -1,9 +1,9 @@
-#  _ _____                  __ _
-# (_)___ /  ___ ___  _ __  / _(_) __ _
-# | | |_ \ / __/ _ \| '_ \| |_| |/ _` |
-# | |___) | (_| (_) | | | |  _| | (_| |
-# |_|____/ \___\___/|_| |_|_| |_|\__, |
-#                                |___/
+#     _ _____                  _____
+#    (_)__  /_________  ____  / __(_)___ _
+#   / / /_ </ ___/ __ \/ __ \/ /_/ / __ `/
+#  / /___/ / /__/ /_/ / / / / __/ / /_/ /
+# /_//____/\___/\____/_/ /_/_/ /_/\__, /
+#                                /____/
 
 # Variable declarations:
 
@@ -11,10 +11,10 @@ set $Ctrl control
 set $Alt mod1
 set $Super mod4
 
-set $right l
-set $up    k
-set $down  j
-set $left  h
+set $Left  h
+set $Down  j
+set $Up    k
+set $Right l
 
 set $parent p
 set $child  c
@@ -36,17 +36,17 @@ bindsym $Ctrl+$Alt+L exec bash ~/scripts/sleep.sh
 
 # Application Shortcuts
 
-set $journal /home/nikin/notes/journal/
+set $journal /home/nikin/notes/Archives/.journal.md
+set $format %a\ %b\ %d\ %Y
 
 bindsym $Super+d   exec bash ~/scripts/thisScriptDoesNothing.sh
 bindsym $Super+$CR exec xterm
 bindsym $Super+r   exec rofi -show run
 bindsym $Super+a   exec rofi -show
 bindsym $Super+b   exec firefox
-bindsym $Super+z   exec tabbed -c zathura -e
 bindsym $Super+m   exec xterm cmus
-bindsym $Super+t   exec xterm -T floatthis -e vim $journal/todo.md
-bindsym $Super+n   exec xterm -T floatthis -e vim $journal/scribbles.md
+bindsym $Super+n   exec xterm -T floatthis -e vim $journal
+bindsym $Super+z   exec zathura
 
 # Utilites
 
@@ -54,21 +54,16 @@ bindsym $Super+n   exec xterm -T floatthis -e vim $journal/scribbles.md
 
 ## screenshots
 
-bindsym $Ctrl+Print exec scrot '%Y-%m-%d:%H%M%S.png' \
-    --border --focused --exec 'mv $f "/home/nikin/pictures/screenshots/"'
-# bindsym $Super+shift+x exec bash ~/scripts/grabScreenSelection.sh
-
-bindsym --release $Super+x exec scrot --select --line style=dash --freeze \
-    '%Y-%m-%d:%H%M%S.png'  --exec 'mv $f "/home/nikin/pictures/screenshots/"'
+bindsym --release $Super+x exec bash ~/scripts/grabScreenSelection.sh
 
 # Containers
 
 ## change focus
 
-bindsym $Super+$up     focus up
-bindsym $Super+$down   focus down
-bindsym $Super+$left   focus left
-bindsym $Super+$right  focus right
+bindsym $Super+$Up     focus up
+bindsym $Super+$Down   focus down
+bindsym $Super+$Left   focus left
+bindsym $Super+$Right  focus right
 
 bindsym $Super+shift+$parent focus parent
 bindsym $Super+shift+$child  focus child
@@ -77,12 +72,16 @@ bindsym $Super+shift+$child  focus child
 
 focus_follows_mouse no
 
+## for stacking mode
+
+force_focus_wrapping yes
+
 ## move focused containers
 
-bindsym $Super+shift+$up    move up
-bindsym $Super+shift+$down  move down
-bindsym $Super+shift+$left  move left
-bindsym $Super+shift+$right move right
+bindsym $Super+shift+$Up    move up
+bindsym $Super+shift+$Down  move down
+bindsym $Super+shift+$Left  move left
+bindsym $Super+shift+$Right move right
 
 ## resizing focused containers
 
@@ -152,9 +151,11 @@ exec /usr/bin/picom --config /home/nikin/.config/picom.conf
 exec_always feh --bg-fill --no-fehbg --randomize \
     /home/nikin/pictures/wallpapers/*
 
-exec_always /home/nikin/.config/screenlayout/my_monitor_setup.sh
+exec_always /home/nikin/.config/screenlayout/my_single_monitor_setup.sh
+# exec_always /home/nikin/.config/screenlayout/my_dual_monitor_setup.sh
 
 ## floating configs
 
 for_window [ title="floatthis" ] floating enable
+for_window [ title="fullscreenthis" ] fullscreen enable
 # for_window [ title="AFNI" ] floating enable
