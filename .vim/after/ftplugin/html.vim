@@ -10,4 +10,4 @@ function! CodeRunner()
     endif
 endfunction
 
-autocmd BufWriteCmd *.html,*.css call CodeRunner()
+autocmd BufWritecmd *.html,*.css call CodeRunner()

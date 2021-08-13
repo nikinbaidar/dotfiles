@@ -64,8 +64,7 @@ call plug#end()
 let g:netrw_bufsettings = 'number nowrap'
 let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<C-h>"
-let g:vimwiki_table_mappings = 0
-let g:tex_flavor="latex"
+let g:vimwiki_table_mappings = 0 " for ultisnips to work properly
 
 " Mappings -
 
@@ -78,11 +77,6 @@ nnoremap <M-S-k> :normal! yyP<CR>
 nnoremap <M-S-j> :normal! yyp<CR>
 nnoremap <leader><Space> :normal! magqip`a<CR>
 nnoremap <F9> :call CodeRunner()<CR>
-" Switch Splits
-nnoremap <leader>h <C-w>h
-nnoremap <leader>j <C-w>j
-nnoremap <leader>k <C-w>k
-nnoremap <leader>l <C-w>l
 " Switching and Deleting Buffers
 nnoremap <leader>s :buffers<CR>:buffer<Space>
 nnoremap <leader>d :buffers<CR>:bdelete<Space>
