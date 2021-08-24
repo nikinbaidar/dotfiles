@@ -460,8 +460,7 @@ call s:X("Cursor",s:background_color,"b0d0f0","","","")
 
 call s:X("LineNr","bcbcbc",s:background_color,"NONE",s:termBlack,"")
 call s:X("CursorLineNr","ffffff","","","White","")
-call s:X("Comment","928374","","italic","245","")
-hi Comment cterm=italic
+call s:X("Comment","928374","","","245","")
 call s:X("Todo","c7c7c7","","bold","White",s:termBlack)
 
 call s:X("StatusLine","dddddd","000000","italic","","White")

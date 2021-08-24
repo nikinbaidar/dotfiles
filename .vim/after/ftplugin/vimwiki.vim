@@ -7,3 +7,5 @@ setlocal textwidth=70 " FIXME??
 setlocal spell
 setlocal complete+=kspell
 setlocal spellcapcheck=\_[\])'"   ]\+
+
+command! Iex execute("split ../.img/")

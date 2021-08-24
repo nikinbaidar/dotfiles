@@ -18,11 +18,11 @@ set wildmenu wildmode=list,full
 set autochdir
 set path+=**
 
-set cursorline
+" set cursorline
 set number relativenumber
 set mouse=a
 
-set wrap
+set nowrap
 set linebreak
 set textwidth=80
 
@@ -62,9 +62,9 @@ call plug#end()
 " Configs -
 
 let g:netrw_bufsettings = 'number nowrap'
-let g:UltiSnipsExpandTrigger = "<tab>"
-let g:UltiSnipsJumpForwardTrigger = "<C-h>"
-let g:vimwiki_table_mappings = 0 " for ultisnips to work properly
+let g:UltiSnipsExpandTrigger = "<C-;>"
+let g:tex_flavor="latex"
+" let g:vimwiki_table_mappings = 0
 
 " Mappings -
 

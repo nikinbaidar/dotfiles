@@ -19,11 +19,6 @@ set $Right l
 set $parent p
 set $child  c
 
-set $wider    w
-set $narrower n
-set $taller   t
-set $shorter  s
-
 set $CR Return
 
 # Scripts
@@ -33,6 +28,7 @@ set $CR Return
 bindsym $Ctrl+$Alt+P exec bash ~/scripts/promptPowerdown.sh
 bindsym $Ctrl+$Alt+S exec bash ~/scripts/promptSignoff.sh
 bindsym $Ctrl+$Alt+L exec bash ~/scripts/sleep.sh
+bindsym $Ctrl+$Alt+M exec bash ~/scripts/screen-setup.sh
 
 # Application Shortcuts
 
@@ -83,13 +79,6 @@ bindsym $Super+shift+$Down  move down
 bindsym $Super+shift+$Left  move left
 bindsym $Super+shift+$Right move right
 
-## resizing focused containers
-
-bindsym $Super+shift+$wider    resize grow   width  10 px
-bindsym $Super+shift+$narrower resize shrink width  10 px
-bindsym $Super+shift+$taller   resize grow   height 10 px
-bindsym $Super+shift+$shorter  resize shrink height 10 px
-
 ## toggle split position for currently focused containers
 
 bindsym $Super+space split toggle
@@ -112,7 +101,7 @@ bindsym --release $Super+shift+q exec xkill
 
 # Workspaces
 
-## start-off with workspace "0"
+## start-off with workspace 0
 
 workspace 0 output primary
 
@@ -151,11 +140,10 @@ exec /usr/bin/picom --config /home/nikin/.config/picom.conf
 exec_always feh --bg-fill --no-fehbg --randomize \
     /home/nikin/pictures/wallpapers/*
 
-exec_always /home/nikin/.config/screenlayout/my_single_monitor_setup.sh
-# exec_always /home/nikin/.config/screenlayout/my_dual_monitor_setup.sh
+# exec_always /home/nikin/.config/screenlayout/my_single_monitor_setup.sh
+exec_always /home/nikin/.config/screenlayout/my_dual_monitor_setup.sh
 
 ## floating configs
 
 for_window [ title="floatthis" ] floating enable
-for_window [ title="fullscreenthis" ] fullscreen enable
 # for_window [ title="AFNI" ] floating enable

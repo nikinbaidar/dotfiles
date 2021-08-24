@@ -9,4 +9,4 @@ function! CodeRunner()
     write
 endfunction
 
-autocmd BufWriteCmd *.html,*.css call CodeRunner()
+" autocmd BufWriteCmd *.html,*.css call CodeRunner()

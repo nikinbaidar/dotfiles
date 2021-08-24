@@ -5,8 +5,9 @@ setlocal expandtab
 
 function! CodeRunner()
     if &modified
-        write
-        silent !bash $HOME/scripts/reloadFirefox.sh
+        :write
+        :silent !$HOME/scripts/reloadLocalUrl.sh
+        :redraw!
     endif
 endfunction
 

@@ -10,7 +10,6 @@ setlocal spellcapcheck=\_[\])'"   ]\+
 let b:surround_{char2nr("'")} = "`\r'"
 let b:surround_{char2nr("\"")} = "``\r''"
 
-nnoremap <F2> :call CompileParent()<CR><CR><CR>
 nnoremap <F6> :call OpenPDF()<CR>
 command! AddBibliography execute("call BiblatexCompile()")
 command! Sosukodo execute("tabnew ../*.tex")
@@ -20,19 +19,21 @@ autocmd VimLeave *.tex !bash ~/scripts/removeTexDependencies.sh
 
 function! CodeRunner()
     :write!
-    :! clear && pdflatex %
-endfunction
-
-function! CompileParent()
-    :write!
-    :cd ..
-    :execute (" ! clear && pdflatex [a-z]*.tex")
-    :cd -
+    let g:isSource = system("/home/nikin/scripts/sourceTexCheck.sh")
+    if g:isSource
+        " Compile Source
+        :silent! execute("! clear && pdflatex %")
+    else
+        " Compile Parent
+        :cd ..
+        :silent! execute ("! clear &&  pdflatex [a-z]*.tex")
+        :cd -
+    endif
 endfunction
 
 function! BiblatexCompile()
     :! clear ; biber %:r
-    silent call CodeRunner()
+    silent call CompileSource()
 endfunction
 
 function! OpenPDF()
@@ -42,3 +43,6 @@ function! OpenPDF()
     endif
     execute ("silent ! zathura --fork") g:pdffile
 endfunction
+
+" autocmd BufWriteCmd *.tex if &modified | call CodeRunner() | redraw! | endif
+autocmd BufWriteCmd *.tex call CodeRunner() | redraw!
