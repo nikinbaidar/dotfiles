@@ -10,6 +10,8 @@ filetype plugin indent on
 
 set noswapfile
 set showcmd
+set tags=./.tags
+set tagstack
 set ruler
 set backspace=2
 
@@ -18,7 +20,6 @@ set wildmenu wildmode=list,full
 set autochdir
 set path+=**
 
-" set cursorline
 set number relativenumber
 set mouse=a
 
@@ -63,8 +64,9 @@ call plug#end()
 
 let g:netrw_bufsettings = 'number nowrap'
 let g:UltiSnipsExpandTrigger = "<C-;>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 let g:tex_flavor="latex"
-" let g:vimwiki_table_mappings = 0
 
 " Mappings -
 
@@ -75,11 +77,18 @@ nnoremap <M-k> :normal! km5jdd`5P<CR>
 nnoremap <M-j> :normal! ddp<CR>
 nnoremap <M-S-k> :normal! yyP<CR>
 nnoremap <M-S-j> :normal! yyp<CR>
+" Use system clipboard
+nnoremap <leader>y "+y
+nnoremap <leader>p :normal! "+p<CR>
+nnoremap <leader>P :normal! "+P<CR>
+" Format long paragraphs to textwidth
 nnoremap <leader><Space> :normal! magqip`a<CR>
-nnoremap <F9> :call CodeRunner()<CR>
-" Switching and Deleting Buffers
-nnoremap <leader>s :buffers<CR>:buffer<Space>
-nnoremap <leader>d :buffers<CR>:bdelete<Space>
+nnoremap <F9> :call RunCode()<CR>
+" Switching splits
+nnoremap <leader>h <C-w>h
+nnoremap <leader>j <C-w>j
+nnoremap <leader>k <C-w>k
+nnoremap <leader>l <C-w>l
 
 " Insert Mode Mappings:
 inoremap <C-a> <C-o>:normal! ^<CR>
@@ -116,6 +125,12 @@ command! Wordbook execute("tabnew ~/notes/Archives/.lexicon.md")
 command! Bookmarks execute("tabnew ~/notes/Archives/.bookmarks.md")
 command! Ftconfig execute("tabnew ~/.vim/after/ftplugin")
 
+function RunCode()
+    :write!
+    :edit %
+    :call CodeRunner()
+endfunction
+
 " Abbreviations -
 
 abbr ture true
@@ -123,6 +138,5 @@ abbr fasle false
 abbr adn and
 abbr teh the
 abbr fmri fMRI
-" Inserting Dates:
-iab <expr> today strftime("%a %b %d %Y")
-iab tomorrow <C-r>=system('date -d tomorrow +\%a\ \%b\ \%d\ \%Y')<CR><BS>
+" Insert today's date
+iab <expr> today strftime("## %a %b %d %Y")

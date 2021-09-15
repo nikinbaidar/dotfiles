@@ -18,17 +18,24 @@ command! Iex execute ("split ../.img" )
 autocmd VimLeave *.tex !bash ~/scripts/removeTexDependencies.sh
 
 function! CodeRunner()
-    :write!
-    let g:isSource = system("/home/nikin/scripts/sourceTexCheck.sh")
-    if g:isSource
-        " Compile Source
-        :silent! execute("! clear && pdflatex %")
+    let g:is_Source = system("/home/nikin/scripts/sourceTexCheck.sh")
+    if g:is_Source
+        call CompileSource()
     else
-        " Compile Parent
-        :cd ..
-        :silent! execute ("! clear &&  pdflatex [a-z]*.tex")
-        :cd -
+        call CompileParent()
     endif
+endfunction
+
+function! CompileSource()
+    :silent! execute("! clear && pdflatex %")
+    :redraw!
+endfunction
+
+function! CompileParent()
+    :cd ..
+    :silent! execute ("! clear &&  pdflatex [a-z]*.tex")
+    :cd -
+    :redraw!
 endfunction
 
 function! BiblatexCompile()
@@ -43,6 +50,3 @@ function! OpenPDF()
     endif
     execute ("silent ! zathura --fork") g:pdffile
 endfunction
-
-" autocmd BufWriteCmd *.tex if &modified | call CodeRunner() | redraw! | endif
-autocmd BufWriteCmd *.tex call CodeRunner() | redraw!

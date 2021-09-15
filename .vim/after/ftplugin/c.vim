@@ -1,4 +1,3 @@
 function! CodeRunner()
-    :write!
-    :! gcc % -o ~/code/c/runcode && ~/code/c/runcode
+ :! gcc % -o ~/programming/c/runcode && ~/programming/c/runcode
 endfunction

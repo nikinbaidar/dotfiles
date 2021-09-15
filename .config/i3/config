@@ -1,9 +1,14 @@
-#     _ _____                  _____
-#    (_)__  /_________  ____  / __(_)___ _
-#   / / /_ </ ___/ __ \/ __ \/ /_/ / __ `/
-#  / /___/ / /__/ /_/ / / / / __/ / /_/ /
-# /_//____/\___/\____/_/ /_/_/ /_/\__, /
-#                                /____/
+#  ________________
+# < i3-gaps config >
+#  ----------------
+#              \   ^__^
+#               \  (oo)\_______
+#                  (__)\       )\/\
+#                      ||----w |
+#                      ||     ||
+
+exec_always /home/nikin/.config/screenlayout/my_dual_monitor_setup.sh
+exec_always /home/nikin/scripts/launchpolybar.sh
 
 # Variable declarations:
 
@@ -23,26 +28,28 @@ set $CR Return
 
 # Scripts
 
-## prompts: shutdown, log out
+## prompts: shutdown, log off, sleep
 
 bindsym $Ctrl+$Alt+P exec bash ~/scripts/promptPowerdown.sh
-bindsym $Ctrl+$Alt+S exec bash ~/scripts/promptSignoff.sh
-bindsym $Ctrl+$Alt+L exec bash ~/scripts/sleep.sh
+bindsym $Ctrl+$Alt+E exec bash ~/scripts/promptSignoff.sh
 bindsym $Ctrl+$Alt+M exec bash ~/scripts/screen-setup.sh
+bindsym $Ctrl+$Alt+S exec bash ~/scripts/sleep.sh
 
 # Application Shortcuts
 
 set $journal /home/nikin/notes/Archives/.journal.md
-set $format %a\ %b\ %d\ %Y
 
-bindsym $Super+d   exec bash ~/scripts/thisScriptDoesNothing.sh
 bindsym $Super+$CR exec xterm
 bindsym $Super+r   exec rofi -show run
 bindsym $Super+a   exec rofi -show
 bindsym $Super+b   exec firefox
+bindsym $Super+d   exec bash ~/scripts/thisScriptDoesNothing.sh
 bindsym $Super+m   exec xterm cmus
 bindsym $Super+n   exec xterm -T floatthis -e vim $journal
+bindsym $Super+t   exec xterm -T taskmanager -e top
 bindsym $Super+z   exec zathura
+
+bindsym $Super+u floating toggle
 
 # Utilites
 
@@ -81,7 +88,8 @@ bindsym $Super+shift+$Right move right
 
 ## toggle split position for currently focused containers
 
-bindsym $Super+space split toggle
+bindsym $Super+space split v
+bindsym $Super+v split h
 
 ## enable stacking layout for currently focused container
 
@@ -101,35 +109,45 @@ bindsym --release $Super+shift+q exec xkill
 
 # Workspaces
 
-## start-off with workspace 0
+workspace $ws0 output VGA-1
+workspace $ws1 output primary
 
-workspace 0 output primary
+set $ws0 "0"
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
 
 ## workspace switches
 
-bindsym $Super+0 workspace 0:
-bindsym $Super+1 workspace 1:
-bindsym $Super+2 workspace 2:
-bindsym $Super+3 workspace 3:
-bindsym $Super+4 workspace 4:
-bindsym $Super+5 workspace 5:
-bindsym $Super+6 workspace 6:
-bindsym $Super+7 workspace 7:
-bindsym $Super+8 workspace 8:
-bindsym $Super+9 workspace 9:
+bindsym $Super+1 workspace number $ws1 ; move workspace to output LVDS-1
+bindsym $Super+2 workspace number $ws2 ; move workspace to output LVDS-1
+bindsym $Super+3 workspace number $ws3 ; move workspace to output LVDS-1
+bindsym $Super+4 workspace number $ws4 ; move workspace to output VGA-1
+bindsym $Super+5 workspace number $ws5 ; move workspace to output VGA-1
+bindsym $Super+6 workspace number $ws6 ; move workspace to output VGA-1
+bindsym $Super+7 workspace number $ws7 ; move workspace to output VGA-1
+bindsym $Super+8 workspace number $ws8 ; move workspace to output VGA-1
+bindsym $Super+9 workspace number $ws9 ; move workspace to output VGA-1
+bindsym $Super+0 workspace number $ws0 ; move workspace to output VGA-1
 
 ## move focused containers to workspace
 
-bindsym $Super+shift+0 move container to workspace 0:
-bindsym $Super+shift+1 move container to workspace 1:
-bindsym $Super+shift+2 move container to workspace 2:
-bindsym $Super+shift+3 move container to workspace 3:
-bindsym $Super+shift+4 move container to workspace 4:
-bindsym $Super+shift+5 move container to workspace 5:
-bindsym $Super+shift+6 move container to workspace 6:
-bindsym $Super+shift+7 move container to workspace 7:
-bindsym $Super+shift+8 move container to workspace 8:
-bindsym $Super+shift+9 move container to workspace 9:
+bindsym $Super+Shift+1 move container to workspace number $ws1
+bindsym $Super+Shift+2 move container to workspace number $ws2
+bindsym $Super+Shift+3 move container to workspace number $ws3
+bindsym $Super+Shift+4 move container to workspace number $ws4
+bindsym $Super+Shift+5 move container to workspace number $ws5
+bindsym $Super+Shift+6 move container to workspace number $ws6
+bindsym $Super+Shift+7 move container to workspace number $ws7
+bindsym $Super+Shift+8 move container to workspace number $ws8
+bindsym $Super+Shift+9 move container to workspace number $ws9
+bindsym $Super+Shift+0 move container to workspace number $ws0
 
 # Appearance
 
@@ -140,10 +158,13 @@ exec /usr/bin/picom --config /home/nikin/.config/picom.conf
 exec_always feh --bg-fill --no-fehbg --randomize \
     /home/nikin/pictures/wallpapers/*
 
-# exec_always /home/nikin/.config/screenlayout/my_single_monitor_setup.sh
-exec_always /home/nikin/.config/screenlayout/my_dual_monitor_setup.sh
-
-## floating configs
-
-for_window [ title="floatthis" ] floating enable
+for_window [ title="floatthis"] floating enable
+for_window [ title="taskmanager"] floating enable
 # for_window [ title="AFNI" ] floating enable
+
+# i3-gaps
+
+gaps inner 10
+gaps outer 3
+
+for_window [class=".*"] border pixel 0
