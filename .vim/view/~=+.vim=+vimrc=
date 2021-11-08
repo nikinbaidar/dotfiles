@@ -176,28 +176,30 @@ setlocal noundofile
 setlocal undolevels=-123456
 setlocal varsofttabstop=
 setlocal vartabstop=
+setlocal virtualedit=
 setlocal wincolor=
 setlocal nowinfixheight
 setlocal nowinfixwidth
 setlocal nowrap
 setlocal wrapmargin=0
 silent! normal! zE
-7,40fold
-41,48fold
-49,62fold
-63,70fold
-71,106fold
-107,120fold
-121,133fold
-134,142fold
+7,43fold
+44,53fold
+54,67fold
+68,75fold
+76,110fold
+111,124fold
+125,138fold
+139,147fold
 let &fdl = &fdl
-let s:l = 66 - ((65 * winheight(0) + 18) / 37)
+let s:l = 57 - ((56 * winheight(0) + 19) / 39)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 66
+keepjumps 57
 normal! 0
 lcd ~/.vim/after
 let &g:so = s:so_save | let &g:siso = s:siso_save
+nohlsearch
 doautoall SessionLoadPost
 " vim: set ft=vim :

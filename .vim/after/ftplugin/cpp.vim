@@ -1,3 +1,3 @@
 function! CodeRunner()
-    :! g++ % -o ~/code/cpp/runcode && ~/code/cpp/runcode
+    :! g++ % -o ~/Coding/cpp/runcode && ~/Coding/cpp/runcode
 endfunction

@@ -1,3 +1,3 @@
 function! CodeRunner()
- :! gcc % -o ~/programming/c/runcode && ~/programming/c/runcode
+ :! gcc % -o ~/Coding/c/runcode -lm && ~/Coding/c/runcode
 endfunction

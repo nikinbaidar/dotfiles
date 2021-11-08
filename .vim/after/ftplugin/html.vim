@@ -3,12 +3,10 @@ setlocal tabstop=2
 setlocal softtabstop=2
 setlocal expandtab
 
-function! CodeRunner()
-    if &modified
-        :write
-        :silent !$HOME/scripts/reloadLocalUrl.sh
-        :redraw!
-    endif
+function! Reload()
+    :write
+    :silent !/home/nikin/Scripts/reloadFocusedTabInFirefox
+    :redraw!
 endfunction
 
-autocmd BufWritecmd *.html,*.css call CodeRunner()
+autocmd BufWritecmd *.html call Reload()

@@ -1,0 +1,3 @@
+function! CodeRunner()
+ :! java %
+endfunction

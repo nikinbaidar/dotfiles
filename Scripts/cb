@@ -1,0 +1,4 @@
+#! /bin/sh
+# Change Background
+
+feh --no-fehbg --bg-fill --randomize /home/nikin/Pictures/wallpapers/*

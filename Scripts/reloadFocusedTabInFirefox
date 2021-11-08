@@ -1,0 +1,28 @@
+#! /bin/bash
+
+function getUrl() {
+    xdotool key --clearmodifiers --window $1 ctrl+l
+    xdotool key --clearmodifiers --window $1 ctrl+c
+    xdotool windowfocus $1
+    xdotool mousemove --clearmodifiers --window $1 0 200
+    xdotool click --clearmodifiers --window $1 2
+
+    url=$(xclip -o)
+}
+
+function isLocal() {
+    # Strip the first 8 characters from the URL
+    urlOutset=$(echo $1 | cut -c 1-8)
+    [[ ${urlOutset} = "file:///" ]]
+    return $?
+
+}
+
+focusedTab=$(xdotool search --name Mozilla\ Firefox)
+
+getUrl ${focusedTab}
+
+if isLocal ${url}
+then # Reload
+    xdotool key --clearmodifiers --window ${focusedTab} ctrl+F5
+fi

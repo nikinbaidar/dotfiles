@@ -1,0 +1,7 @@
+#/bin/bash
+
+while true
+do
+    xsetroot -name "$(checkbattery) $( date +' %b %d %Y %a | %I:%M %p ' )"
+    sleep 3
+done

@@ -14,18 +14,21 @@ set tags=./.tags
 set tagstack
 set ruler
 set backspace=2
+set spell
 
 set ignorecase
 set wildmenu wildmode=list,full
 set autochdir
 set path+=**
 
+set cursorline
 set number relativenumber
 set mouse=a
 
 set nowrap
 set linebreak
 set textwidth=80
+set colorcolumn=81
 
 set tabstop=4
 set shiftwidth=4
@@ -41,7 +44,9 @@ set confirm
 " Appearance -
 
 syntax on
-colorscheme jellybeans
+set background=dark
+let g:gruvbox_guisp_fallback="bg"
+colorscheme gruvbox
 if $TERM == 'linux'
     colorscheme murphy
 endif
@@ -72,11 +77,20 @@ let g:tex_flavor="latex"
 
 let mapleader = "\<Space>"
 
-" Normal Mode Mappings:
+" Normal Mode Mappings
 nnoremap <M-k> :normal! km5jdd`5P<CR>
 nnoremap <M-j> :normal! ddp<CR>
 nnoremap <M-S-k> :normal! yyP<CR>
 nnoremap <M-S-j> :normal! yyp<CR>
+" Switching splits
+nnoremap <leader>j <C-w>w
+nnoremap <leader>k <C-w>w
+" Resize splits
+nnoremap <leader>h <C-w>10>
+nnoremap <leader>l <C-w>10<
+" Switch buffers
+nnoremap <leader>x :buffers<CR>:buffer<Space>
+
 " Use system clipboard
 nnoremap <leader>y "+y
 nnoremap <leader>p :normal! "+p<CR>
@@ -84,23 +98,13 @@ nnoremap <leader>P :normal! "+P<CR>
 " Format long paragraphs to textwidth
 nnoremap <leader><Space> :normal! magqip`a<CR>
 nnoremap <F9> :call RunCode()<CR>
-" Switching splits
-nnoremap <leader>h <C-w>h
-nnoremap <leader>j <C-w>j
-nnoremap <leader>k <C-w>k
-nnoremap <leader>l <C-w>l
 
-" Insert Mode Mappings:
-inoremap <C-a> <C-o>:normal! ^<CR>
-inoremap <C-e> <C-o>:normal! $<CR>
-inoremap <C-u> <C-o>:normal! d^<CR>
-inoremap <C-k> <C-o>:normal! d$<CR>
 " Autocompletion
 inoremap <expr> j pumvisible()?"<C-n>":"j"
 inoremap <expr> k pumvisible()?"<C-p>":"k"
 inoremap <expr> q pumvisible()?"<C-e>":"q"
 
-" Command Mode Mappings:
+" Command Mode Mappings
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
 
@@ -121,9 +125,10 @@ endif
 " User-defined Commands
 
 command! Vimconfig execute("tabnew ~/.vim/vimrc")
-command! Wordbook execute("tabnew ~/notes/Archives/.lexicon.md")
-command! Bookmarks execute("tabnew ~/notes/Archives/.bookmarks.md")
+command! Wordbook execute("tabnew ~/Notes/Archives/Lexicon.md")
+command! Bookmarks execute("tabnew ~/Notes/Archives/Bookmarks.md")
 command! Ftconfig execute("tabnew ~/.vim/after/ftplugin")
+command! GenerateTags execute("! ctags -f .tags *")
 
 function RunCode()
     :write!

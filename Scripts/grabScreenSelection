@@ -1,0 +1,14 @@
+#! /bin/bash
+
+scrot --select --line style=dash --freeze \
+"$HOME/Pictures/screenshots/.temporary.png"
+
+if [ -f $HOME/Pictures/screenshots/.temporary.png ] ; then
+
+    fileName=$(zenity --file-selection --filename=$HOME/notes/ --save \
+        --confirm-overwrite )
+    mv $HOME/Pictures/screenshots/.temporary.png "$fileName"
+
+fi
+
+rm -rf $HOME/Pictures/screenshots/.temporary.png

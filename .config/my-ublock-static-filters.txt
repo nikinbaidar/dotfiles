@@ -57,7 +57,7 @@ www.slideshare.net##.scribd-ad-modal-wrapper > .modal-title
 bitbanged.com##.cc-bottom.cc-theme-classic.cc-type-info.cc-banner.cc-window
 
 ! 2021-07-18 https://www.youtube.com
-www.youtube.com###primary > .ytd-two-column-browse-results-renderer.style-scope
+
 www.youtube.com###sections
 
 ! 2021-07-19 https://graphicdesign.stackexchange.com
@@ -133,4 +133,44 @@ teachmeanatomy.info###cookie-law-info-bar
 
 ! 2021-08-14 https://www.healthline.com
 www.healthline.com##.css-1kj8h1t
+
+! 2021-08-15 https://vim.fandom.com
+vim.fandom.com##.page-side-edit.page-side-tool
+vim.fandom.com##.is-visible.fandom-sticky-header
+
+! 2021-08-15 https://www.arcolinuxd.com
+www.arcolinuxd.com##.cookie-notice-container
+
+! 2021-08-16 https://99designs.com
+99designs.com##.fullscreen-main__body
+99designs.com##.fullscreen-main
+99designs.com##.icon-button--circled.icon-button
+99designs.com##.fullscreen-overlay__content
+
+! 2021-08-18 https://www.tecmint.com
+www.tecmint.com##.grid-parent.grid-container.inside-top-bar
+
+! 2021-08-18 https://softwareengineering.stackexchange.com
+softwareengineering.stackexchange.com##.js-consent-banner.r16.l16.b16.bar-lg.fc-white.bg-black-750.sm\:p16.p32.sm\:w-auto.ws4.z-nav-fixed.ps-fixed.ff-sans
+
+! 2021-08-25 https://www.bluematador.com
+www.bluematador.com##.leadin-content-body
+www.bluematador.com##.leadinModal-overlay
+
+! 2021-09-07 https://www.geeksforgeeks.org
+www.geeksforgeeks.org##.login-modal-div > .modal-content
+www.geeksforgeeks.org##.login-modal-div
+
+! 2021-09-08 https://owl.purdue.edu
+owl.purdue.edu###cookieconsent\:desc
+owl.purdue.edu##.cc-color-override-1527206165.cc-bottom.cc-theme-block.cc-type-info.cc-banner.cc-window
+
+! 2021-09-13 https://novoresume.com
+novoresume.com###popup-cookie-policy-small
+
+! 2021-10-01 https://bitly.com
+bitly.com###wow-modal-window-10
+
+! 2021-10-08 https://gogambar.wordpress.com
+gogambar.wordpress.com##.ads-active.hide-on-button
 
