@@ -192,11 +192,11 @@ silent! normal! zE
 125,138fold
 139,147fold
 let &fdl = &fdl
-let s:l = 57 - ((56 * winheight(0) + 19) / 39)
+let s:l = 61 - ((58 * winheight(0) + 19) / 38)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 57
+keepjumps 61
 normal! 0
 lcd ~/.vim/after
 let &g:so = s:so_save | let &g:siso = s:siso_save

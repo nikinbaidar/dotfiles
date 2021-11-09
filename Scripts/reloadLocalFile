@@ -1,0 +1,10 @@
+#! /bin/bash
+
+localURLIndex=$(${HOME}/Scripts/py_scripts/getLocalURLIndex)
+
+if [ $localURLIndex -ne 0 ]
+then
+    window=$(xdotool search --name Mozilla\ Firefox)
+    xdotool key --clearmodifiers --window ${window} Alt+${localURLIndex}
+    xdotool key --clearmodifiers --window ${window} F5
+fi

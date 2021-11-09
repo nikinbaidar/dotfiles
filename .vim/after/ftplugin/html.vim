@@ -4,9 +4,10 @@ setlocal softtabstop=2
 setlocal expandtab
 
 function! Reload()
-    :write
-    :silent !/home/nikin/Scripts/reloadFocusedTabInFirefox
-    :redraw!
+    if &modified
+        write!
+        execute ("silent ! /home/nikin/Scripts/reloadLocalFile")
+    endif
 endfunction
 
 autocmd BufWritecmd *.html call Reload()
