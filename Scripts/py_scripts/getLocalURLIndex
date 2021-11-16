@@ -1,35 +1,32 @@
 #! /usr/bin/env python
-# Print the tab index of the first local URL open in the current firefox
-# session; if no local URL is open print 0.
+# This script is a part of a bash script
+# Print the tab position of the localFilename open in the current firefox
+# session; if localFilename is not open print 0.
 
 import listurl
-
-def getlocalURLIndex(url_list):
-    ''' Returns the index of the first local URL that it finds in url_list '''
-
-    for index in range(len(url_list)):
-        if url_list[index].startswith(localURLOutset):
-            return index + 1
+import sys
 
 def hasLocalURL(url_list):
 
     ''' The hasLocalURL() function creates a list of local URLs and checks if
-    the length of this new list is greater than 0. I know this isn't the most
-    optimum way to check if url_list has a local URL but I'll keep it this way
-    just in case I decide to optimize this script in the future. '''
+    the given local URL is in the list. '''
 
     local_url_list = [ url for url in url_list
             if url.startswith(localURLOutset) ]
-    localURLCount = len(local_url_list)
-    return localURLCount > 0
 
-# Variable Declarations
+    return localURL in local_url_list
 
-localURLOutset = "file:///"
-localURLIndex = 0 # Assume no local URLs are open
+# Global Var Declarations
 
-if hasLocalURL(listurl.url_list):
-    localURLIndex = getlocalURLIndex(listurl.url_list)
+localFilename = sys.argv[1]
+localURLOutset = "file://"
 
-print (localURLIndex)
+localURL = localURLOutset + localFilename
 
+if (hasLocalURL(listurl.url_list)):
+    localURLIndex = listurl.url_list.index(localURL)
+    localURLTabPosition = localURLIndex + 1
+else:
+    localURLTabPosition = 0
+
+print(localURLTabPosition)

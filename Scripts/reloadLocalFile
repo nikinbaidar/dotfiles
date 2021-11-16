@@ -1,10 +1,15 @@
 #! /bin/bash
 
-localURLIndex=$(${HOME}/Scripts/py_scripts/getLocalURLIndex)
-
-if [ $localURLIndex -ne 0 ]
+if [ -f ${HOME}/.mozilla/firefox/hunb5k7z.default-release/sessionstore-backups/recovery.jsonlz4 ]
 then
-    window=$(xdotool search --name Mozilla\ Firefox)
-    xdotool key --clearmodifiers --window ${window} Alt+${localURLIndex}
-    xdotool key --clearmodifiers --window ${window} F5
+    localFilename=$(awk '{print}' /home/nikin/Scripts/.localFilename)
+    localURLIndex=$(${HOME}/Scripts/py_scripts/getLocalURLIndex "${localFilename}")
+
+    if [ $localURLIndex -ne 0 ]
+    then
+        window=$(xdotool search --name Mozilla\ Firefox)
+        xdotool key --clearmodifiers --window ${window} Alt+${localURLIndex}
+        xdotool key --clearmodifiers --window ${window} F5
+    fi
 fi
+

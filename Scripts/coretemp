@@ -1,15 +1,8 @@
 #! /bin/bash
 
-sensors | awk ' /^Core/ { print } ' | awk ' BEGIN { a = 0; OFS=""; ORS=" ";
-print "Temp:"};
- {
-    # { print a }
-    if ( a == 0 ) {
-        ORS = " | "
-    }
-    else {
-        ORS = "\n"
-    }
- };
+sensors | awk ' /^Core/ { print } ' | awk ' BEGIN { OFS=""; ORS=" ";
+print "Temp: [" };
 { print $3 };
-{ a = 1 } '
+END { print "]"
+    # ORS = "\n"
+} '

@@ -40,6 +40,7 @@ set breakindent
 set splitright
 set splitbelow
 set confirm
+set hidden
 
 " Appearance -
 
@@ -89,7 +90,7 @@ nnoremap <leader>k <C-w>w
 nnoremap <leader>h <C-w>10>
 nnoremap <leader>l <C-w>10<
 " Switch buffers
-nnoremap <leader>x :buffers<CR>:buffer<Space>
+nnoremap <leader>b :buffers<CR>:buffer<Space>
 
 " Use system clipboard
 nnoremap <leader>y "+y
@@ -119,7 +120,7 @@ augroup END
 if has("autocmd")
     " Automatically jump to the last cursor position on entering vim
     autocmd BufReadPost * if line("'\"") > 0 && line ("'\"") <= line("$")
-                \ | execute "normal g'\"zz" | endif
+                \ | execute "normal g'\"zt" | endif
 endif
 
 " User-defined Commands

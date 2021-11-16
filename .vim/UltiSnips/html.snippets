@@ -1,5 +1,19 @@
-snippet MathJax "Easily Integrate Math Equations"
+snippet MathJax "easily integrate math equations"
 <script type="text/javascript" async
-    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
+		src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
 </script>
 endsnippet
+
+snippet mth "quick inline math"
+\(${1:${VISUAL:Insert Math}}\) ${2}
+endsnippet
+
+snippet fig "description"
+<img class="center" src="../../images/${1:${VISUAL:source}}"
+	 alt="${2:${VISUAL:alternate}}">
+<figure>
+	<figcaption>${3:${VISUAL:caption}}</figcaption>
+</figure>
+endsnippet
+
+

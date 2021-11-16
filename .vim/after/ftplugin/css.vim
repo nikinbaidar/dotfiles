@@ -6,8 +6,7 @@ setlocal expandtab
 function! Reload()
     if &modified
         write
-        silent !/home/nikin/Scripts/reloadLocalFile
-        redraw!
+        execute ("silent ! /home/nikin/Scripts/reloadLocalFile")
     endif
 endfunction
 

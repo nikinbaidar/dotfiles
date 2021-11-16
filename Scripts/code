@@ -32,11 +32,11 @@ else
 fi
 
 if [ -z ${programmingLanguage} ] ; then
-    vim /home/nikin/Coding/
+    vim /home/nikin/Common-Projects/
 
 elif [[ -n ${programmingParadigm} ]] ; then
-    vim /home/nikin/Coding/${programmingLanguage}/${programmingParadigm}/
+    vim /home/nikin/Common-Projects/${programmingLanguage}/${programmingParadigm}/
 
 else
-    vim /home/nikin/Coding/${programmingLanguage}/
+    vim /home/nikin/Common-Projects/${programmingLanguage}/
 fi

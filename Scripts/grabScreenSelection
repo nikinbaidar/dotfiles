@@ -5,8 +5,8 @@ scrot --select --line style=dash --freeze \
 
 if [ -f $HOME/Pictures/screenshots/.temporary.png ] ; then
 
-    fileName=$(zenity --file-selection --filename=$HOME/notes/ --save \
-        --confirm-overwrite )
+    fileName=$(zenity --title Snip\ Tool --file-selection \
+        --filename=$HOME/notes/ --save --confirm-overwrite )
     mv $HOME/Pictures/screenshots/.temporary.png "$fileName"
 
 fi
