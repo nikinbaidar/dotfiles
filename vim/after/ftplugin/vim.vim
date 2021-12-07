@@ -1,2 +1,2 @@
 
-autocmd BufWinEnter vimrc silent loadview
+autocmd BufWritePost vimrc source $MYVIMRC

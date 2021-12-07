@@ -13,8 +13,6 @@ set showcmd
 set tags=./.tags
 set tagstack
 set ruler
-set backspace=2
-set spell
 
 set ignorecase
 set wildmenu wildmode=list,full
@@ -22,13 +20,13 @@ set autochdir
 set path+=**
 
 set cursorline
-set number relativenumber
+set number
+set relativenumber
 set mouse=a
 
 set nowrap
 set linebreak
 set textwidth=80
-set colorcolumn=81
 
 set tabstop=4
 set shiftwidth=4
@@ -48,9 +46,7 @@ syntax on
 set background=dark
 let g:gruvbox_guisp_fallback="bg"
 colorscheme gruvbox
-if $TERM == 'linux'
-    colorscheme murphy
-endif
+set termguicolors
 
 " Vim Plugins -
 
@@ -73,32 +69,32 @@ let g:UltiSnipsExpandTrigger = "<C-;>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 let g:tex_flavor="latex"
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
 " Mappings -
 
 let mapleader = "\<Space>"
 
 " Normal Mode Mappings
-nnoremap <M-k> :normal! km5jdd`5P<CR>
-nnoremap <M-j> :normal! ddp<CR>
-nnoremap <M-S-k> :normal! yyP<CR>
-nnoremap <M-S-j> :normal! yyp<CR>
-" Switching splits
+" Switching buffers & splits
 nnoremap <leader>j <C-w>w
 nnoremap <leader>k <C-w>w
-" Resize splits
-nnoremap <leader>h <C-w>10>
-nnoremap <leader>l <C-w>10<
-" Switch buffers
-nnoremap <leader>b :buffers<CR>:buffer<Space>
+nnoremap <leader>h :bprevious
+nnoremap <leader>l :bnext
+nnoremap <leader>s :buffers<CR>:buffer<Space>
 
 " Use system clipboard
-nnoremap <leader>y "+y
-nnoremap <leader>p :normal! "+p<CR>
-nnoremap <leader>P :normal! "+P<CR>
+nnoremap <C-y> "+y
+nnoremap <C-c> "+d
+nnoremap <C-p> :normal! "+p<CR>
 " Format long paragraphs to textwidth
 nnoremap <leader><Space> :normal! magqip`a<CR>
-nnoremap <F9> :call RunCode()<CR>
+nnoremap <F5> :call RunCode()<CR>
+
+inoremap <C-a> <Home>
+inoremap <C-e> <End>
+inoremap <C-d> <Del>
 
 " Autocompletion
 inoremap <expr> j pumvisible()?"<C-n>":"j"
@@ -120,7 +116,7 @@ augroup END
 if has("autocmd")
     " Automatically jump to the last cursor position on entering vim
     autocmd BufReadPost * if line("'\"") > 0 && line ("'\"") <= line("$")
-                \ | execute "normal g'\"zt" | endif
+                \ | execute "normal g'\"zz" | endif
 endif
 
 " User-defined Commands
@@ -136,13 +132,3 @@ function RunCode()
     :edit %
     :call CodeRunner()
 endfunction
-
-" Abbreviations -
-
-abbr ture true
-abbr fasle false
-abbr adn and
-abbr teh the
-abbr fmri fMRI
-" Insert today's date
-iab <expr> today strftime("## %a %b %d %Y")
