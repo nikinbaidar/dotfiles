@@ -32,4 +32,3 @@ alias updatemysite="cd ~/website && git add --all \
 
 ## Works with .pptx and .docx FIXED DEPRECIATION
 alias convert2pdf="soffice --headless --convert-to pdf"
-

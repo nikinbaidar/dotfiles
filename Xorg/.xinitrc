@@ -1,13 +1,8 @@
-
-unclutter -grab &
-
-setxkbmap -option caps:swapescape &
-
+unclutter --timeout 1 --start-hidden --fork
 xset -dpms && xset s off &
+singlemonitor
 
-/usr/bin/dropbox &
-
-[[ -f ~/.Xresources ]] && xrdb -merge -I$HOME ~/.Xresources
-
-exec i3
-
+cb
+dwmStatus &
+slock
+exec dwm

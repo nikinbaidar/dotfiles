@@ -1,0 +1,45 @@
+/*** Remove items from image context menu ***/
+
+/* Email Image... */
+#context-sendimage, 
+
+/* Set Image as Desktop Background... (and preceding separator) */
+#context-sep-setbackground, #context-setDesktopBackground,
+
+/* Inspect Accessibility Properties */
+#context-inspect-a11y
+{
+  display: none !important;
+}
+
+#context-sendpagetodevice, #context-sep-sendpagetodevice,
+#context-sendlinktodevice, #context-sep-sendlinktodevice,
+#context_sendTabToDevice, #context_sendTabToDevice_separator {
+  display: none !important;
+}
+
+.tabbrowser-tab:not([busy="true"]):not([pinned]) .tab-icon-image
+{
+  display: none !important;
+}
+
+#sidebar-close {
+  visibility: collapse;
+}
+
+#sidebar-header {
+  display: none;
+}
+
+.tabbrowser-tab .tab-close-button {
+  display: none !important;
+}
+
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"); /* only needed once */
+
+:-moz-any(#content,#appcontent) browser{
+ margin-right:-14px!important;
+ overflow-y:scroll;
+ margin-bottom:0px!important;
+ overflow-x:scroll;
+}

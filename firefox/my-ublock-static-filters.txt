@@ -1,0 +1,176 @@
+! 2021-06-13 https://askubuntu.com
+askubuntu.com##.js-consent-banner.r16.l16.b16.bar-lg.fc-white.bg-black-750.sm\:p16.p32.sm\:w-auto.ws4.z-nav-fixed.ps-fixed.ff-sans
+
+! 2021-06-13 https://unix.stackexchange.com
+unix.stackexchange.com##.js-consent-banner.r16.l16.b16.bar-lg.fc-white.bg-black-750.sm\:p16.p32.sm\:w-auto.ws4.z-nav-fixed.ps-fixed.ff-sans
+
+! 2021-06-13 https://vi.stackexchange.com
+vi.stackexchange.com##.js-consent-banner.r16.l16.b16.bar-lg.fc-white.bg-black-750.sm\:p16.p32.sm\:w-auto.ws4.z-nav-fixed.ps-fixed.ff-sans
+
+! 2021-06-13 https://stackoverflow.com
+stackoverflow.com##.js-consent-banner.r16.l16.b16.bar-lg.fc-white.bg-black-750.sm\:p16.p32.sm\:w-auto.ws4.z-nav-fixed.ps-fixed.ff-sans
+
+! 2021-06-14 https://superuser.com
+superuser.com##.js-consent-banner.r16.l16.b16.bar-lg.fc-white.bg-black-750.sm\:p16.p32.sm\:w-auto.ws4.z-nav-fixed.ps-fixed.ff-sans
+
+! 2021-06-14 https://www.pnas.org
+www.pnas.org##.info.popup-content
+
+! 2021-06-16 https://www.ge.com
+www.ge.com##.evidon-banner-message
+www.ge.com###_evidon_banner
+
+! 2021-06-24 https://www.medicalnewstoday.com
+www.medicalnewstoday.com##.css-on84ts
+
+! 2021-06-24 https://www.psychiatry.org
+www.psychiatry.org##.popup--closeable.popupInline
+
+! 2021-06-24 https://bmcpsychiatry.biomedcentral.com
+bmcpsychiatry.biomedcentral.com###onetrust-banner-sdk > .ot-sdk-container
+
+! 2021-06-25 https://www.mendeley.com
+www.mendeley.com##.ot-buttons-fw.ot-wo-title.top.otFlat
+
+! 2021-06-25 https://ourworldindata.org
+ourworldindata.org##.open.cookie-notice
+
+! 2021-06-27 https://www.nature.com
+www.nature.com##.vertical-align-content.bottom.otFlat
+
+! 2021-06-28 https://tex.stackexchange.com
+tex.stackexchange.com##.js-consent-banner.r16.l16.b16.bar-lg.fc-white.bg-black-750.sm\:p16.p32.sm\:w-auto.ws4.z-nav-fixed.ps-fixed.ff-sans
+
+! 2021-06-30 https://meta.stackexchange.com
+meta.stackexchange.com##.js-consent-banner.r16.l16.b16.bar-lg.fc-white.bg-black-750.sm\:p16.p32.sm\:w-auto.ws4.z-nav-fixed.ps-fixed.ff-sans
+
+! 2021-07-12 https://journals.lww.com
+journals.lww.com##.cookie-jar
+
+! 2021-07-15 https://www.slideshare.net
+www.slideshare.net###scribd-ad-exit-backdrop
+www.slideshare.net##.modal-content > .content
+www.slideshare.net##.scribd-ad-modal-wrapper > .modal-content
+www.slideshare.net##.scribd-ad-modal-wrapper > .modal-title
+
+! 2021-07-15 https://bitbanged.com
+bitbanged.com##.cc-bottom.cc-theme-classic.cc-type-info.cc-banner.cc-window
+
+! 2021-07-18 https://www.youtube.com
+
+www.youtube.com###sections
+
+! 2021-07-19 https://graphicdesign.stackexchange.com
+graphicdesign.stackexchange.com##.js-consent-banner.r16.l16.b16.bar-lg.fc-white.bg-black-750.sm\:p16.p32.sm\:w-auto.ws4.z-nav-fixed.ps-fixed.ff-sans
+
+! 2021-07-20 https://www.ringcentral.co.uk
+www.ringcentral.co.uk##.vertical-align-content.ot-wo-title.default.otCenterRounded
+www.ringcentral.co.uk##.ot-fade-in.onetrust-pc-dark-filter
+
+! 2021-07-21 https://www.accessengineeringlibrary.com
+www.accessengineeringlibrary.com##.page-wrapper.eu-cookie-compliance-toolbar
+
+! 2021-07-22 https://books.google.com.np
+books.google.com.np###menu_scroll_wrapper
+books.google.com.np##.overflow-scrolling
+
+! 2021-07-26 https://www.electronics-tutorials.ws
+www.electronics-tutorials.ws##.col-md-12.col-sm-12.col-xs-12 > [href="/register"]
+www.electronics-tutorials.ws##.cookieinfo
+
+! 2021-07-27 https://www.power-and-beyond.com
+www.power-and-beyond.com##.inf-cookie-consent-small
+
+! 2021-07-28 https://www.engineeringbooks.me
+www.engineeringbooks.me###g207
+
+! 2021-07-28 https://www.transtutors.com
+www.transtutors.com###pnlLoadingBar > div
+
+! 2021-07-31 https://mega.nz
+mega.nz##.ps-theme-default.ps-container.big-pad.scrollable-block
+mega.nz##.active.step1.content-block > .bottom-buttons
+mega.nz##.fm-dialog-overlay
+mega.nz##div.table-cell.bottom-page:nth-of-type(3)
+||sg.static.mega.co.nz/4/images/mega/bottom-page/start_img1-3a@2x.png?v=eae8cb9fec820457$image
+
+! 2021-08-02 https://www.cell.com
+www.cell.com##.ot-buttons-fw.vertical-align-content.ot-wo-title.bottom.otFlat
+www.cell.com##.ot-fade-in.onetrust-pc-dark-filter
+
+! 2021-08-02 https://www.scientificamerican.com
+www.scientificamerican.com##.vertical-align-content.bottom.otFlat
+
+! 2021-08-02 https://www.liebertpub.com
+www.liebertpub.com###band-cookies
+
+! 2021-08-02 https://elifesciences.org
+elifesciences.org##.opt-in-message-bar__button_wrapper
+elifesciences.org##.opt-in-message-bar
+
+! 2021-08-10 https://www.annalsthoracicsurgery.org
+www.annalsthoracicsurgery.org##.vertical-align-content.ot-wo-title.bottom.otFlat
+www.annalsthoracicsurgery.org##.ot-fade-in.onetrust-pc-dark-filter
+
+! 2021-08-10 https://www.growthengineering.co.uk
+www.growthengineering.co.uk##.elementor-section-height-default.elementor-section-boxed.elementor-section-content-middle.elementor-element-38ef4b66.elementor-element.elementor-top-section.elementor-section
+
+! 2021-08-11 https://vim.fandom.com
+vim.fandom.com##.global-navigation
+vim.fandom.com##.wds-banner-notification__text
+
+! 2021-08-12 https://usersnap.com
+usersnap.com##.glowCookies__show.glowCookies__left.glowCookies__border.glowCookies__banner__3.glowCookies__banner
+
+! 2021-08-12 https://vim.fandom.com
+vim.fandom.com##.wikia-bar-anon.wikia-bar
+vim.fandom.com##.wds-banner-notification__close
+vim.fandom.com##.confirm.wds-success.wds-banner-notification
+vim.fandom.com##.sticky-toc-toggle.page-side-tool
+
+! 2021-08-14 https://teachmeanatomy.info
+teachmeanatomy.info###cookie-law-info-bar
+
+! 2021-08-14 https://www.healthline.com
+www.healthline.com##.css-1kj8h1t
+
+! 2021-08-15 https://vim.fandom.com
+vim.fandom.com##.page-side-edit.page-side-tool
+vim.fandom.com##.is-visible.fandom-sticky-header
+
+! 2021-08-15 https://www.arcolinuxd.com
+www.arcolinuxd.com##.cookie-notice-container
+
+! 2021-08-16 https://99designs.com
+99designs.com##.fullscreen-main__body
+99designs.com##.fullscreen-main
+99designs.com##.icon-button--circled.icon-button
+99designs.com##.fullscreen-overlay__content
+
+! 2021-08-18 https://www.tecmint.com
+www.tecmint.com##.grid-parent.grid-container.inside-top-bar
+
+! 2021-08-18 https://softwareengineering.stackexchange.com
+softwareengineering.stackexchange.com##.js-consent-banner.r16.l16.b16.bar-lg.fc-white.bg-black-750.sm\:p16.p32.sm\:w-auto.ws4.z-nav-fixed.ps-fixed.ff-sans
+
+! 2021-08-25 https://www.bluematador.com
+www.bluematador.com##.leadin-content-body
+www.bluematador.com##.leadinModal-overlay
+
+! 2021-09-07 https://www.geeksforgeeks.org
+www.geeksforgeeks.org##.login-modal-div > .modal-content
+www.geeksforgeeks.org##.login-modal-div
+
+! 2021-09-08 https://owl.purdue.edu
+owl.purdue.edu###cookieconsent\:desc
+owl.purdue.edu##.cc-color-override-1527206165.cc-bottom.cc-theme-block.cc-type-info.cc-banner.cc-window
+
+! 2021-09-13 https://novoresume.com
+novoresume.com###popup-cookie-policy-small
+
+! 2021-10-01 https://bitly.com
+bitly.com###wow-modal-window-10
+
+! 2021-10-08 https://gogambar.wordpress.com
+gogambar.wordpress.com##.ads-active.hide-on-button
+

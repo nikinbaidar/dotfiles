@@ -1,5 +1,4 @@
 #! /bin/bash
 
-
-i3lock -i /home/nikin/Pictures/screenlock.png --no-unlock-indicator
 systemctl suspend
+slock
