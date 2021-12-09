@@ -1,29 +1,30 @@
-set window-height 3000
-set window-width 3000
-set guioptions ""
+#                __  __
+#   ____  ____ _/ /_/ /_  __  ___________ ___________
+#  /_  / / __ `/ __/ __ \/ / / / ___/ __ `/ ___/ ___/
+#   / /_/ /_/ / /_/ / / / /_/ / /  / /_/ / /  / /__
+#  /___/\__,_/\__/_/ /_/\__,_/_/   \__,_/_/   \___/
 
-set default-bg "#c6c6c6"
+# Mappings
 
-set statusbar-fg "#B0B0B0"
-set statusbar-bg "#202020"
+map b set first-page-column\ 1:1
+map B set first-page-column\ 1:2
 
-set inputbar-fg "#B0B0B0"
-set inputbar-bg "#202020"
+set guioptions none
 
-set notification-error-bg ""
-set notification-error-fg ""
+# Colors
 
-set notification-warning-bg ""
-set notification-warning-fg ""
-
-set highlight-active-color "#6A9FB5"
-set completion-highlight-fg "#151515"
-set completion-highlight-bg "#90A959"
-
-set completion-bg "#303030"
-set completion-fg "#E0E0E0"
+set notification-fg none
+set notification-bg none
 
 set highlight-color "#add8e6"
 
-set notification-bg ""
-set notification-fg ""
+# Old Configs-----#######################
+#                                       #
+# set highlight-active-color "#6A9FB5"  #
+# set completion-highlight-fg "#151515" #
+# set completion-highlight-bg "#90A959" #
+#                                       #
+# set completion-bg "#303030"           #
+# set completion-fg "#E0E0E0"           #
+#                                       #
+#########################################
