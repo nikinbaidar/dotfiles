@@ -1,27 +1,58 @@
 --- dwm.c
 +++ dwm.c
-@@ -1696,16 +1709,16 @@ tile(Monitor *m)
- 	if (n > m->nmaster)
- 		mw = m->nmaster ? m->ww * m->mfact : 0;
- 	else
--		mw = m->ww;
--	for (i = my = ty = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++)
-+		mw = m->ww - m->gappx;
-+	for (i = 0, my = ty = m->gappx, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++)
- 		if (i < m->nmaster) {
--			h = (m->wh - my) / (MIN(n, m->nmaster) - i);
--			resize(c, m->wx, m->wy + my, mw - (2*c->bw), h - (2*c->bw), 0);
--			my += HEIGHT(c);
-+			h = (m->wh - my) / (MIN(n, m->nmaster) - i) - m->gappx;
-+			resize(c, m->wx + m->gappx, m->wy + my, mw - (2*c->bw) - m->gappx, h - (2*c->bw), 0);
-+			my += HEIGHT(c) + m->gappx;
- 		} else {
--			h = (m->wh - ty) / (n - i);
--			resize(c, m->wx + mw, m->wy + ty, m->ww - mw - (2*c->bw), h - (2*c->bw), 0);
--			ty += HEIGHT(c);
-+			h = (m->wh - ty) / (n - i) - m->gappx;
-+			resize(c, m->wx + mw + m->gappx, m->wy + ty, m->ww - mw - (2*c->bw) - 2*m->gappx, h - (2*c->bw), 0);
-+			ty += HEIGHT(c) + m->gappx;
- 		}
+@@ -92,7 +92,7 @@ struct Client {
+ 	int basew, baseh, incw, inch, maxw, maxh, minw, minh;
+ 	int bw, oldbw;
+ 	unsigned int tags;
+-	int isfixed, iscentered, isfloating, isurgent, neverfocus, oldstate, isfullscreen;
++	int isfixed, isfloating, isurgent, neverfocus, oldstate, isfullscreen;
+ 	Client *next;
+ 	Client *snext;
+ 	Monitor *mon;
+@@ -137,7 +137,6 @@ typedef struct {
+ 	const char *instance;
+ 	const char *title;
+ 	unsigned int tags;
+-	int iscentered;
+ 	int isfloating;
+ 	int monitor;
+ } Rule;
+@@ -286,7 +285,6 @@ applyrules(Client *c)
+ 	XClassHint ch = { NULL, NULL };
+ 
+ 	/* rule matching */
+-	c->iscentered = 0;
+ 	c->isfloating = 0;
+ 	c->tags = 0;
+ 	XGetClassHint(dpy, c->win, &ch);
+@@ -299,7 +297,6 @@ applyrules(Client *c)
+ 		&& (!r->class || strstr(class, r->class))
+ 		&& (!r->instance || strstr(instance, r->instance)))
+ 		{
+-			c->iscentered = r->iscentered;
+ 			c->isfloating = r->isfloating;
+ 			c->tags |= r->tags;
+ 			for (m = mons; m && m->num != r->monitor; m = m->next);
+@@ -1059,10 +1056,6 @@ manage(Window w, XWindowAttributes *wa)
+ 	updatewindowtype(c);
+ 	updatesizehints(c);
+ 	updatewmhints(c);
+-	if (c->iscentered) {
+-		c->x = c->mon->mx + (c->mon->mw - WIDTH(c)) / 2;
+-		c->y = c->mon->my + (c->mon->mh - HEIGHT(c)) / 2;
+-	}
+ 	XSelectInput(dpy, w, EnterWindowMask|FocusChangeMask|PropertyChangeMask|StructureNotifyMask);
+ 	grabbuttons(c, 0);
+ 	if (!c->isfloating)
+@@ -2016,10 +2009,8 @@ updatewindowtype(Client *c)
+ 
+ 	if (state == netatom[NetWMFullscreen])
+ 		setfullscreen(c, 1);
+-	if (wtype == netatom[NetWMWindowTypeDialog]) {
+-		c->iscentered = 1;
++	if (wtype == netatom[NetWMWindowTypeDialog])
+ 		c->isfloating = 1;
+-	}
  }
  
+ void

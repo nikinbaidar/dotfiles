@@ -95,7 +95,7 @@ struct Client {
     int basew, baseh, incw, inch, maxw, maxh, minw, minh;
     int bw, oldbw;
     unsigned int tags;
-    int isfixed, isfloating, isurgent, neverfocus, oldstate, isfullscreen;
+ 	int isfixed, isfloating, isurgent, neverfocus, oldstate, isfullscreen;
     Client *next;
     Client *snext;
     Monitor *mon;
@@ -2039,9 +2039,10 @@ updatewindowtype(Client *c)
     Atom state = getatomprop(c, netatom[NetWMState]);
     Atom wtype = getatomprop(c, netatom[NetWMWindowType]);
 
-    if (state == netatom[NetWMFullscreen])
+    if (state == netatom[NetWMFullscreen]) {
         setfullscreen(c, 1);
-    if (wtype == netatom[NetWMWindowTypeDialog])
+    }
+ 	if (wtype == netatom[NetWMWindowTypeDialog])
         c->isfloating = 1;
 }
 

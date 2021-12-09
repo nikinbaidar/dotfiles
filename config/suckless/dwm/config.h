@@ -9,7 +9,7 @@ static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "monospace:size=10" };
 static const char dmenufont[]       = "monospace:size=10";
 static const char col_gray1[]       = "#222222";
-static const char col_gray2[]       = "#444444";
+/* static const char col_gray2[]       = "#444444"; */
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
 static const char col_cyan[]        = "#005577";
@@ -23,16 +23,14 @@ typedef struct {
         const char *name;
         const void *cmd;
 } Sp;
-const char *spcmd1[] = {"st", "-n", "spterm", NULL };
+const char *spcmd1[] = {"st", "-a",  "-n", "spterm", NULL };
 const char *spcmd2[] = {"quicknotes", NULL };
 const char *spcmd3[] = {"st", "-n", "spmusic", "-e", "cmus", NULL };
-const char *spcmd4[] = {"viber", NULL };
 static Sp scratchpads[] = {
     /* name      cmd  */
     {"spterm",   spcmd1},
     {"spdiary",  spcmd2},
     {"spmusic",  spcmd3},
-    {"viber",    spcmd4},
 };
 
 /* tagging */
@@ -43,13 +41,12 @@ static const Rule rules[] = {
      *      WM_CLASS(STRING) = instance, class
      *      WM_NAME(STRING) = title
      */
-    /* class      instance        title       tags mask     isfloating   monitor */
-    { "Gimp",     NULL,           NULL,       0,              0,           -1 },
-    { "Firefox",  NULL,           NULL,       1 << 8,         0,           -1 },
-    { NULL,       "spterm",       NULL,       SPTAG(0),       0,           -1 },
-    { NULL,       "spdiary",      NULL,       SPTAG(1),       0,           -1 },
-    { NULL,       "spmusic",      NULL,       SPTAG(2),       0,           -1 },
-    { NULL,       "viber",        NULL,       SPTAG(3),       0,           -1 },
+    /* class      instance        title       tags mask  isfloating   monitor */
+    { "Gimp",     NULL,           NULL,       0,            0,           -1 },
+    { "Firefox",  NULL,           NULL,       1 << 8,       0,           -1 },
+    { NULL,       "spterm",       NULL,       SPTAG(0),     0,           -1 },
+    { NULL,       "spdiary",      NULL,       SPTAG(1),     0,           -1 },
+    { NULL,       "spmusic",      NULL,       SPTAG(2),     0,           -1 },
 };
 
 /* layout(s) */
@@ -79,8 +76,9 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-static const char *termcmd[]  = { "st", NULL };
+static const char *termcmd[]  = { "st", "-a", NULL };
 static const char *nop[]  = { "thisScriptDoesNothing", NULL };
+static const char *screenshotcmd[]  = { "grabScreenSelection", NULL };
 static const char *dualmon[] = { "dualmonitor", NULL };
 static const char *externalmon[] = { "singlemonitor", NULL };
 
@@ -89,6 +87,7 @@ static Key keys[] = {
     { MODKEY,              XK_p,                 spawn,          {.v = dmenucmd } },
     { MODKEY,              XK_Return,            spawn,          {.v = termcmd } },
     { MODKEY,              XK_d,                 spawn,          {.v = nop } },
+    { MODKEY,              XK_x,                 spawn,          {.v = screenshotcmd } },
     { MODKEY,              XK_bracketright,      spawn,          {.v = dualmon } },
     { MODKEY,              XK_bracketleft,       spawn,          {.v = externalmon } },
     { MODKEY,              XK_b,                 togglebar,      {0} },
@@ -103,11 +102,10 @@ static Key keys[] = {
     { MODKEY,              XK_q,                 killclient,     {0} },
     { MODKEY,              XK_t,                 setlayout,      {.v = &layouts[0]} },
     { MODKEY|ShiftMask,    XK_f,                 setlayout,      {.v = &layouts[1]} },
+    { MODKEY,              XK_m,                 setlayout,      {.v = &layouts[2]} },
     { MODKEY,              XK_grave,             togglescratch,  {.ui = 0 } },
     { MODKEY,              XK_n,                 togglescratch,  {.ui = 1 } },
     { MODKEY|ShiftMask,    XK_m,                 togglescratch,  {.ui = 2 } },
-    { MODKEY,              XK_v,                 togglescratch,  {.ui = 3 } },
-    { MODKEY,              XK_m,                 setlayout,      {.v = &layouts[2]} },
     { MODKEY,              XK_minus,             setgaps,        {.i = -5 } },
     { MODKEY,              XK_equal,             setgaps,        {.i = +5 } },
     { MODKEY|ShiftMask,    XK_equal,             setgaps,        {.i = 0  } },

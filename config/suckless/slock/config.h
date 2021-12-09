@@ -4,7 +4,8 @@ static const char *group = "nikin";
 
 static const char *colorname[NUMCOLS] = {
 	[INIT] =   "#182021",   /* after initialization */
-	[INPUT] =  "#2596be",   /* during input */
+	/* [INPUT] =  "#2596be",   /1* during input *1/ */
+	[INPUT] =  "#1ca5d6",   /* during input */
 	[FAILED] = "#182021",   /* wrong password */
 };
 
