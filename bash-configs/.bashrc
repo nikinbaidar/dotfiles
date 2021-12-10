@@ -13,6 +13,8 @@ PS1='\[\e[01;31m\][\[\e[01;33m\]\u\[\e[01;34m\]@\[\e[01;36m\]\h\[\e[01;30m\]:\[\
 export EDITOR=vim
 export PATH=$PATH:${HOME}/.local/bin:/opt/afni
 
+# Shell Options
+
 shopt -s checkjobs
 
 # Aliash definitions
@@ -22,9 +24,3 @@ shopt -s checkjobs
 if [ -f ~/.bash_aliases ]; then
 	. ~/.bash_aliases
 fi
-
-function def() {
-	sdcv -n --utf8-output --color "$@" 2>&1 | \
-	fold --width=$(tput cols) | \
-	less --quit-if-one-screen -RX
-}
