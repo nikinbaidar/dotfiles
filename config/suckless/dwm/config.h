@@ -23,7 +23,7 @@ typedef struct {
         const char *name;
         const void *cmd;
 } Sp;
-const char *spcmd1[] = {"st", "-a",  "-n", "spterm", NULL };
+const char *spcmd1[] = {"st",  "-n", "spterm", NULL };
 const char *spcmd2[] = {"quicknotes", NULL };
 const char *spcmd3[] = {"st", "-n", "spmusic", "-e", "cmus", NULL };
 static Sp scratchpads[] = {
@@ -76,7 +76,7 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-static const char *termcmd[]  = { "st", "-a", NULL };
+static const char *termcmd[]  = { "st", NULL };
 static const char *nop[]  = { "thisScriptDoesNothing", NULL };
 static const char *screenshotcmd[]  = { "grabScreenSelection", NULL };
 static const char *dualmon[] = { "dualmonitor", NULL };
