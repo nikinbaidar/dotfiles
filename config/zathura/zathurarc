@@ -6,6 +6,9 @@
 
 # Mappings
 
+unmap q
+
+map ZZ quit
 map b set first-page-column\ 1:1
 map B set first-page-column\ 1:2
 
@@ -17,14 +20,3 @@ set notification-fg none
 set notification-bg none
 
 set highlight-color "#add8e6"
-
-# Old Configs-----#######################
-#                                       #
-# set highlight-active-color "#6A9FB5"  #
-# set completion-highlight-fg "#151515" #
-# set completion-highlight-bg "#90A959" #
-#                                       #
-# set completion-bg "#303030"           #
-# set completion-fg "#E0E0E0"           #
-#                                       #
-#########################################

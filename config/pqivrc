@@ -8,14 +8,15 @@ sort-key=MTIME
 
 [keybindings]
 d { command(rm .) }
-:q<Return> { quit() }
-r { rotate_right() }
+ZZ { quit() }
 j { set_scale_level_relative(0.9) }
-h { goto_file_relative(-1) }
-l { goto_file_relative(1) }
 k { set_scale_level_relative(1.1) }
+n { goto_file_relative(+1) }
+p { goto_file_relative(-1) }
 q { goto_file_relative(0) }
 <Escape> { goto_file_relative(0) }
+l { flip_horizontally() }
+r { rotate_right() }
 
 <Mouse-Scroll-1>  { set_scale_level_relative(1.1) }
 <Mouse-Scroll-2>  { set_scale_level_relative(0.9) }
