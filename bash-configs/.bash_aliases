@@ -16,6 +16,8 @@ alias convert2pdf="soffice --headless --convert-to pdf"
 
 function update() {
 
+    # update BRANCH [MESSAGE] REPO
+
     function git_commit() {
         if [ $# -eq 2 ]; then
             git commit -m "synchronize ${2}"
