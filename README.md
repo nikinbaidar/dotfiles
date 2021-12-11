@@ -1,4 +1,3 @@
-
 # Arch User Repository
 
 Installing packages from the AUR is a relatively simple process.
