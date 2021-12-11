@@ -16,19 +16,28 @@ alias convert2pdf="soffice --headless --convert-to pdf"
 
 function update() {
 
-    cd ${!#}
-    git add --all
+    function git_commit() {
+        if [ $# -eq 2 ]; then
+            git commit -m "synchronize ${2}"
+        elif [[ $# -eq 3 && "$2" = -msg ]]; then
+            git commit
+        elif [[ $# -eq 3 ]]; then
+            git commit -m "${2}"
+        fi
+    }
 
-    if [ $# -eq 2 ] ; then
-        git commit -m "synchronize ${2}"
-    elif [ "$2" = -msg ] ; then
-        git commit
-    else
-        git commit -m "${2}"
+    # Variable Declarations
+    repo=${!#}
+    branch=${1}
+
+    if [ -d ${repo} ]
+    then
+        cd ${repo}
+        git add --all
+        git_commit "$@"
+        git push -u origin ${branch}
+        cd -
     fi
-
-    git push -u origin ${1}
-    cd -
 }
 
 
