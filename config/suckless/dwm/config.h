@@ -26,11 +26,13 @@ typedef struct {
 const char *spcmd1[] = {"st",  "-n", "spterm", NULL };
 const char *spcmd2[] = {"quicknotes", NULL };
 const char *spcmd3[] = {"st", "-n", "spmusic", "-e", "cmus", NULL };
+const char *spcmd4[] = {"viber", NULL };
 static Sp scratchpads[] = {
     /* name      cmd  */
     {"spterm",   spcmd1},
     {"spdiary",  spcmd2},
     {"spmusic",  spcmd3},
+    {"viber",  spcmd4},
 };
 
 /* tagging */
@@ -47,6 +49,7 @@ static const Rule rules[] = {
     { NULL,       "spterm",       NULL,       SPTAG(0),     0,           -1 },
     { NULL,       "spdiary",      NULL,       SPTAG(1),     0,           -1 },
     { NULL,       "spmusic",      NULL,       SPTAG(2),     0,           -1 },
+    { NULL,       "viber",        NULL,       SPTAG(3),     0,           -1 },
 };
 
 /* layout(s) */
@@ -106,6 +109,7 @@ static Key keys[] = {
     { MODKEY,              XK_grave,             togglescratch,  {.ui = 0 } },
     { MODKEY,              XK_n,                 togglescratch,  {.ui = 1 } },
     { MODKEY|ShiftMask,    XK_m,                 togglescratch,  {.ui = 2 } },
+    { MODKEY,              XK_v,                 togglescratch,  {.ui = 3 } },
     { MODKEY,              XK_minus,             setgaps,        {.i = -5 } },
     { MODKEY,              XK_equal,             setgaps,        {.i = +5 } },
     { MODKEY|ShiftMask,    XK_equal,             setgaps,        {.i = 0  } },
