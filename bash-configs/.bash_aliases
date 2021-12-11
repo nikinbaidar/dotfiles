@@ -6,6 +6,7 @@
 # | |_) | (_| \__ \ | | |_____| (_| | | | (_| \__ \  __/\__ \
 # |_.__/ \__,_|___/_| |_|      \__,_|_|_|\__,_|___/\___||___/
 
+alias ls="ls --color=always"
 alias grep="grep --color=always"
 alias pqiv="pqiv >& /dev/null"
 
@@ -28,17 +29,18 @@ function update() {
         fi
     }
 
+    # main()
     # Variable Declarations
     repo=${!#}
     branch=${1}
 
     if [ -d ${repo} ]
     then
-        cd ${repo}
+        pushd ${repo} > /dev/null
         git add --all
         git_commit "$@"
         git push -u origin ${branch}
-        cd -
+        popd > /dev/null
     fi
 }
 
