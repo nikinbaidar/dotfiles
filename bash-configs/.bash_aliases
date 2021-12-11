@@ -39,7 +39,7 @@ function update() {
         pushd ${repo} > /dev/null
         git add --all
         git_commit "$@"
-        git push -u origin ${branch}
+        git push -u origin ${branch} --verbose
         popd > /dev/null
     fi
 }
