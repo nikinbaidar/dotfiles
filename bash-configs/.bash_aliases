@@ -16,14 +16,15 @@ alias convert2pdf="soffice --headless --convert-to pdf"
 
 function update() {
 
+    cd ${!#}
+    git add --all
+
     if [ $# -eq 2 ] ; then
-        cd ${2}
-        git add --all
         git commit -m "synchronize ${2}"
-    else
-        cd $3
-        git add --all
+    elif [ "$2" = -msg ] ; then
         git commit
+    else
+        git commit -m "${2}"
     fi
 
     git push -u origin ${1}
