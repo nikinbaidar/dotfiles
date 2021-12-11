@@ -3,7 +3,7 @@
 
 Installing packages from the AUR is a relatively simple process.
 
-[Archwiki Documentation for AUR](wiki.archlinux.org/title/Arch_User_Repository).
+[Archwiki Documentation for AUR](https://wiki.archlinux.org/title/Arch_User_Repository).
 
 Essentially:
 
