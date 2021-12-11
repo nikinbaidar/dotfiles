@@ -15,4 +15,4 @@ endfunction
 
 let @p = 'ysiptp}kkJx  '
 
-autocmd BufWritecmd *.html call Reload()
+" autocmd BufWritecmd *.html call Reload()

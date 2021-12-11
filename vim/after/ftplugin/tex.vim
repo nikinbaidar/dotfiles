@@ -15,10 +15,10 @@ command! AddBibliography execute("call BiblatexCompile()")
 command! Sosukodo execute("tabnew ../*.tex")
 command! Iex execute ("split ../.img" )
 
-autocmd VimLeave *.tex silent ! /home/nikin/Scripts/removeTexDependencies
+autocmd VimLeave *.tex silent ! ${HOME}/.local/bin/removeTexDependencies
 
 function! CodeRunner()
-    let g:is_Source = system("/home/nikin/Scripts/sourceTexCheck")
+    let g:is_Source = system("${HOME}/.local/bin/sourceTexCheck")
     if g:is_Source
         call CompileSource()
     else
