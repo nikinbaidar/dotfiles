@@ -126,10 +126,19 @@ command! Wordbook execute("edit ~/Notes/Archives/Lexicon.md")
 command! Bookmarks execute("edit ~/Notes/Archives/Bookmarks.md")
 command! Ftconfig execute("edit ~/.vim/after/ftplugin")
 command! GenerateTags execute("! ctags -f .tags *")
+command! SF execute("call FixSpell()")
 command! Date :.! date +'\%a \%b \%d \%Y'
 
 function RunCode()
     :write!
     :edit %
     :call CodeRunner()
+endfunction
+
+function FixSpell()
+    :setlocal spell
+    :normal! mh
+    :execute ("silent 0,$ normal! gg]s1z=")
+    :normal! 'h
+    :setlocal nospell
 endfunction
