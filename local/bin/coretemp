@@ -1,8 +1,7 @@
 #! /bin/bash
+sensors | awk 'BEGIN { ORS = " " } /^Core/ {print $3; ORS ="\n"}'
 
-sensors | awk ' /^Core/ { print } ' | awk ' BEGIN { OFS=""; ORS=" ";
-print "Temp: [" };
-{ print $3 };
-END { print "]"
-    # ORS = "\n"
-} '
+# Calculate average of all temperatures:
+
+# sensors | awk 'BEGIN { sum = 0 } /^Core/ {sum = sum + $3} END {printf "%0.2f°C\n",sum }'
+
