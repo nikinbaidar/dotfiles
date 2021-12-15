@@ -174,3 +174,52 @@ bitly.com###wow-modal-window-10
 ! 2021-10-08 https://gogambar.wordpress.com
 gogambar.wordpress.com##.ads-active.hide-on-button
 
+! 2021-12-08 https://link.springer.com
+link.springer.com###onetrust-banner-sdk > .ot-sdk-container
+
+! 2021-12-09 https://www.asciiart.eu
+www.asciiart.eu##.ce-window
+
+! 2021-12-10 https://serverfault.com
+serverfault.com##.js-consent-banner.r16.l16.b16.bar-lg.fc-white.bg-black-750.sm\:p16.p32.sm\:w-auto.ws4.z-nav-fixed.ps-fixed.ff-sans
+
+! 2021-12-10 https://getcomics.info
+getcomics.info##td
+
+! 2021-12-11 https://www.marca.com
+www.marca.com##.didomi-regular-notice-with-data-processing.top.shape-banner.didomi-notice-banner.didomi-banner-notice-info-type.didomi-regular-notice
+www.marca.com##.didomi-consent-popup__178119d0-5586-4a4c-953e-04aaf9ac0994.didomi-mobile.didomi-screen-small.notranslate > div
+
+! 2021-12-11 https://ieeexplore.ieee.org
+||ieeexplore.ieee.org/assets/dist/ng-new/bg.body.gif$image
+||ieeexplore.ieee.org/assets/dist/ng-new/bg.body.gif$image
+||ieeexplore.ieee.org/assets/dist/ng-new/bg.body.gif$image
+||ieeexplore.ieee.org/assets/dist/ng-new/bg.body.gif$image
+||ieeexplore.ieee.org/assets/dist/ng-new/bg.body.gif$image
+||ieeexplore.ieee.org/assets/dist/ng-new/bg.body.gif$image
+
+! 2021-12-14 https://www.digitalocean.com
+www.digitalocean.com##.reveal.newsletter-signups-dialog
+www.digitalocean.com##._wrap_1nv7e_16
+
+! 2021-12-14 https://www.dropbox.com
+||consent.dropbox.com/?hide_gdpr=false&ccpa_token=&is_ccpa_enabled=true&gpc_signal=undefined$subdocument
+
+! 2021-12-14 https://bitly.com
+bitly.com##.sitebanner--container
+bitly.com##.sitebanner--spacer
+bitly.com##.grid-container > .top-bar
+||docrdsfx76ssb.cloudfront.net/static/1639060534/pages/wp-content/uploads/2020/05/illo-mobile-810x480-1.jpg$image
+||docrdsfx76ssb.cloudfront.net/static/1639060534/pages/wp-content/uploads/2020/05/illo-mobile-810x480-1.jpg$image
+||docrdsfx76ssb.cloudfront.net/static/1639060534/pages/wp-content/uploads/2020/05/illo-mobile-810x480-1.jpg$image
+bitly.com##.cards-block
+bitly.com##.hero-content
+||docrdsfx76ssb.cloudfront.net/static/1639060534/pages/wp-content/uploads/2020/05/illo-mobile-810x480-1.jpg$image
+bitly.com##.text-center.scroll-for-more
+||docrdsfx76ssb.cloudfront.net/static/1639060534/pages/wp-content/uploads/2019/08/Homepage-Branded-Links-Illustration-1.png$image
+||docrdsfx76ssb.cloudfront.net/static/1639060534/pages/wp-content/uploads/2019/08/Homepage-Branded-Links-Illustration-1.png$image
+||docrdsfx76ssb.cloudfront.net/static/1639060534/pages/wp-content/uploads/2019/08/Homepage-Branded-Links-Illustration-2.png$image
+||docrdsfx76ssb.cloudfront.net/static/1639060534/pages/wp-content/uploads/2021/06/Site_Check-you.png$image
+bitly.com##.testimonial-block
+bitly.com##.dark-row.text-content.full-width-content
+
