@@ -9,6 +9,7 @@
 filetype plugin indent on
 
 set noswapfile
+set noesckeys
 set showcmd
 set tags=./.tags
 set tagstack
@@ -22,7 +23,6 @@ set path+=**
 set cursorline
 set number
 set relativenumber
-set mouse=a
 
 set nowrap
 set linebreak
@@ -137,8 +137,6 @@ endfunction
 
 function FixSpell()
     :setlocal spell
-    :normal! mh
     :execute ("silent 0,$ normal! gg]s1z=")
-    :normal! 'h
     :setlocal nospell
 endfunction
