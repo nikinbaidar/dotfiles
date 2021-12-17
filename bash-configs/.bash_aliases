@@ -9,8 +9,6 @@
 alias ls="ls --color=always"
 alias grep="grep --color=always"
 alias pqiv="pqiv >& /dev/null"
-alias octave="octave --silent"
-alias qrencode="qrencode --type utf8"
 
 ## Works with .pptx and .docx FIXED DEPRECIATION
 alias convert2pdf="soffice --headless --convert-to pdf"
