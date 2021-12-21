@@ -22,11 +22,11 @@ function update() {
     # update BRANCH [MESSAGE] REPO
 
     function git_commit() {
-        if [ $# -eq 2 ]; then
-            git commit -m "synchronize ${2}"
-        elif [[ $# -eq 3 && "$2" = -msg ]]; then
+        if [ $# -eq 1 ]; then
+            git commit -m "synchronize ${1}"
+        elif [[ $# -eq 1 && "$1" = -msg ]]; then
             git commit
-        elif [[ $# -eq 3 ]]; then
+        elif [[ $# -eq 2 ]]; then
             git commit -m "${2}"
         fi
     }
@@ -34,11 +34,11 @@ function update() {
     # main()
     # Variable Declarations
     repo=${!#}
-    branch=${1}
 
-    if [ -d ${repo} ]
+    if [ -d ${repo}/.git ]
     then
         pushd ${repo} > /dev/null
+        branch=$(git branch | awk ' /\*/ {print $2} ')
         git add --all
         git_commit "$@"
         git push -u origin ${branch} --verbose
