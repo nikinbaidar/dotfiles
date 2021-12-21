@@ -1,0 +1,33 @@
+snippet MathJax "easily integrate math equations"
+<script type="text/javascript" async
+		src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
+</script>
+endsnippet
+
+snippet im "inline math"
+\( ${1}\) ${0}
+endsnippet
+
+snippet fig "description"
+<img class="center" src="../../images/${1:${VISUAL:source}}"
+	 alt="${2:${VISUAL:alternate}}">
+<figure>
+	<figcaption>${3:${VISUAL:caption}}</figcaption>
+</figure>
+endsnippet
+
+snippet p "paragraph tag"
+<p> $1 </p> $0
+endsnippet
+
+snippet ul "unordered lists"
+ul>(li>p)*$0
+endsnippet
+
+snippet ol "ordered lists"
+ol>(li>p)*$0
+endsnippet
+
+snippet \ "math equation"
+<span class="equation"> \[ ${1}\] where, </span> ${0}
+endsnippet

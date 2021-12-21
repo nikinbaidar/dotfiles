@@ -1,0 +1,138 @@
+" General setup
+set noswapfile
+set hidden
+set splitright
+set splitbelow
+" set ttimeoutlen=0  " Time out applied to key codes (i don't know what it means)
+set tags=./.tags
+set tagstack
+
+" Searching patterns and files
+set ignorecase
+set wildmenu wildmode=list,full
+set autochdir
+set path+=**
+
+" Navigation
+set number
+set relativenumber
+set cursorline
+
+" Line wrapping
+set nowrap
+set linebreak
+set textwidth=79
+set colorcolumn=80
+
+" Indentations
+filetype indent on
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+set expandtab
+set autoindent
+set breakindent
+
+" Appearance -
+syntax on
+set background=dark
+set termguicolors
+" let g:gruvbox_guisp_fallback="bg"
+colorscheme tokyonight
+
+" Plugins
+
+filetype plugin on
+
+call plug#begin('~/.vim/plugged')
+Plug 'jiangmiao/auto-pairs'
+Plug 'mattn/emmet-vim'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'vimwiki/vimwiki'
+Plug 'kezhenxu94/vim-mysql-plugin'
+call plug#end()
+
+" Plugin configs
+
+let g:netrw_bufsettings = 'number nowrap'
+let g:netrw_dirhistmax = 0 " Don't save netrw history or bookmarks
+let g:UltiSnipsExpandTrigger = "<Tab>"
+let g:UltiSnipsJumpForwardTrigger="<C-l>"
+let g:UltiSnipsJumpBackwardTrigger="<C-z>"
+let g:tex_flavor="latex" " Can I save this in tex.vim in my ftplugin? NO
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+
+" Mappings
+let mapleader = "\<Space>"
+
+" Quickly compile codes
+nnoremap <leader>r :call CodeRunner()<CR>
+
+" Switching splits
+" Normally I have, at most two splits open so just mapping j and k works for me
+" Also this work flow overlaps with my dwm workflow so yay.
+nnoremap <leader>j <C-w>w
+nnoremap <leader>k <C-w>w
+
+" Switching buffers
+nnoremap <leader>h :bprevious<CR>
+nnoremap <leader>l :bnext<CR>
+nnoremap <leader>s :buffers<CR>:buffer<Space>
+" Quit multiple buffers at once
+nnoremap <leader>q :buffers<CR>:bdelete<Space>
+
+" Autocompletion in insert mode
+inoremap <expr> j pumvisible()?"<C-n>":"j"
+inoremap <expr> k pumvisible()?"<C-p>":"k"
+inoremap <expr> q pumvisible()?"<C-e>":"q"
+
+" Use system clipboard (gVim needs to be installed)
+map <C-y> "+y
+map <C-c> "+d
+map <C-p> :normal! "+p<CR>
+
+" Don't remove fingers from home row
+map! <C-a> <Home>
+map! <C-e> <End>
+map! <C-d> <Del>
+map! <C-f> <Right>
+map! <C-b> <Left>
+imap <C-k> <C-o>D
+cmap <C-p> <Up>
+cmap <C-n> <Down>
+
+" Auto Commands -
+" By default formatoptions changes with resp. to filetype. To see the
+" formatoptions specified for curren file run `echo &filetype` and `set fo?`
+" For some reason I cannot set formatoptions in .vim/ftplugin See :help
+" fo-table for description of format option chars.
+autocmd Filetype * set fo-=o | set fo-=a | set fo+=j
+autocmd Filetype tex set fo+=2
+
+autocmd BufWritePre * %s/\s\+$//e " strip trailing spaces
+
+if has("autocmd")
+    " Automatically jump to the last cursor position on entering vim
+    autocmd BufReadPost * if line("'\"") > 0 && line ("'\"") <= line("$")
+                \ | execute "normal g'\"zz" | endif
+endif
+
+" User-defined commands
+command! Ftplugin execute("edit ~/.vim/after/ftplugin")
+command! SF call FixSpell()
+
+" Automatically fix spelling errors
+" This function needs high level of optimization like ignoring comments and
+" stuff for which I've got no time.
+function! FixSpell()
+    normal! ma
+    execute ("silent 0,$ normal! gg]s1z=")
+    normal! `azz
+endfunction
+
+abbr THe The
