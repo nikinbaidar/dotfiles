@@ -1,3 +1,0 @@
-function! CodeRunner()
-    :! node %
-endfunction
