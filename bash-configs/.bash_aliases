@@ -8,6 +8,7 @@
 
 alias ls="ls --color=always"
 alias grep="grep --color=always"
+alias less="less --RAW-CONTROL-CHARS"
 alias pqiv="pqiv >& /dev/null"
 alias octave="octave --silent"
 alias qrencode="qrencode --type utf8"
