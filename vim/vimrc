@@ -37,8 +37,8 @@ set breakindent
 syntax on
 set background=dark
 set termguicolors
-" let g:gruvbox_guisp_fallback="bg"
-colorscheme tokyonight
+let g:gruvbox_guisp_fallback="bg"
+colorscheme ayu
 
 " Plugins
 
@@ -60,6 +60,7 @@ call plug#end()
 
 let g:netrw_bufsettings = 'number nowrap'
 let g:netrw_dirhistmax = 0 " Don't save netrw history or bookmarks
+let g:vimwiki_table_mappings = 0
 let g:UltiSnipsExpandTrigger = "<Tab>"
 let g:UltiSnipsJumpForwardTrigger="<C-l>"
 let g:UltiSnipsJumpBackwardTrigger="<C-z>"
@@ -83,8 +84,8 @@ nnoremap <leader>k <C-w>w
 nnoremap <leader>h :bprevious<CR>
 nnoremap <leader>l :bnext<CR>
 nnoremap <leader>s :buffers<CR>:buffer<Space>
-" Quit multiple buffers at once
-nnoremap <leader>q :buffers<CR>:bdelete<Space>
+" Delete multiple buffers at once
+nnoremap <leader>d :buffers<CR>:bdelete<Space>
 
 " Autocompletion in insert mode
 inoremap <expr> j pumvisible()?"<C-n>":"j"
@@ -124,15 +125,3 @@ endif
 
 " User-defined commands
 command! Ftplugin execute("edit ~/.vim/after/ftplugin")
-command! SF call FixSpell()
-
-" Automatically fix spelling errors
-" This function needs high level of optimization like ignoring comments and
-" stuff for which I've got no time.
-function! FixSpell()
-    normal! ma
-    execute ("silent 0,$ normal! gg]s1z=")
-    normal! `azz
-endfunction
-
-abbr THe The

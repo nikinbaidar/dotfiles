@@ -7,6 +7,8 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 function! CodeRunner()
-    :write!
-    :! gcc % -o ~/Common-Projects/c/runcode -lm && ~/Common-Projects/c/runcode
+    write!
+    ! gcc % -o ~/Common-Projects/c/.runcode -lm && ~/Common-Projects/c/.runcode
 endfunction
+
+command! PF execute("%s/print(/printf(")
