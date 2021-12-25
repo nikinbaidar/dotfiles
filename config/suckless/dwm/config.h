@@ -23,7 +23,7 @@ typedef struct {
         const char *name;
         const void *cmd;
 } Sp;
-const char *spcmd1[] = {"st",  "-n", "spterm", NULL };
+const char *spcmd1[] = {"st", "-a", "-n", "spterm", NULL };
 const char *spcmd2[] = {"quicknotes", NULL };
 const char *spcmd3[] = {"st", "-n", "spmusic", "-e", "cmus", NULL };
 const char *spcmd4[] = {"viber", NULL };
@@ -86,7 +86,7 @@ static char dmenumon[2] = "0";
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", \
     dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", \
     col_gray4, NULL };
-static const char *termcmd[]  = { "st", NULL };
+static const char *termcmd[]  = { "st", "-a", NULL };
 static const char *nop[]  = { "thisScriptDoesNothing", NULL };
 static const char *screenshotcmd[]  = { "grabScreenSelection", NULL };
 static const char *dualmon[] = { "dualmonitor", NULL };
@@ -143,11 +143,12 @@ TAGKEYS(              XK_9,                            8)
 };
 
 /* button definitions */
-/* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
+/* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle,
+ * ClkClientWin, or ClkRootWin */
 static Button buttons[] = {
-    /* click                event mask      button          function        argument */
-    { ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
-    { ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
-    { ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
-	{ ClkTagBar,            0,              Button1,        view,           {0} },
+    /* click          event mask    button          function        argument */
+    { ClkClientWin,   MODKEY,       Button1,        movemouse,      {0} },
+    { ClkClientWin,   MODKEY,       Button2,        togglefloating, {0} },
+    { ClkClientWin,   MODKEY,       Button3,        resizemouse,    {0} },
+    { ClkTagBar,      0,            Button1,        view,           {0} },
 };
