@@ -1,0 +1,148 @@
+# unmappings
+map d
+
+# Swap mappings v and i
+map v $$PAGER "$f" # view
+map i invert
+
+map <enter> open
+
+set number
+set relativenumber
+set drawbox
+set ifs "\n"
+
+# execute current file (must be executable)
+map x $$f
+map X !$f
+
+###########################################################################
+#                             Basic                                       #
+###########################################################################
+# commented with '#^' commands aren't found in lf but present in ranger
+
+map R :{{
+    reload
+}}
+map <C-r> reload
+map <C-l> redraw
+map <C-c> cmd-interrupt
+map <esc> cmd-escape
+map ? search-back
+# map S push :shell<enter>$SHELL<enter>
+map \$ shell
+map f find
+
+# Tagging / Marking
+# map t       tag_toggle
+# map ut      tag_remove
+# map "<any>  tag_toggle tag=%any
+#map V       toggle_visual_mode
+#map uV      toggle_visual_mode reverse=True
+
+# Quick Navigations to Frequent Paths
+map gh cd ~
+map ge cd /etc
+map gu cd /usr
+map gd cd ~/Downloads
+map gD cd ~/Documents
+map gn cd ~/Notes
+map gM cd /media
+map gm cd /mnt
+map gs cd /srv
+map gt cd /tmp
+map g/ cd /
+
+# External Programs
+map E  $$EDITOR "$f"
+
+# Ranger like behaviour
+map dd cut
+map dD delete
+
+# Searching
+map n  search-next
+map N  search-prev
+
+# Settings
+map zc :{{
+  set preview!
+  #set ratios 1:1
+}}
+map zh    set hidden!
+#^map zI    set flushinput! TODO:
+#^map zi    set preview_images!
+#^map zm    set mouse_enabled!
+#^map zp    set preview_files!
+#^map zP    set preview_directories!
+#^map zu    set autoupdate_cumulative_size!
+#^map zv    set use_preview_script!
+#^map zf    console filter%space
+#^copymap zf zz
+
+# Bookmarks
+#^map `<any>  enter_bookmark %any
+#^map '<any>  enter_bookmark %any
+#^map m<any>  set_bookmark %any
+#^map um<any> unset_bookmark %any
+
+# dedicated keys for file opener actions
+#map o &mimeopen $f
+# map o $mimeopen --ask $f
+
+# define a custom 'open' command
+# This command is called when current file is not a directory. You may want to
+# use either file extensions and/or mime types here. Below uses an editor for
+# text files and a file opener for the rest.
+cmd open ${{
+    case $(file --mime-type $f -b) in
+        text/*) $EDITOR $fx;;
+        *) for f in $fx; do setsid $OPENER $f > /dev/null 2> /dev/null & done;;
+    esac
+}}
+
+# extract the current file with the right command
+# (xkcd link: https://xkcd.com/1168/)
+cmd extract ${{
+    set -f
+    case $f in
+        *.tar.bz|*.tar.bz2|*.tbz|*.tbz2) tar xjvf $f;;
+        *.tar.gz|*.tgz) tar xzvf $f;;
+        *.tar.xz|*.txz) tar xJvf $f;;
+        *.zip) unzip -d $(basename -s .zip $f) $f;;
+        *.rar) unrar x $f;;
+        *.7z) 7z x $f;;
+    esac
+}}
+
+# compress current file or selected files with tar and gunzip
+cmd tar ${{
+    set -f
+    mkdir $1
+    cp -r $fx $1
+    tar czf $1.tar.gz $1
+    rm -rf $1
+}}
+
+# compress current file or selected files with zip
+cmd zip ${{
+    set -f
+    mkdir $1
+    cp -r $fx $1
+    zip -r $1.zip $1
+    rm -rf $1
+}}
+
+cmd mkdir ${{
+    mkdir $1
+}}
+
+cmd touch ${{
+    touch $1
+}}
+
+cmd q quit
+
+cmd chmod ${{
+    chmod $1 "$fx"
+}}
