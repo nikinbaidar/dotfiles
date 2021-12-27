@@ -10,6 +10,7 @@ alias ls="ls --color=always"
 alias grep="grep --color=always"
 alias less="less --RAW-CONTROL-CHARS"
 alias pqiv="pqiv >& /dev/null"
+alias zathura="zathura --fork"
 alias octave="octave --silent"
 alias qrencode="qrencode --type utf8"
 
@@ -25,7 +26,8 @@ function update() {
     function git_commit() {
         if [ $# -eq 1 ]; then
             git commit -m "synchronize ${1}"
-        elif [[ $# -eq 1 && "$1" = -msg ]]; then
+            % Optimize these options later
+        elif [[ $# -eq 2 && "${1}" = "-m" ]]; then
             git commit
         elif [[ $# -eq 2 ]]; then
             git commit -m "${2}"
@@ -47,9 +49,22 @@ function update() {
     fi
 }
 
-
 function def() {
 	sdcv -n --utf8-output --color "$@" 2>&1 | \
 	fold --width=$(tput cols) | \
 	less --quit-if-one-screen -RX
+}
+
+function lfcd() {
+    tmp="$(mktemp)"
+    lf -last-dir-path="$tmp" "$@"
+    if [ -f "$tmp" ]; then
+        dir="$(cat "$tmp")"
+        rm -f "$tmp"
+        if [ -d "$dir" ]; then
+            if [ "$dir" != "$(pwd)" ]; then
+                cd "$dir"
+            fi
+        fi
+    fi
 }
