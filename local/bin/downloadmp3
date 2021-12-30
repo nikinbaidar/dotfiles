@@ -1,0 +1,19 @@
+#! /bin/bash
+
+cd ~/Music/
+
+total_songs_to_download=$(cat ~/youtube_urls.txt | wc -l)
+count=1
+
+IFS_OLD=${IFS}
+IFS=$'\n'
+
+for url in $(cat ~/youtube_urls.txt)
+do
+    echo -e "Downloading audio... ${count} of ${total_songs_to_download} \n"
+    youtube-dl --extract-audio --audio-format mp3 --audio-quality 0 ${url}
+    (( count++ ))
+    echo -e "\n"
+done
+
+IFS=${IFS_OLD}

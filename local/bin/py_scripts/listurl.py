@@ -5,8 +5,8 @@
 * This script uses a secondary file located in the path
   ~/.mozilla/firefox/*.default*/sessionstore-backups/recovery.jsonlz4.
 
-* The recovery.jsonlz4 is a lz4 compressed file that holds information about the
-  browser's current session (URLs of all the open tabs along with other
+* The recovery.jsonlz4 is a lz4 compressed file that holds information about
+  the browser's current session (URLs of all the open tabs along with other
   information). This file exists only when firefox is up and running.
 
 * By default, this file is updated as often as every 15000 ms. This interval is
@@ -29,3 +29,5 @@ for f in files:
     for window in j['windows']:
         url_list = [ tab['entries'][tab['index'] - 1]['url'] \
                 for tab in window['tabs'] ]
+
+# print(url_list)

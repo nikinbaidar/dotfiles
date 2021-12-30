@@ -1,14 +1,13 @@
 #! /bin/bash
 
-scrot --select --line style=dash --freeze \
-"$HOME/Pictures/screenshots/.temporary.png"
+scrot --select --line style=dash --freeze "/tmp/temporary.png"
 
-if [ -f $HOME/Pictures/screenshots/.temporary.png ] ; then
+if [ -f /tmp/temporary.png ] ; then
 
     fileName=$(zenity --title Snip\ Tool --file-selection \
-        --filename=$HOME/notes/ --save --confirm-overwrite )
-    mv $HOME/Pictures/screenshots/.temporary.png "$fileName"
+        --filename=${HOME}/ --save --confirm-overwrite )
+    mv /tmp/temporary.png "$fileName"
 
 fi
 
-rm -f $HOME/Pictures/screenshots/.temporary*.png
+rm -f /tmp/temporary*.png

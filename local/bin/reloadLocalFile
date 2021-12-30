@@ -1,15 +1,18 @@
 #! /bin/bash
 
-if [ -f ${HOME}/.mozilla/firefox/hunb5k7z.default-release/sessionstore-backups/recovery.jsonlz4 ]
-then
-    localFilename=$(awk '{print}' /home/nikin/Scripts/.localFilename)
-    localURLIndex=$(${HOME}/Scripts/py_scripts/getLocalURLIndex "${localFilename}")
+# Make sure there is only a single *.default-release else you might have to fix
+# the fss (firefox session store) path below.
 
-    if [ $localURLIndex -ne 0 ]
-    then
+fss=~/.mozilla/firefox/*.default-release/sessionstore-backups/recovery.jsonlz4
+
+if [ -f ${fss} ] ; then
+    # File that called this script
+    localFilename=$(awk '{print}' /tmp/localFilename)
+    localURLIndex=$(~/.local/bin/py_scripts/getLocalURLIndex "${localFilename}")
+
+    if [ $localURLIndex -ne 0 ] ; then
         window=$(xdotool search --name Mozilla\ Firefox)
         xdotool key --clearmodifiers --window ${window} Alt+${localURLIndex}
         xdotool key --clearmodifiers --window ${window} F5
     fi
 fi
-

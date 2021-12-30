@@ -1,0 +1,3 @@
+#! /bin/bash
+
+st -n sptodo -e vim ~/Notes/Archives/Miscellaneous\ Files/Agenda.md

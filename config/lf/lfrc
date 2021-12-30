@@ -1,14 +1,26 @@
 # unmappings
 map d
+map <space> :echo Key map not found. Let's calm down, escape, and try again.
+map <c-y> :echo Use your keyboard you dummy.
+map <c-e> :echo Use your keyboard you dummy.
+map w :echo Key map not found. Let's calm down, escape, and try again.
+map u :echo Key map not found. Let's calm down, escape, and try again.
+map i :echo Key map not found. Let's calm down, escape, and try again.
+map q :echo Key map not found. Let's calm down, escape, and try again.
 
-# Swap mappings v and i
-map v $$PAGER "$f" # view
-map i invert
-
+# Mappings
+map p $$PAGER "$f" # view
+map v invert
+map s :toggle; down
+map S :toggle; up
 map <enter> open
+map t $$SHELL
+map u :clear; unselect
+map c :set number!; set relativenumber!
+map <gt> incr_page
+map <lt> decr_page
 
-set number
-set relativenumber
+set icons
 set drawbox
 set ifs "\n"
 
@@ -21,37 +33,31 @@ map X !$f
 ###########################################################################
 # commented with '#^' commands aren't found in lf but present in ranger
 
-map R :{{
-    reload
-}}
-map <C-r> reload
-map <C-l> redraw
-map <C-c> cmd-interrupt
+map R reload
+map <c-c> cmd-interrupt
+map <c-z> $ kill -STOP $PPID
 map <esc> cmd-escape
 map ? search-back
-# map S push :shell<enter>$SHELL<enter>
-map \$ shell
 map f find
-
-# Tagging / Marking
-# map t       tag_toggle
-# map ut      tag_remove
-# map "<any>  tag_toggle tag=%any
-#map V       toggle_visual_mode
-#map uV      toggle_visual_mode reverse=True
 
 # Quick Navigations to Frequent Paths
 map gh cd ~
-map ge cd /etc
-map gu cd /usr
+
+map g. :{{
+    set hidden
+    cd ~/.dotfiles
+}}
+
+
+map gc :{{
+    set hidden
+    cd ~/.config
+}}
+
+map gC cd ~/Common-Projects
 map gd cd ~/Downloads
 map gD cd ~/Documents
 map gn cd ~/Notes
-map gM cd /media
-map gm cd /mnt
-map gs cd /srv
-map gt cd /tmp
-map g/ cd /
 
 # External Programs
 map E  $$EDITOR "$f"
@@ -61,7 +67,7 @@ map dd cut
 map dD delete
 
 # Searching
-map n  search-next
+map n :search-next
 map N  search-prev
 
 # Settings

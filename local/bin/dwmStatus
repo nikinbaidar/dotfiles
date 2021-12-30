@@ -3,6 +3,6 @@
 while bp=$(cat /sys/class/power_supply/BAT0/capacity)% # Battery percent
 true
 do
-    xsetroot -name " [$(echo "${bp}")] [$(coretemp)] [$(hostname -i)] [$(date +'%a %b %d %Y')] [$(date +'%I:%M %p')] "
+    xsetroot -name "[$(echo "${bp}")] [$(coretemp)] [$(hostname -i)] [$(date +'%a %b %d %Y')] [$(date +'%I:%M %p')]"
     sleep 60
 done
