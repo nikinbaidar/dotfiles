@@ -25,6 +25,24 @@ function changeTrackNumber() {
 
 function changeArtistandAlbum() {
 
+    function sort_array() {
+        local -n arr=${1}
+        length=${#arr[@]}
+
+        for (( i=0 ; i < ${length} ; i++ ))
+        do
+            for (( j=i+1 ; j < ${length} ; j++  ))
+            do
+                if [ ${arr[$i]} -gt ${arr[j]} ]
+                then
+                    temp=${arr[$i]}
+                    arr[$i]=${arr[$j]}
+                    arr[$j]=${temp}
+                fi
+            done
+        done
+    }
+
     function popElements() {
         for (( k = 0 ; k < ${#indexes_to_pop[@]} ; k++ ))
         do
@@ -132,6 +150,9 @@ function changeArtistandAlbum() {
         (( count++ ))
     done
 
+    # Sort the array "indexes_to_pop" in ascending order
+    sort_array indexes_to_pop
+
     IFS=$'\n'
 
     popElements
@@ -159,7 +180,7 @@ track_count=0
 IFS_OLD=${IFS}
 IFS=$'\n'
 
-for file in $(find ./*.mp3 -cmin -60)
+for file in $(find ./*.mp3 -cmin -"$1")
 # for file in $(find ./*.mp3 -iname "slipknot*")
 do
     fileName=$(basename "${file}")

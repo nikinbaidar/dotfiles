@@ -8,8 +8,9 @@ function declareAppropriateVars() {
         -cpp) programmingLanguage=cpp ;;
         -py) programmingLanguage=python ;;
         -j) programmingLanguage=java ;;
+        -js) programmingLanguage=javascript ;;
         -sh) programmingLanguage=bash ;;
-
+        -sql) programmingLanguage=mySQL ;;
         # Selecting programming pardigms:
         -oop) programmingParadigm=OOP ;;
 

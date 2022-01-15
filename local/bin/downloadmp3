@@ -1,5 +1,7 @@
 #! /bin/bash
 
+start=$(date|awk '{print $4}')
+
 cd ~/Music/
 
 total_songs_to_download=$(cat ~/youtube_urls.txt | wc -l)
@@ -15,5 +17,11 @@ do
     (( count++ ))
     echo -e "\n"
 done
+
+stop=$(date|awk '{print $4}')
+
+mins=$(echo -e "${start}\n${stop}" | awk 'BEGIN {FS=":"; diff=0} {diff=$2 - diff} END {print diff}')
+
+ct ${mins}
 
 IFS=${IFS_OLD}
