@@ -56,7 +56,7 @@ static const Rule rules[] = {
 };
 
 /* layout(s) */
-static const float mfact     = 0.50; /* factor of master area */
+static const float mfact     = 0.55; /* factor of master area */
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 0;    /* 1 means respect size hints */
 static const int lockfullscreen = 1; /* force focus on the fullscreen window */
