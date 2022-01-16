@@ -102,7 +102,7 @@ function isLeapYear(year) {
     }
 }
 
-function getEnglishMonth(month) {
+function getNepaliMonth(month) {
     let englishMonth = "";
 
     switch (month) {
@@ -111,15 +111,15 @@ function getEnglishMonth(month) {
             break;
 
         case 2:
-            englishMonth = "Jesth";
+            englishMonth = "Jestha";
             break;
 
         case 3:
-            englishMonth = "Asar";
+            englishMonth = "Ashad";
             break;
 
         case 4:
-            englishMonth = "Srawan";
+            englishMonth = "Shrawan";
             break;
 
         case 5:
@@ -160,31 +160,31 @@ function getEnglishMonth(month) {
 function getEnglishDayOfWeekInString(day) {
     switch (day) {
         case 1:
-            day = "Sunday";
+             day = "Sun";
             break;
 
         case 2:
-            day = "Monday";
+             day = "Mon";
             break;
 
         case 3:
-            day = "Tuesday";
+             day = "Tue";
             break;
 
         case 4:
-            day = "Wednesday";
+             day = "Wed";
             break;
 
         case 5:
-            day = "Thursday";
+             day = "Thu";
             break;
 
         case 6:
-            day = "Friday";
+             day = "Fri";
             break;
 
         case 7:
-            day = "Saturday";
+             day = "Sat";
             break;
     }
     return day;
@@ -259,8 +259,16 @@ function convertEnglishDateToNepali(yy, mm, dd) {
         total_eDays--;
     }
 
-    dateString = y + " " + getEnglishMonth(m) + " " + total_nDays + ", " + getEnglishDayOfWeekInString(day);
+    dateString = getEnglishDayOfWeekInString(day) + " " + getNepaliMonth(m) + " " + addZero(total_nDays) + " " + addZero(HH) + ":" + addZero(MM) + ":" + addZero(SS) + " +0545 " + y ;
     return dateString;
+}
+
+
+function addZero(i) {
+    if (i < 10) {
+        i = "0" + i;
+    }
+    return i;
 }
 
 
@@ -276,31 +284,13 @@ function checkIfDateIsInRange(year, month, day) {
 
 }
 
-
-function addZero(i) {
-    if (i < 10) {
-        i = "0" + i;
-    }
-    return i;
-}
-
-function localizeNumber(temp) {
-    for (let i = 0; i < temp.length; i++) {
-        if (isNumeric(temp[i])) {
-            temp = temp.replace(temp[i], englishToNepaliNumber(temp[i]));
-        }
-    }
-    return temp;
-}
-
-function isNumeric(n) {
-    return !isNaN(parseFloat(n)) && isFinite(n);
-}
-
 currentDateTime = new Date();
 
 yy = currentDateTime.getFullYear();
 mm = currentDateTime.getMonth() + 1;
 dd = currentDateTime.getDate();
+HH = currentDateTime.getHours() % 12 || 12 ;
+MM = currentDateTime.getMinutes() ;
+SS = currentDateTime.getSeconds() ;
 
 console.log(convertEnglishDateToNepali(yy, mm, dd));
