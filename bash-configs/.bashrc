@@ -35,3 +35,5 @@ shopt -s checkjobs
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
+
+bind "C-Space":kill-whole-line

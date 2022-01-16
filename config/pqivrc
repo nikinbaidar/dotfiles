@@ -1,4 +1,3 @@
-
 [options]
 hide-info-box=1
 auto-montage-mode=1
@@ -8,12 +7,10 @@ sort-key=MTIME
 
 [keybindings]
 d { command(rm .) }
-ZZ { quit() }
 j { set_scale_level_relative(0.9) }
 k { set_scale_level_relative(1.1) }
 n { goto_file_relative(+1) }
 p { goto_file_relative(-1) }
-q { goto_file_relative(0) }
 <Escape> { goto_file_relative(0) }
 l { flip_horizontally() }
 r { rotate_right() }
