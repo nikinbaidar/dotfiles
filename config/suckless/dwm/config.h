@@ -23,18 +23,14 @@ typedef struct {
         const char *name;
         const void *cmd;
 } Sp;
-const char *spcmd1[] = {"st", "-n", "spterm", NULL };
-const char *spcmd2[] = {"quicknotes", NULL };
-const char *spcmd3[] = {"st", "-n", "spmusic", "-e", "cmus", NULL };
-const char *spcmd4[] = {"viber", NULL };
-const char *spcmd5[] = {"agendas", NULL };
+const char *spcmd1[] = {"quicknotes", NULL };
+const char *spcmd2[] = {"viber", NULL };
+const char *spcmd3[] = {"agendas", NULL };
 static Sp scratchpads[] = {
     /* name      cmd  */
-    {"spterm",   spcmd1},
-    {"spdiary",  spcmd2},
-    {"spmusic",  spcmd3},
-    {"viber",    spcmd4},
-    {"sptodo",   spcmd5},
+    {"spdiary",  spcmd1},
+    {"viber",    spcmd2},
+    {"sptodo",   spcmd3},
 };
 
 /* tagging */
@@ -45,14 +41,13 @@ static const Rule rules[] = {
      *      WM_CLASS(STRING) = instance, class
      *      WM_NAME(STRING) = title
      */
-    /* class      instance        title       tags mask  isfloating   monitor */
-    { "Gimp",     NULL,           NULL,       0,            0,           -1 },
-    { "Firefox",  NULL,           NULL,       1 << 8,       0,           -1 },
-    { NULL,       "spterm",       NULL,       SPTAG(0),     0,           -1 },
-    { NULL,       "spdiary",      NULL,       SPTAG(1),     0,           -1 },
-    { NULL,       "spmusic",      NULL,       SPTAG(2),     0,           -1 },
-    { NULL,       "viber",        NULL,       SPTAG(3),     0,           -1 },
-    { NULL,       "sptodo",       NULL,       SPTAG(4),     1,           -1 },
+    /* class        instance    title       tags mask  isfloating   monitor */
+    { "Gimp",       NULL,       NULL,       0,            0,           -1 },
+    { "GNU Octave", NULL,       NULL,       1 << 6,       1,           -1 },
+    { "Firefox",    NULL,       NULL,       1 << 8,       0,           -1 },
+    { NULL,         "spdiary",  NULL,       SPTAG(0),     0,           -1 },
+    { NULL,         "viber",    NULL,       SPTAG(1),     0,           -1 },
+    { NULL,         "sptodo",   NULL,       SPTAG(2),     1,           -1 },
 };
 
 /* layout(s) */
@@ -115,11 +110,9 @@ static Key keys[] = {
 { MODKEY,             XK_t,            setlayout,      {.v = &layouts[0]} },
 { MODKEY,             XK_m,            setlayout,      {.v = &layouts[1]} },
 { MODKEY|ShiftMask,   XK_f,            setlayout,      {.v = &layouts[2]} },
-{ MODKEY,             XK_grave,        togglescratch,  {.ui = 0 } },
-{ MODKEY,             XK_n,            togglescratch,  {.ui = 1 } },
-{ MODKEY|ShiftMask,   XK_m,            togglescratch,  {.ui = 2 } },
-{ MODKEY,             XK_v,            togglescratch,  {.ui = 3 } },
-{ MODKEY,             XK_z,            togglescratch,  {.ui = 4 } },
+{ MODKEY,             XK_n,            togglescratch,  {.ui = 0 } },
+{ MODKEY,             XK_v,            togglescratch,  {.ui = 1 } },
+{ MODKEY,             XK_z,            togglescratch,  {.ui = 2 } },
 { MODKEY,             XK_minus,        setgaps,        {.i = -5 } },
 { MODKEY,             XK_equal,        setgaps,        {.i = +5 } },
 { MODKEY|ShiftMask,   XK_equal,        setgaps,        {.i = 0  } },
