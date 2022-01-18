@@ -10,6 +10,7 @@
 syntax enable
 
 setlocal spell
+setlocal colorcolumn=71
 setlocal textwidth=70 " FIXME?? NO!
 setlocal complete+=kspell
 setlocal spellcapcheck=\_[\])'"   ]\+

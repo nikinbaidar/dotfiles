@@ -519,7 +519,7 @@
 /home/nikin/Music/SAHARA.mp3
 /home/nikin/Music/Chinta.mp3
 /home/nikin/Music/Tear In My Heart.mp3
-/home/nikin/Music/Migrane.mp3
+/home/nikin/Music/Migraine.mp3
 /home/nikin/Music/Stressed Out.mp3
 /home/nikin/Music/Ride.mp3
 /home/nikin/Music/Trees.mp3

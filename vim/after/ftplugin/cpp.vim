@@ -8,5 +8,5 @@
 
 function! CodeRunner()
     :write!
-    :! g++ % -o ~/Coding/cpp/runcode && ~/Coding/cpp/runcode
+    :! g++ % -o ~/Documents/Common-Projects/cpp/runcode && ~/Documents/Common-Projects/cpp/runcode
 endfunction

@@ -1,4 +1,4 @@
-set aaa_mode=all
+set aaa_mode=artist
 set altformat_current= %F 
 set altformat_playlist= %f%= %d 
 set altformat_title=%f
@@ -9,48 +9,48 @@ set auto_expand_albums_selcur=true
 set auto_reshuffle=true
 set buffer_seconds=10
 set color_cmdline_attr=default
-set color_cmdline_bg=232
-set color_cmdline_fg=220
+set color_cmdline_bg=default
+set color_cmdline_fg=default
 set color_cur_sel_attr=default
 set color_error=lightred
-set color_info=136
-set color_separator=232
+set color_info=lightyellow
+set color_separator=blue
 set color_statusline_attr=default
-set color_statusline_bg=232
-set color_statusline_fg=48
+set color_statusline_bg=gray
+set color_statusline_fg=black
 set color_titleline_attr=default
-set color_titleline_bg=232
-set color_titleline_fg=232
+set color_titleline_bg=blue
+set color_titleline_fg=white
 set color_trackwin_album_attr=bold
 set color_trackwin_album_bg=232
 set color_trackwin_album_fg=72
 set color_win_attr=default
-set color_win_bg=232
+set color_win_bg=default
 set color_win_cur=lightyellow
-set color_win_cur_attr=bold
+set color_win_cur_attr=default
 set color_win_cur_sel_attr=default
-set color_win_cur_sel_bg=214
-set color_win_cur_sel_fg=232
-set color_win_dir=208
-set color_win_fg=35
+set color_win_cur_sel_bg=blue
+set color_win_cur_sel_fg=lightyellow
+set color_win_dir=lightblue
+set color_win_fg=default
 set color_win_inactive_cur_sel_attr=default
-set color_win_inactive_cur_sel_bg=232
+set color_win_inactive_cur_sel_bg=gray
 set color_win_inactive_cur_sel_fg=lightyellow
 set color_win_inactive_sel_attr=default
-set color_win_inactive_sel_bg=232
-set color_win_inactive_sel_fg=35
+set color_win_inactive_sel_bg=gray
+set color_win_inactive_sel_fg=black
 set color_win_sel_attr=default
-set color_win_sel_bg=214
-set color_win_sel_fg=232
+set color_win_sel_bg=blue
+set color_win_sel_fg=white
 set color_win_title_attr=default
-set color_win_title_bg=71
-set color_win_title_fg=232
+set color_win_title_bg=blue
+set color_win_title_fg=white
 set confirm_run=true
-set continue=false
+set continue=true
 set continue_album=true
 set device=/dev/cdrom
 set display_artist_sort_name=false
-set dsp.alsa.device=default
+set dsp.alsa.device=
 set dsp.jack.resampling_quality=2
 set dsp.jack.server_name=
 set dsp.oss.device=
@@ -78,14 +78,14 @@ set input.wav.priority=50
 set input.wavpack.priority=50
 set lib_add_filter=
 set lib_sort=albumartist date album discnumber tracknumber title filename play_count
-set mixer.alsa.channel=PCM
-set mixer.alsa.device=default
+set mixer.alsa.channel=
+set mixer.alsa.device=
 set mixer.oss.channel=PCM
 set mixer.oss.device=
 set mixer.pulse.restore_volume=1
 set mouse=false
 set mpris=true
-set output_plugin=alsa
+set output_plugin=pulse
 set passwd=
 set pl_sort=
 set play_library=true
@@ -136,6 +136,7 @@ bind common 7 view settings
 bind common = vol +10%
 bind common ? search-b-start
 bind common C toggle continue
+bind common D win-remove
 bind common E win-add-Q
 bind common F push filter 
 bind common G win-bottom
@@ -193,6 +194,7 @@ bind common right seek +5
 bind common s toggle shuffle
 bind common space win-toggle
 bind common t toggle show_remaining_time
+bind common tab win-next
 bind common u update-cache
 bind common up win-up
 bind common v player-stop
@@ -201,7 +203,6 @@ bind common y win-add-p
 bind common z player-prev
 bind common { vol -1% -0
 bind common } vol -0 -1%
-bind queue q quit!
 fset 90s=date>=1990&date<2000
 fset classical=genre="Classical"
 fset missing-tag=!stream&(artist=""|album=""|title=""|tracknumber=-1|date=-1)

@@ -12,6 +12,7 @@ alias less="less --RAW-CONTROL-CHARS"
 alias pqiv="pqiv >& /dev/null"
 alias zathura="zathura --fork"
 alias octave="octave --silent"
+alias R="R --silent"
 alias qrencode="qrencode --type utf8"
 
 ## Works with .pptx and .docx FIXED DEPRECIATION

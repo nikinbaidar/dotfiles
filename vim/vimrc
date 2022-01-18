@@ -1,9 +1,9 @@
 " General setup
 set noswapfile
+set showcmd
 set hidden
 set splitright
 set splitbelow
-" set ttimeoutlen=0  " Time out applied to key codes (i don't know what it means)
 set tags=./.tags
 set tagstack
 
@@ -37,7 +37,6 @@ set breakindent
 syntax on
 set background=dark
 set termguicolors
-let g:gruvbox_guisp_fallback="bg"
 colorscheme ayu
 
 " Plugins
@@ -109,12 +108,10 @@ cmap <C-n> <Down>
 
 " Auto Commands -
 " By default formatoptions changes with resp. to filetype. To see the
-" formatoptions specified for curren file run `echo &filetype` and `set fo?`
+" formatoptions specified for a specific file run `echo &filetype` and `set fo?`
 " For some reason I cannot set formatoptions in .vim/ftplugin See :help
 " fo-table for description of format option chars.
 autocmd Filetype * set fo-=o | set fo-=a | set fo+=j
-autocmd Filetype tex set fo+=2
-
 autocmd BufWritePre * %s/\s\+$//e " strip trailing spaces
 
 if has("autocmd")

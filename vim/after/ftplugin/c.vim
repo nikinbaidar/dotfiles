@@ -8,7 +8,7 @@
 
 function! CodeRunner()
     write!
-    ! gcc % -o ~/Common-Projects/c/.runcode -lm && ~/Common-Projects/c/.runcode
+    ! gcc % -o ~/Documents/Common-Projects/c/.runcode -lm && ~/Documents/Common-Projects/c/.runcode
 endfunction
 
 command! PF execute("%s/print(/printf(")
