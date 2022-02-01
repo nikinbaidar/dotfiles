@@ -1,1 +1,1 @@
-{"chrome://browser/content/browser.xhtml":{"main-window":{"sizemode":"maximized"}}}
+{"chrome://browser/content/browser.xhtml":{"main-window":{"sizemode":"maximized","screenX":"5","screenY":"22","width":"1229","height":"691"},"sidebar-box":{"sidebarcommand":"viewBookmarksSidebar"},"sidebar-title":{"value":"Bookmarks"}},"chrome://mozapps/content/downloads/unknownContentType.xhtml":{"unknownContentTypeWindow":{"screenX":"-5","screenY":"202"}}}

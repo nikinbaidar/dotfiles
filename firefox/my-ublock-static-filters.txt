@@ -58,7 +58,7 @@ bitbanged.com##.cc-bottom.cc-theme-classic.cc-type-info.cc-banner.cc-window
 
 ! 2021-07-18 https://www.youtube.com
 
-www.youtube.com###sections
+!www.youtube.com###sections
 
 ! 2021-07-19 https://graphicdesign.stackexchange.com
 graphicdesign.stackexchange.com##.js-consent-banner.r16.l16.b16.bar-lg.fc-white.bg-black-750.sm\:p16.p32.sm\:w-auto.ws4.z-nav-fixed.ps-fixed.ff-sans
@@ -177,49 +177,64 @@ gogambar.wordpress.com##.ads-active.hide-on-button
 ! 2021-12-08 https://link.springer.com
 link.springer.com###onetrust-banner-sdk > .ot-sdk-container
 
-! 2021-12-09 https://www.asciiart.eu
-www.asciiart.eu##.ce-window
+! 2022-01-26 https://titanwolf.org
+titanwolf.org##.in.fade.modal
+titanwolf.org##.in.fade.modal-backdrop
 
-! 2021-12-10 https://serverfault.com
-serverfault.com##.js-consent-banner.r16.l16.b16.bar-lg.fc-white.bg-black-750.sm\:p16.p32.sm\:w-auto.ws4.z-nav-fixed.ps-fixed.ff-sans
+! 2022-01-26 https://www.geeksforgeeks.org
+www.geeksforgeeks.org##.skiptranslate.goog-te-banner-frame
+www.geeksforgeeks.org##.lightbox-target
+www.geeksforgeeks.org##.show-consent.hide-consent.cookie-consent
 
-! 2021-12-10 https://getcomics.info
-getcomics.info##td
+! 2022-01-29 https://www.section.io
+www.section.io##.t-consentPrompt.termly-styles-bottom-c884b6.termly-styles-termly-banner-1ae7a5.termly-styles-root-808b10
 
-! 2021-12-11 https://www.marca.com
-www.marca.com##.didomi-regular-notice-with-data-processing.top.shape-banner.didomi-notice-banner.didomi-banner-notice-info-type.didomi-regular-notice
-www.marca.com##.didomi-consent-popup__178119d0-5586-4a4c-953e-04aaf9ac0994.didomi-mobile.didomi-screen-small.notranslate > div
+! 2022-02-01 https://duckduckgo.com
+duckduckgo.com##.ddgsi-horn.ddgsi
+duckduckgo.com##.social.header__label.header--aside__social.header--aside__item > .js-hl-button.header__clickable > .js-popout.popout-trig
+duckduckgo.com##.js-side-menu-open.header__button--menu
 
-! 2021-12-11 https://ieeexplore.ieee.org
-||ieeexplore.ieee.org/assets/dist/ng-new/bg.body.gif$image
-||ieeexplore.ieee.org/assets/dist/ng-new/bg.body.gif$image
-||ieeexplore.ieee.org/assets/dist/ng-new/bg.body.gif$image
-||ieeexplore.ieee.org/assets/dist/ng-new/bg.body.gif$image
-||ieeexplore.ieee.org/assets/dist/ng-new/bg.body.gif$image
-||ieeexplore.ieee.org/assets/dist/ng-new/bg.body.gif$image
+! 2022-02-01 https://duckduckgo.com
+duckduckgo.com##.js-dropdown-button.dropdown__button.zcm__link
 
-! 2021-12-14 https://www.digitalocean.com
-www.digitalocean.com##.reveal.newsletter-signups-dialog
-www.digitalocean.com##._wrap_1nv7e_16
+! 2022-02-01 https://www.youtube.com
 
-! 2021-12-14 https://www.dropbox.com
-||consent.dropbox.com/?hide_gdpr=false&ccpa_token=&is_ccpa_enabled=true&gpc_signal=undefined$subdocument
+www.youtube.com###voice-search-button
 
-! 2021-12-14 https://bitly.com
-bitly.com##.sitebanner--container
-bitly.com##.sitebanner--spacer
-bitly.com##.grid-container > .top-bar
-||docrdsfx76ssb.cloudfront.net/static/1639060534/pages/wp-content/uploads/2020/05/illo-mobile-810x480-1.jpg$image
-||docrdsfx76ssb.cloudfront.net/static/1639060534/pages/wp-content/uploads/2020/05/illo-mobile-810x480-1.jpg$image
-||docrdsfx76ssb.cloudfront.net/static/1639060534/pages/wp-content/uploads/2020/05/illo-mobile-810x480-1.jpg$image
-bitly.com##.cards-block
-bitly.com##.hero-content
-||docrdsfx76ssb.cloudfront.net/static/1639060534/pages/wp-content/uploads/2020/05/illo-mobile-810x480-1.jpg$image
-bitly.com##.text-center.scroll-for-more
-||docrdsfx76ssb.cloudfront.net/static/1639060534/pages/wp-content/uploads/2019/08/Homepage-Branded-Links-Illustration-1.png$image
-||docrdsfx76ssb.cloudfront.net/static/1639060534/pages/wp-content/uploads/2019/08/Homepage-Branded-Links-Illustration-1.png$image
-||docrdsfx76ssb.cloudfront.net/static/1639060534/pages/wp-content/uploads/2019/08/Homepage-Branded-Links-Illustration-2.png$image
-||docrdsfx76ssb.cloudfront.net/static/1639060534/pages/wp-content/uploads/2021/06/Site_Check-you.png$image
-bitly.com##.testimonial-block
-bitly.com##.dark-row.text-content.full-width-content
+www.youtube.com###scroll-container > .yt-chip-cloud-renderer.style-scope
+www.youtube.com##.ytd-live-chat-frame.style-scope > .ytd-toggle-button-renderer.style-scope.yt-simple-endpoint > .ytd-toggle-button-renderer.style-scope
+www.youtube.com###show-hide-button
+www.youtube.com###chat
+www.youtube.com###guide-button
+www.youtube.com###country-code
+www.youtube.com###container > .ytd-video-secondary-info-renderer.style-scope
+www.youtube.com###meta-contents > .ytd-watch-flexy.style-scope
+www.youtube.com##.ytd-video-primary-info-renderer.style-scope > .ytd-menu-renderer.style-scope.top-level-buttons
+www.youtube.com###button > .ytd-menu-renderer.style-scope
+www.youtube.com##.ytd-button-renderer.style-scope.yt-simple-endpoint > .size-default.style-suggestive.ytd-button-renderer.style-scope
+www.youtube.com##.ytd-video-view-count-renderer.style-scope.view-count
+www.youtube.com###dot
+
+! 2022-02-01 https://www.youtube.com
+www.youtube.com##ytd-guide-section-renderer.ytd-guide-renderer.style-scope:nth-of-type(1)
+www.youtube.com##ytd-guide-section-renderer.ytd-guide-renderer.style-scope:nth-of-type(2)
+www.youtube.com##ytd-guide-section-renderer.ytd-guide-renderer.style-scope:nth-of-type(3)
+www.youtube.com##ytd-guide-section-renderer.ytd-guide-renderer.style-scope:nth-of-type(4)
+www.youtube.com###guide-inner-content
+www.youtube.com###guide-content
+www.youtube.com###scroll-container > .ytd-feed-filter-chip-bar-renderer.style-scope
+www.youtube.com###header > .ytd-rich-grid-renderer.style-scope
+www.youtube.com##.style-default.ytd-topbar-menu-button-renderer.style-scope
+www.youtube.com##.notification-button-style-type-default.ytd-notification-topbar-button-renderer.style-scope
+www.youtube.com##.ytd-comments.style-scope
+www.youtube.com##ytd-logo.ytd-topbar-logo-renderer.style-scope > .ytd-logo.style-scope
+www.youtube.com##yt-multi-page-menu-section-renderer.ytd-multi-page-menu-renderer.style-scope:nth-of-type(1)
+||i.ytimg.com/vi/rKXkw7QZnR4/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBADzJLcarbI_S153aLndjYY9z0fw$image
+||i.ytimg.com/vi/rKXkw7QZnR4/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBADzJLcarbI_S153aLndjYY9z0fw$image
+www.youtube.com##yt-multi-page-menu-section-renderer.ytd-multi-page-menu-renderer.style-scope:nth-of-type(2)
+||i.ytimg.com/vi/coyaVoVkhVw/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBs9KqzMIXUlSX-gmnPGIC24OtyMw$image
+www.youtube.com##div.ytd-c4-tabbed-header-renderer.style-scope.banner-visible-area
+www.youtube.com###subscriber-count
+www.youtube.com##tp-yt-paper-button.ytd-subscribe-button-renderer.style-scope
+www.youtube.com###wrapper > .tp-yt-app-header-layout.style-scope
 
