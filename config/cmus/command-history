@@ -1,4 +1,5 @@
 q
+colorscheme green
 q!
 colorscheme dracula
 colorscheme default
@@ -9,6 +10,5 @@ colorscheme cyan
 colorscheme amazon
 colorscheme jellybeans
 colorscheme zenburn
-colorscheme green
 colorscheme gruvbox
 colorscheme gray-88

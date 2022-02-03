@@ -5,18 +5,18 @@ map <c-y> :echo Use your keyboard you dummy.
 map <c-e> :echo Use your keyboard you dummy.
 map w :echo Key map not found. Let's calm down, escape, and try again.
 map u :echo Key map not found. Let's calm down, escape, and try again.
-map i :echo Key map not found. Let's calm down, escape, and try again.
-map q :echo Key map not found. Let's calm down, escape, and try again.
 
 # Mappings
-map p $$PAGER "$f" # view
+# map p $$PAGER "$f" # view
 map v invert
 map s :toggle; down
 map S :toggle; up
 map <enter> open
 map t $$SHELL
 map u :clear; unselect
-map c :set number!; set relativenumber!
+# Do you want to look cool or be fast?
+set number
+set relativenumber
 map <gt> incr_page
 map <lt> decr_page
 

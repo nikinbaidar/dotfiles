@@ -35,8 +35,6 @@
   display: none !important;
 }
 
-/* @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"); /1* only needed once *1/ */
-
 :-moz-any(#content,#appcontent) browser{
  margin-right:-10px!important;
  overflow-y:hidden;
@@ -50,3 +48,17 @@
 /* Hide the hamburger menu */
 #PanelUI-menu-button {display: none;}
 
+/* Hide the tabs bar and the address bar but show address bar when C-l is
+ * pressed
+ */
+
+#TabsToolbar { visibility: collapse !important; }
+
+#main-window:not([customizing]) #navigator-toolbox:not(:focus-within):not(:hover){
+    margin-top: -40px;
+}
+
+/* The following line of code stores a cookie that always starts youtube on
+ * theater mode without the need of any kind of third-party plugins
+ * document.cookie = 'wide=1; expires='+new Date('3099').toUTCString()+'; path=/';
+ */
