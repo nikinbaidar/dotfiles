@@ -7,12 +7,15 @@ function declareAppropriateVars() {
         -c) programmingLanguage=c ;;
         -cpp) programmingLanguage=cpp ;;
         -py) programmingLanguage=python ;;
+        -oct) programmingLanguage=octave ;;
         -j) programmingLanguage=java ;;
         -js) programmingLanguage=javascript ;;
         -sh) programmingLanguage=bash ;;
         -sql) programmingLanguage=mySQL ;;
         # Selecting programming pardigms:
         -oop) programmingParadigm=OOP ;;
+        -im) programmingParadigm=ImageProcessing ;;
+        -nn) programmingParadigm=NeuralNetworks ;;
 
         # Selecting Projects:
 
@@ -33,11 +36,11 @@ else
 fi
 
 if [ -z ${programmingLanguage} ] ; then
-    vim /home/nikin/Common-Projects/
+    vim $HOME/Documents/Common-Projects/
 
 elif [[ -n ${programmingParadigm} ]] ; then
-    vim /home/nikin/Common-Projects/${programmingLanguage}/${programmingParadigm}/
+    vim $HOME/Documents/Common-Projects/${programmingLanguage}/${programmingParadigm}/
 
 else
-    vim /home/nikin/Common-Projects/${programmingLanguage}/
+    vim $HOME/Documents/Common-Projects/${programmingLanguage}/
 fi

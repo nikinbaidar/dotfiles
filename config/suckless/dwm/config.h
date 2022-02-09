@@ -25,12 +25,10 @@ typedef struct {
 } Sp;
 const char *spcmd1[] = {"quicknotes", NULL };
 const char *spcmd2[] = {"viber", NULL };
-const char *spcmd3[] = {"agendas", NULL };
 static Sp scratchpads[] = {
     /* name      cmd  */
     {"spdiary",  spcmd1},
     {"viber",    spcmd2},
-    {"sptodo",   spcmd3},
 };
 
 /* tagging */
@@ -43,11 +41,9 @@ static const Rule rules[] = {
      */
     /* class        instance    title       tags mask  isfloating   monitor */
     { "Gimp",       NULL,       NULL,       0,            0,           -1 },
-    { "GNU Octave", NULL,       NULL,       1 << 6,       1,           -1 },
     { "Firefox",    NULL,       NULL,       1 << 8,       0,           -1 },
     { NULL,         "spdiary",  NULL,       SPTAG(0),     0,           -1 },
     { NULL,         "viber",    NULL,       SPTAG(1),     0,           -1 },
-    { NULL,         "sptodo",   NULL,       SPTAG(2),     1,           -1 },
 };
 
 /* layout(s) */
