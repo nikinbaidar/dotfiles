@@ -21,13 +21,12 @@ alias convert2pdf="soffice --headless --convert-to pdf"
 # Function Definitions
 
 function update() {
-
     # update BRANCH [MESSAGE] REPO
 
     function git_commit() {
         if [ $# -eq 1 ]; then
             git commit -m "synchronize ${1}"
-            % Optimize these options later
+            # Optimize these options later
         elif [[ $# -eq 2 && "${1}" = "-m" ]]; then
             git commit
         elif [[ $# -eq 2 ]]; then
@@ -54,18 +53,4 @@ function def() {
 	sdcv -n --utf8-output --color "$@" 2>&1 | \
 	fold --width=$(tput cols) | \
 	less --quit-if-one-screen -RX
-}
-
-function lfcd() {
-    tmp="$(mktemp)"
-    lf -last-dir-path="$tmp" "$@"
-    if [ -f "$tmp" ]; then
-        dir="$(cat "$tmp")"
-        rm -f "$tmp"
-        if [ -d "$dir" ]; then
-            if [ "$dir" != "$(pwd)" ]; then
-                cd "$dir"
-            fi
-        fi
-    fi
 }
