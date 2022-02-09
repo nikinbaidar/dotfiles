@@ -6,10 +6,12 @@
 # |_.__/ \__,_|___/_| |_|_|  \___|
 
 # PS1='\[\e[01;31m\][\[\e[01;33m\]\u\[\e[01;34m\]@\[\e[01;36m\]\h\[\e[01;37m\]:\[\e[01;30m\]:\[\e[01;35m\]\w\[\e[01;31m\]]\[\e[01;32m\]$\[\e[00;37m\] '
-PS1='\[\e[01;31m\][\[\e[01;33m\]\u\[\e[01;34m\]@\[\e[01;36m\]\h\[\e[01;37m\]: \[\e[01;35m\]\W\[\e[01;31m\]]\[\e[01;32m\]$\[\e[00;37m\] '
+PS1='\[\e[01;31m\][\[\e[01;33m\]\u\[\e[01;34m\]@\[\e[01;36m\]\h\[\e[01;37m\]:'\
+' \[\e[01;35m\]\W\[\e[01;31m\]]\[\e[01;32m\]$\[\e[00;37m\] '
 
 export EDITOR=vim
 export LESS="eFRX"
+export GOPATH=$HOME/.config/go
 export PATH=$PATH:${HOME}/.local/bin:/opt/afni
 
 # Config for lf File Manager
@@ -35,5 +37,3 @@ shopt -s checkjobs
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
-
-bind "C-Space":kill-whole-line
