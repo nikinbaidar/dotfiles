@@ -1,4 +1,0 @@
-#! /bin/bash
-
-tabbed -c zathura -e &> /dev/null &
-
