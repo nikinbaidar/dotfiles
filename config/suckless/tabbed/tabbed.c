@@ -113,12 +113,10 @@ static Bool gettextprop(Window w, Atom atom, char *text, unsigned int size);
 static void initfont(const char *fontstr);
 static Bool isprotodel(int c);
 static void keypress(const XEvent *e);
-static void keyrelease(const XEvent *e);
 static void killclient(const Arg *arg);
 static void manage(Window win);
 static void maprequest(const XEvent *e);
 static void move(const Arg *arg);
-static void movetab(const Arg *arg);
 static void propertynotify(const XEvent *e);
 static void resize(int c, int w, int h);
 static void rotate(const Arg *arg);
@@ -127,7 +125,6 @@ static void sendxembed(int c, long msg, long detail, long d1, long d2);
 static void setcmd(int argc, char *argv[], int);
 static void setup(void);
 static void sigchld(int unused);
-static void showbar(const Arg *arg);
 static void spawn(const Arg *arg);
 static int textnw(const char *text, unsigned int len);
 static void toggle(const Arg *arg);
@@ -151,7 +148,6 @@ static void (*handler[LASTEvent]) (const XEvent *) = {
 	[Expose] = expose,
 	[FocusIn] = focusin,
 	[KeyPress] = keypress,
-	[KeyRelease] = keyrelease,
 	[MapRequest] = maprequest,
 	[PropertyNotify] = propertynotify,
 };
@@ -687,22 +683,6 @@ keypress(const XEvent *e)
 }
 
 void
-keyrelease(const XEvent *e)
-{
-	const XKeyEvent *ev = &e->xkey;
-	unsigned int i;
-	KeySym keysym;
-
-	keysym = XkbKeycodeToKeysym(dpy, (KeyCode)ev->keycode, 0, 0);
-	for (i = 0; i < LENGTH(keyreleases); i++) {
-		if (keysym == keyreleases[i].keysym &&
-		    CLEANMASK(keyreleases[i].mod) == CLEANMASK(ev->state) &&
-		    keyreleases[i].func)
-			keyreleases[i].func(&(keyreleases[i].arg));
-	}
-}
-
-void
 killclient(const Arg *arg)
 {
 	XEvent ev;
@@ -746,16 +726,6 @@ manage(Window w)
 			if ((code = XKeysymToKeycode(dpy, keys[i].keysym))) {
 				for (j = 0; j < LENGTH(modifiers); j++) {
 					XGrabKey(dpy, code, keys[i].mod |
-					         modifiers[j], w, True,
-					         GrabModeAsync, GrabModeAsync);
-				}
-			}
-		}
-
-		for (i = 0; i < LENGTH(keyreleases); i++) {
-			if ((code = XKeysymToKeycode(dpy, keyreleases[i].keysym))) {
-				for (j = 0; j < LENGTH(modifiers); j++) {
-					XGrabKey(dpy, code, keyreleases[i].mod |
 					         modifiers[j], w, True,
 					         GrabModeAsync, GrabModeAsync);
 				}
@@ -828,35 +798,6 @@ move(const Arg *arg)
 {
 	if (arg->i >= 0 && arg->i < nclients)
 		focus(arg->i);
-}
-
-void
-movetab(const Arg *arg)
-{
-	int c;
-	Client *new;
-
-	if (sel < 0)
-		return;
-
-	c = (sel + arg->i) % nclients;
-	if (c < 0)
-		c += nclients;
-
-	if (c == sel)
-		return;
-
-	new = clients[sel];
-	if (sel < c)
-		memmove(&clients[sel], &clients[sel+1],
-		        sizeof(Client *) * (c - sel));
-	else
-		memmove(&clients[c+1], &clients[c],
-		        sizeof(Client *) * (sel - c));
-	clients[c] = new;
-	sel = c;
-
-	drawbar();
 }
 
 void
@@ -1084,7 +1025,7 @@ setup(void)
 	XMapRaised(dpy, win);
 	XSelectInput(dpy, win, SubstructureNotifyMask | FocusChangeMask |
 	             ButtonPressMask | ExposureMask | KeyPressMask |
-	             KeyReleaseMask | PropertyChangeMask | StructureNotifyMask |
+	             PropertyChangeMask | StructureNotifyMask |
 	             SubstructureRedirectMask);
 	xerrorxlib = XSetErrorHandler(xerror);
 
@@ -1115,13 +1056,6 @@ setup(void)
 
 	nextfocus = foreground;
 	focus(-1);
-}
-
-void
-showbar(const Arg *arg)
-{
-	barvisibility = arg->i;
-	drawbar();
 }
 
 void
