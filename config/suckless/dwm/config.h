@@ -9,14 +9,13 @@ static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "monospace:size=10" };
 static const char dmenufont[]       = "monospace:size=10";
 static const char col_gray1[]       = "#222222";
-/* static const char col_gray2[]       = "#444444"; */
-static const char col_gray3[]       = "#bbbbbb";
-static const char col_gray4[]       = "#eeeeee";
+static const char col_gray2[]       = "#bbbbbb";
+static const char col_gray3[]       = "#eeeeee";
 static const char col_cyan[]        = "#005577";
 static const char *colors[][3]      = {
         /*               fg         bg         border   */
-        [SchemeNorm] = { col_gray4, "#1d2021", "#83a598" },
-        [SchemeSel]  = { col_gray4,  col_cyan, "#fabd2f" },
+        [SchemeNorm] = { col_gray3, "#1d2021", "#83a598" },
+        [SchemeSel]  = { col_gray3,  col_cyan, "#fabd2f" },
 };
 
 typedef struct {
@@ -41,7 +40,10 @@ static const Rule rules[] = {
      */
     /* class        instance    title       tags mask  isfloating   monitor */
     { "Gimp",       NULL,       NULL,       0,            0,           -1 },
-    { "Firefox",    NULL,       NULL,       1 << 8,       0,           -1 },
+    { "firefox",    NULL,       NULL,       1 << 1,       0,           -1 },
+    { "AFNI",       NULL,       NULL,       1 << 7,       1,           -1 },
+    { "TopLevelShell", NULL,       NULL,       1 << 7,       1,           -1 },
+    { "tabbed",     NULL,       NULL,       1 << 2,       0,           -1 },
     { NULL,         "spdiary",  NULL,       SPTAG(0),     0,           -1 },
     { NULL,         "viber",    NULL,       SPTAG(1),     0,           -1 },
 };
@@ -76,13 +78,12 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0";
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", \
     dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", \
-    col_gray4, NULL };
-static const char *termcmd[]  = { "st", NULL };
-static const char *nop[]  = { "thisScriptDoesNothing", NULL };
+    col_gray3, NULL };
+static const char *termcmd[]        = { "st", "-e", "tmux", NULL };
+static const char *nop[]            = { "thisScriptDoesNothing", NULL };
 static const char *screenshotcmd[]  = { "grabScreenSelection", NULL };
-static const char *dualmon[] = { "dualmonitor", NULL };
-static const char *externalmon[] = { "singlemonitor", NULL };
-static const char *shutdown[] = { "promptPowerOff", NULL };
+static const char *dualmon[]        = { "dualmonitor", NULL };
+static const char *externalmon[]    = { "singlemonitor", NULL };
 
 static Key keys[] = {
 /* modifier           key              function        argument */
@@ -92,8 +93,6 @@ static Key keys[] = {
 { MODKEY,             XK_x,            spawn,          {.v = screenshotcmd } },
 { MODKEY,             XK_bracketright, spawn,          {.v = dualmon } },
 { MODKEY,             XK_bracketleft,  spawn,          {.v = externalmon } },
-{ MODKEY|ShiftMask,   XK_p,            spawn,          {.v = shutdown } },
-{ MODKEY,             XK_b,            togglebar,      {0} },
 { MODKEY,             XK_j,            focusstack,     {.i = +1 } },
 { MODKEY,             XK_k,            focusstack,     {.i = -1 } },
 { MODKEY,             XK_i,            incnmaster,     {.i = +1 } },
@@ -108,7 +107,6 @@ static Key keys[] = {
 { MODKEY|ShiftMask,   XK_f,            setlayout,      {.v = &layouts[2]} },
 { MODKEY,             XK_n,            togglescratch,  {.ui = 0 } },
 { MODKEY,             XK_v,            togglescratch,  {.ui = 1 } },
-{ MODKEY,             XK_z,            togglescratch,  {.ui = 2 } },
 { MODKEY,             XK_space,        setlayout,      {0} },
 { MODKEY|ShiftMask,   XK_space,        togglefloating, {0} },
 { MODKEY,             XK_0,            view,           {.ui = ~0 } },
@@ -126,6 +124,9 @@ TAGKEYS(              XK_7,                            6)
 TAGKEYS(              XK_8,                            7)
 TAGKEYS(              XK_9,                            8)
 { MODKEY|ShiftMask,   XK_q,            quit,           {0} },
+{ MODKEY,             XK_b,            view,           {.ui = 0x5 } },
+{ MODKEY,             XK_a,            view,           {.ui = 0x3 } },
+{ MODKEY,             XK_c,            view,           {.ui = 0x6 } },
 };
 
 /* button definitions */

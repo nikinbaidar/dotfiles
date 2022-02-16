@@ -215,7 +215,6 @@ static void spawn(const Arg *arg);
 static void tag(const Arg *arg);
 static void tagmon(const Arg *arg);
 static void tile(Monitor *);
-static void togglebar(const Arg *arg);
 static void togglefloating(const Arg *arg);
 static void togglescratch(const Arg *arg);
 static void toggletag(const Arg *arg);
@@ -451,9 +450,15 @@ buttonpress(XEvent *e)
     }
     if (ev->window == selmon->barwin) {
         i = x = 0;
-        do
-            x += TEXTW(tags[i]);
-        while (ev->x >= x && ++i < LENGTH(tags));
+ 		unsigned int occ = 0;
+ 		for(c = m->clients; c; c=c->next)
+ 			occ |= c->tags;
+ 		do {
+ 			/* Do not reserve space for vacant tags */
+ 			if (!(occ & 1 << i || m->tagset[m->seltags] & 1 << i))
+ 				continue;
+ 			x += TEXTW(tags[i]);
+ 		} while (ev->x >= x && ++i < LENGTH(tags));
         if (i < LENGTH(tags)) {
             click = ClkTagBar;
             arg.ui = 1 << i;
@@ -751,13 +756,12 @@ drawbar(Monitor *m)
     }
     x = 0;
     for (i = 0; i < LENGTH(tags); i++) {
+ 		/* Do not draw vacant tags */
+ 		if(!(occ & 1 << i || m->tagset[m->seltags] & 1 << i))
+ 			continue;
         w = TEXTW(tags[i]);
         drw_setscheme(drw, scheme[m->tagset[m->seltags] & 1 << i ? SchemeSel : SchemeNorm]);
         drw_text(drw, x, 0, w, bh, lrpad / 2, tags[i], urg & 1 << i);
-        if (occ & 1 << i)
-            drw_rect(drw, x + boxs, boxs, boxw, boxw,
-                m == selmon && selmon->sel && selmon->sel->tags & 1 << i,
-                urg & 1 << i);
         x += w;
     }
     w = blw = TEXTW(m->ltsymbol);
@@ -1573,7 +1577,7 @@ setup(void)
     wmatom[WMDelete] = XInternAtom(dpy, "WM_DELETE_WINDOW", False);
     wmatom[WMState] = XInternAtom(dpy, "WM_STATE", False);
     wmatom[WMTakeFocus] = XInternAtom(dpy, "WM_TAKE_FOCUS", False);
-    netatom[NetActiveWindow] = XInternAtom(dpy, "_NET_ACTIVE_WINDOW", False);
+    netatom[NetActiveWindow] = XInternAtom(dpy, "_NET_WM_NAME", False);
     netatom[NetSupported] = XInternAtom(dpy, "_NET_SUPPORTED", False);
     netatom[NetWMName] = XInternAtom(dpy, "_NET_WM_NAME", False);
     netatom[NetWMState] = XInternAtom(dpy, "_NET_WM_STATE", False);
@@ -1721,15 +1725,6 @@ tile(Monitor *m)
 }
 
 void
-togglebar(const Arg *arg)
-{
-    selmon->showbar = selmon->pertag->showbars[selmon->pertag->curtag] = !selmon->showbar;
-    updatebarpos(selmon);
-    XMoveResizeWindow(dpy, selmon->barwin, selmon->wx, selmon->by, selmon->ww, bh);
-    arrange(selmon);
-}
-
-void
 togglefloating(const Arg *arg)
 {
     if (!selmon->sel)
@@ -1776,9 +1771,6 @@ togglescratch(const Arg *arg)
         selmon->sellt = selmon->pertag->sellts[selmon->pertag->curtag];
         selmon->lt[selmon->sellt] = selmon->pertag->ltidxs[selmon->pertag->curtag][selmon->sellt];
         selmon->lt[selmon->sellt^1] = selmon->pertag->ltidxs[selmon->pertag->curtag][selmon->sellt^1];
-
-        if (selmon->showbar != selmon->pertag->showbars[selmon->pertag->curtag])
-            togglebar(NULL);
 
         focus(NULL);
         arrange(selmon);
@@ -2072,8 +2064,6 @@ updatetitle(Client *c)
 {
     if (!gettextprop(c->win, netatom[NetWMName], c->name, sizeof c->name))
         gettextprop(c->win, XA_WM_NAME, c->name, sizeof c->name);
-    if (c->name[0] == '\0') /* hack to mark broken clients */
-        strcpy(c->name, broken);
 }
 
 void
@@ -2138,9 +2128,6 @@ view(const Arg *arg)
     selmon->sellt = selmon->pertag->sellts[selmon->pertag->curtag];
     selmon->lt[selmon->sellt] = selmon->pertag->ltidxs[selmon->pertag->curtag][selmon->sellt];
     selmon->lt[selmon->sellt^1] = selmon->pertag->ltidxs[selmon->pertag->curtag][selmon->sellt^1];
-
-    if (selmon->showbar != selmon->pertag->showbars[selmon->pertag->curtag])
-        togglebar(NULL);
 
     focus(NULL);
     arrange(selmon);
@@ -2239,10 +2226,6 @@ main(int argc, char *argv[])
         die("dwm: cannot open display");
     checkotherwm();
     setup();
-#ifdef __OpenBSD__
-    if (pledge("stdio rpath proc exec", NULL) == -1)
-        die("pledge");
-#endif /* __OpenBSD__ */
     scan();
     run();
     cleanup();
