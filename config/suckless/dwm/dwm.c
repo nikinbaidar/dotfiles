@@ -1124,7 +1124,7 @@ maprequest(XEvent *e)
 void
 monocle(Monitor *m)
 {
-    unsigned int n = 0;
+    unsigned int n = 0, h, mw, my;
     Client *c;
 
     for (c = m->clients; c; c = c->next)
@@ -1132,8 +1132,15 @@ monocle(Monitor *m)
             n++;
     if (n > 0) /* override layout symbol */
         snprintf(m->ltsymbol, sizeof m->ltsymbol, "[%d]", n);
-    for (c = nexttiled(m->clients); c; c = nexttiled(c->next))
-        resize(c, m->wx, m->wy, m->ww - 2 * c->bw, m->wh - 2 * c->bw, 0);
+    for (c = nexttiled(m->clients); c; c = nexttiled(c->next)) {
+            my = m->gappx;
+            mw = m->ww - m->gappx;
+            h = (m->wh - my) - m->gappx;
+            resize(c, m->wx + m->gappx, m->wy + my, mw - (2*c->bw) - m->gappx,
+                    h - (2*c->bw), 0);
+            my += HEIGHT(c) + m->gappx;
+    }
+
 }
 
 void
