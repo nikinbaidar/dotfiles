@@ -6,9 +6,9 @@
 
 # Mappings
 
-unmap q
+unmap s
+unmap a
 
-map ZZ quit
 map b set first-page-column\ 1:1
 map B set first-page-column\ 1:2
 
@@ -20,3 +20,7 @@ set notification-fg none
 set notification-bg none
 
 set highlight-color "#add8e6"
+
+set recolor true
+set recolor-darkcolor  "#fbf1c7" # Foreground Color
+set recolor-lightcolor "#282828" # Background Color

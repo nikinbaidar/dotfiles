@@ -63,7 +63,6 @@
 /home/nikin/Music/Bother (Live).mp3
 /home/nikin/Music/Taciturn (Acoustic).mp3
 /home/nikin/Music/Corey Taylor - Hard Luck Woman-u62_pExenuk.mp3
-/home/nikin/Music/Take It Easy (Cover).mp3
 /home/nikin/Music/Hallowed Be Thy Name Cover.mp3
 /home/nikin/Music/Passenger.mp3
 /home/nikin/Music/Hotel California.mp3
@@ -519,7 +518,6 @@
 /home/nikin/Music/SAHARA.mp3
 /home/nikin/Music/Chinta.mp3
 /home/nikin/Music/Tear In My Heart.mp3
-/home/nikin/Music/Migraine.mp3
 /home/nikin/Music/Stressed Out.mp3
 /home/nikin/Music/Ride.mp3
 /home/nikin/Music/Trees.mp3

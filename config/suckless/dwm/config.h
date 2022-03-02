@@ -11,11 +11,11 @@ static const char dmenufont[]       = "monospace:size=10";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#bbbbbb";
 static const char col_gray3[]       = "#eeeeee";
-static const char col_cyan[]        = "#005577";
+static const char col_cyan[]        = "#36454F";
 static const char *colors[][3]      = {
         /*               fg         bg         border   */
-        [SchemeNorm] = { col_gray3, "#1d2021", "#83a598" },
-        [SchemeSel]  = { col_gray3,  col_cyan, "#fabd2f" },
+        [SchemeNorm] = { col_gray3, "#1d2021", "#b2be85" },
+        [SchemeSel]  = { col_gray3, col_cyan, "#EAAA00" },
 };
 
 typedef struct {
@@ -38,14 +38,11 @@ static const Rule rules[] = {
      *      WM_CLASS(STRING) = instance, class
      *      WM_NAME(STRING) = title
      */
-    /* class        instance    title       tags mask  isfloating   monitor */
-    { "Gimp",       NULL,       NULL,       0,            0,           -1 },
-    { "firefox",    NULL,       NULL,       1 << 1,       0,           -1 },
-    { "AFNI",       NULL,       NULL,       1 << 7,       1,           -1 },
-    { "TopLevelShell", NULL,       NULL,       1 << 7,       1,           -1 },
-    { "tabbed",     NULL,       NULL,       1 << 2,       0,           -1 },
-    { NULL,         "spdiary",  NULL,       SPTAG(0),     0,           -1 },
-    { NULL,         "viber",    NULL,       SPTAG(1),     0,           -1 },
+    /* class           instance    title  tags mask  isfloating   monitor */
+    { "AFNI",          NULL,       NULL,  1 << 7,       1,           -1 },
+    { "TopLevelShell", NULL,       NULL,  1 << 7,       1,           -1 },
+    { NULL,            "spdiary",  NULL,  SPTAG(0),     0,           -1 },
+    { NULL,            "viber",    NULL,  SPTAG(1),     0,           -1 },
 };
 
 /* layout(s) */
@@ -82,6 +79,7 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", \
 static const char *termcmd[]        = { "st", "-e", "tmux", NULL };
 static const char *nop[]            = { "thisScriptDoesNothing", NULL };
 static const char *screenshotcmd[]  = { "grabScreenSelection", NULL };
+/* Select Monitor Setup */
 static const char *dualmon[]        = { "dualmonitor", NULL };
 static const char *externalmon[]    = { "singlemonitor", NULL };
 
@@ -124,9 +122,6 @@ TAGKEYS(              XK_7,                            6)
 TAGKEYS(              XK_8,                            7)
 TAGKEYS(              XK_9,                            8)
 { MODKEY|ShiftMask,   XK_q,            quit,           {0} },
-{ MODKEY,             XK_b,            view,           {.ui = 0x5 } },
-{ MODKEY,             XK_a,            view,           {.ui = 0x3 } },
-{ MODKEY,             XK_c,            view,           {.ui = 0x6 } },
 };
 
 /* button definitions */
