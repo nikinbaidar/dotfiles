@@ -1,11 +1,11 @@
 -- Don't create swap files
-vim.bo.swapfile       = false
+vim.opt.swapfile       = false
 
 -- Navigation 
-vim.opt.mouse         = "a"
-vim.wo.number         = true
-vim.wo.relativenumber = true
-vim.wo.cursorline     = true
+vim.opt.mouse          = "a"
+vim.opt.number         = true
+vim.opt.relativenumber = true
+vim.opt.cursorline     = true
 
 -- Searching: Patterns and Files
 vim.opt.incsearch     = false
@@ -19,10 +19,10 @@ vim.opt.tabstop       = 2
 vim.opt.softtabstop   = 2
 vim.opt.shiftwidth    = 2
 vim.opt.expandtab     = true
-vim.bo.textwidth      = 79
-vim.wo.colorcolumn    = "80"
-vim.wo.linebreak      = true
-vim.wo.wrap           = false
+vim.opt.textwidth     = 79
+vim.opt.colorcolumn   = "80"
+vim.opt.linebreak     = true
+vim.opt.wrap          = false
 
 -- Colors
 vim.opt.termguicolors = true

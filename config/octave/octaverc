@@ -1,19 +1,20 @@
 PS1 (">> ")
 
-edit mode sync
-# edit home .
-EDITOR('vim') ;
-# EDITOR('vim > /dev/tty 2>&1 < /dev/tty %s') ;
-
-addpath ("/home/nikin/Common-Projects/octave") ;
-# addpath ("/home/nikin/Common-Projects/octave/spm12-r7771") ;
+edit mode sync;
+edit home .;
+EDITOR('$EDITOR');
+EDITOR('$EDITOR > /dev/tty 2>&1 < /dev/tty %s');
 
 pkg prefix ~/.config/octave/octave-packages ...
-    ~/.config/octave/package-dependencies ;
+    ~/.config/octave/package-dependencies;
 
-# cd /home/nikin/Common-Projects/octave/spm12-r7771/src ;
+################################################################
+# Install SPM12                                                #
+# addpath ("/home/nikin/Common-Projects/octave/spm12-r7771") ; #
+# cd /home/nikin/Common-Projects/octave/spm12-r7771/src ;      #
+# system ("make PLATFORM=octave > /dev/null")                  #
+# system ("make PLATFORM=octave install > /dev/null")          #
+################################################################
 
-# system ("make PLATFORM=octave > /dev/null")
-# system ("make PLATFORM=octave install > /dev/null")
-
-cd /home/nikin/Common-Projects/octave/ ;
+addpath ("/home/nikin/Documents/Common-Projects/octave");
+# cd /home/nikin/Documents/Common-Projects/octave/; 
