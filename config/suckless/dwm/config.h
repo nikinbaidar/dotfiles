@@ -73,6 +73,7 @@ static Key keys[] = {
 /* modifier           key              function        argument */
 { MODKEY,             XK_p,            spawn,          {.v = dmenucmd } },
 { MODKEY,             XK_Return,       spawn,          {.v = termcmd } },
+{ MODKEY,             XK_b,            togglebar,      {0} },
 { MODKEY,             XK_d,            spawn,          {.v = nop } },
 { MODKEY,             XK_x,            spawn,          {.v = screenshotcmd } },
 { MODKEY,             XK_bracketright, spawn,          {.v = dualmon } },
