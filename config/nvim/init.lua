@@ -1,16 +1,34 @@
 --[[
- ________________________________
-/ This is the configuration file \
-| for my neovim written in lua.  |
-\ author: nikinbaidar            /
- --------------------------------
-        \   ^__^
-         \  (oo)\_______
-            (__)\       )\/\
-                ||----w |
-                ||     ||
+ _______________________________ 
+/ Filename   : init.lua         \
+| Maintainer : nikinbaidar      |
+| Loaction   : ~/.config/nvim/  |
+\ Description: Configs for nvim /
+ -------------------------------
+                      \   ^__^
+                       \  (oo)\_______
+                          (__)\       )\/\
+                              ||----w |
+                              ||     ||
 --]]
 
 require('bindings')
 require('packages')
 require('config')
+
+require 'nvim-treesitter.configs'.setup {
+  highlight = { enable = true }
+}
+
+-- Auto-commands
+vim.cmd [[ 
+
+" Run :h fo-table for the description about formatoptions.
+autocmd Filetype * set fo-=o | set fo+=tq 
+
+" Automatically jump to the last cursor position
+autocmd BufReadPost * execute "normal g`\"zz" 
+
+autocmd TermOpen term://* startinsert
+
+]]

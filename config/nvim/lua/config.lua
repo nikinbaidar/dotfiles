@@ -1,46 +1,32 @@
 -- Don't create swap files
-vim.opt.swapfile       = false
+vim.opt.swapfile      = false
 
 -- Navigation 
-vim.opt.mouse          = "a"
-vim.opt.number         = true
-vim.opt.relativenumber = true
-vim.opt.cursorline     = true
+vim.opt.mouse         = "a"
+vim.wo.number         = true
+vim.wo.relativenumber = true
+vim.wo.cursorline     = true
 
--- Searching: Patterns and Files
-vim.opt.incsearch     = false
+-- Searching: Patterns 
 vim.opt.hlsearch      = false
+vim.opt.incsearch     = false
 vim.opt.ignorecase    = true
-vim.opt.autochdir     = true
-vim.opt.path          = ".,**,/usr/include,,"
 
--- Line wrapping and indentations
+-- Searching: Files
+vim.opt.path          = ".,/home/nikin/.config/**,**,/home/nikin/**,/usr/include"
+vim.opt.autochdir     = true
+
+-- Indentations
+vim.opt.shiftwidth    = 2
 vim.opt.tabstop       = 2
 vim.opt.softtabstop   = 2
-vim.opt.shiftwidth    = 2
 vim.opt.expandtab     = true
-vim.opt.textwidth     = 79
-vim.opt.colorcolumn   = "80"
-vim.opt.linebreak     = true
-vim.opt.wrap          = false
 
--- Colors
+-- Line wrapping 
+vim.bo.textwidth      = 79
+vim.wo.linebreak      = true
+vim.wo.wrap           = false
+
+-- Appearance
 vim.opt.termguicolors = true
 vim.cmd [[ colorscheme ayu ]]
-
-require 'nvim-treesitter.configs'.setup {
-  highlight = { 
-    enable = true,
-    additional_vim_regex_highlighting = false,
-  },
-}
-
-vim.cmd [[
-
-" Run :h fo-table for the description about formatoptions.
-autocmd Filetype * set fo-=r | set fo-=o | set fo-=a | set fo+=tq
-
-" Automatically jump to the last cursor position on entering vim
-autocmd BufReadPost * execute "normal g`\"zz" 
-
-]]
