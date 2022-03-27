@@ -1,4 +1,4 @@
-#! /usr/bin/node
+#!/usr/bin/env node
 
 const nepali_years_and_days_in_months = [
     [2000, 30, 32, 31, 32, 31, 30, 30, 30, 29, 30, 29, 31],
@@ -127,7 +127,7 @@ function getNepaliMonth(month) {
             break;
 
         case 6:
-            englishMonth = "Aaswin";
+            englishMonth = "Aasoj";
             break;
 
         case 7:
@@ -139,7 +139,7 @@ function getNepaliMonth(month) {
             break;
 
         case 9:
-            englishMonth = "Paush";
+            englishMonth = "Poush";
             break;
 
         case 10:
@@ -155,39 +155,6 @@ function getNepaliMonth(month) {
             break;
     }
     return englishMonth;
-}
-
-function getEnglishDayOfWeekInString(day) {
-    switch (day) {
-        case 1:
-             day = "Sun";
-            break;
-
-        case 2:
-             day = "Mon";
-            break;
-
-        case 3:
-             day = "Tue";
-            break;
-
-        case 4:
-             day = "Wed";
-            break;
-
-        case 5:
-             day = "Thu";
-            break;
-
-        case 6:
-             day = "Fri";
-            break;
-
-        case 7:
-             day = "Sat";
-            break;
-    }
-    return day;
 }
 
 function convertEnglishDateToNepali(yy, mm, dd) {
@@ -259,7 +226,7 @@ function convertEnglishDateToNepali(yy, mm, dd) {
         total_eDays--;
     }
 
-    dateString = getEnglishDayOfWeekInString(day) + " " + getNepaliMonth(m) + " " + addZero(total_nDays) + " " + addZero(HH) + ":" + addZero(MM) + ":" + addZero(SS) + " +0545 " + y ;
+    dateString = (getNepaliMonth(m) + " " + total_nDays + " " + y) ;
     return dateString;
 }
 
@@ -289,8 +256,5 @@ currentDateTime = new Date();
 yy = currentDateTime.getFullYear();
 mm = currentDateTime.getMonth() + 1;
 dd = currentDateTime.getDate();
-HH = currentDateTime.getHours() % 12 || 12 ;
-MM = currentDateTime.getMinutes() ;
-SS = currentDateTime.getSeconds() ;
 
 console.log(convertEnglishDateToNepali(yy, mm, dd));
