@@ -18,6 +18,16 @@ static const char *colors[][3]      = {
         [SchemeSel]  = { col_gray3, col_cyan, "#EAAA00" },
 };
 
+typedef struct {
+        const char *name;
+        const void *cmd;
+} Sp;
+const char *spcmd1[] = {"viber", NULL };
+static Sp scratchpads[] = {
+    /* name      cmd  */
+    {"viber",    spcmd1},
+};
+
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
@@ -29,6 +39,7 @@ static const Rule rules[] = {
     /* class           instance    title  tags mask  isfloating   monitor */
     { "AFNI",          NULL,       NULL,  1 << 7,       1,           -1 },
     { "TopLevelShell", NULL,       NULL,  1 << 7,       1,           -1 },
+    { NULL,            "viber",    NULL,  SPTAG(0),     0,           -1 },
 };
 
 /* layout(s) */
@@ -51,11 +62,6 @@ static const Layout layouts[] = {
 { MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
 { MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
 { MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
-
-/* helper for spawning shell commands in the pre dwm-5.0 fashion */
-#define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
-
-/* static const int *lines = 5 ; */
 
 /* commands */
 static char dmenumon[2] = "0";
@@ -90,6 +96,7 @@ static Key keys[] = {
 { MODKEY,             XK_t,            setlayout,      {.v = &layouts[0]} },
 { MODKEY,             XK_m,            setlayout,      {.v = &layouts[1]} },
 { MODKEY|ShiftMask,   XK_f,            setlayout,      {.v = &layouts[2]} },
+{ MODKEY,             XK_v,            togglescratch,  {.ui = 0 } },
 { MODKEY,             XK_space,        setlayout,      {0} },
 { MODKEY|ShiftMask,   XK_space,        togglefloating, {0} },
 { MODKEY,             XK_0,            view,           {.ui = ~0 } },

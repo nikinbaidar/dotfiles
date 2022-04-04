@@ -63,6 +63,9 @@ static void ttysend(const Arg *);
 /* config.h for applying patches and the configuration. */
 #include "config.h"
 
+/* size of title stack */
+#define TITLESTACKSIZE 8
+
 /* XEMBED messages */
 #define XEMBED_FOCUS_IN  4
 #define XEMBED_FOCUS_OUT 5
@@ -157,6 +160,7 @@ static void xhints(void);
 static int xloadcolor(int, const char *, Color *);
 static int xloadfont(Font *, FcPattern *);
 static void xloadfonts(const char *, double);
+static void xloadsparefont();
 static void xunloadfont(Font *);
 static void xunloadfonts(void);
 static void xsetenv(void);
@@ -220,6 +224,8 @@ static DC dc;
 static XWindow xw;
 static XSelection xsel;
 static TermWindow win;
+static int tstki; /* title stack index */
+static char *titlestack[TITLESTACKSIZE]; /* title stack */
 
 /* Font Ring Cache */
 enum {
@@ -306,6 +312,7 @@ zoomabs(const Arg *arg)
 {
 	xunloadfonts();
 	xloadfonts(usedfont, arg->f);
+	xloadsparefont();
 	cresize(0, 0);
 	redraw();
 	xhints();
@@ -1022,6 +1029,67 @@ xloadfonts(const char *fontstr, double fontsize)
 }
 
 void
+xloadsparefont()
+{
+	FcPattern *fontpattern, *match;
+	FcResult result;
+
+	/* add font2 to font cache as first 4 entries */
+	if ( font2[0] == '-' )
+		fontpattern = XftXlfdParse(font2, False, False);
+	else
+		fontpattern = FcNameParse((FcChar8 *)font2);
+	if ( fontpattern ) {
+		/* Allocate memory for the new cache entries. */
+		frccap += 4;
+		frc = xrealloc(frc, frccap * sizeof(Fontcache));
+		/* add Normal */
+		match = FcFontMatch(NULL, fontpattern, &result);
+		if ( match )
+			frc[frclen].font = XftFontOpenPattern(xw.dpy, match);
+			if ( frc[frclen].font ) {
+				frc[frclen].flags = FRC_NORMAL;
+				frclen++;
+			} else
+				FcPatternDestroy(match);
+		/* add Italic */
+		FcPatternDel(fontpattern, FC_SLANT);
+		FcPatternAddInteger(fontpattern, FC_SLANT, FC_SLANT_ITALIC);
+		match = FcFontMatch(NULL, fontpattern, &result);
+		if ( match )
+			frc[frclen].font = XftFontOpenPattern(xw.dpy, match);
+			if ( frc[frclen].font ) {
+				frc[frclen].flags = FRC_ITALIC;
+				frclen++;
+			} else
+				FcPatternDestroy(match);
+		/* add Italic Bold */
+		FcPatternDel(fontpattern, FC_WEIGHT);
+		FcPatternAddInteger(fontpattern, FC_WEIGHT, FC_WEIGHT_BOLD);
+		match = FcFontMatch(NULL, fontpattern, &result);
+		if ( match )
+			frc[frclen].font = XftFontOpenPattern(xw.dpy, match);
+			if ( frc[frclen].font ) {
+				frc[frclen].flags = FRC_ITALICBOLD;
+				frclen++;
+			} else
+				FcPatternDestroy(match);
+		/* add Bold */
+		FcPatternDel(fontpattern, FC_SLANT);
+		FcPatternAddInteger(fontpattern, FC_SLANT, FC_SLANT_ROMAN);
+		match = FcFontMatch(NULL, fontpattern, &result);
+		if ( match )
+			frc[frclen].font = XftFontOpenPattern(xw.dpy, match);
+			if ( frc[frclen].font ) {
+				frc[frclen].flags = FRC_BOLD;
+				frclen++;
+			} else
+				FcPatternDestroy(match);
+		FcPatternDestroy(fontpattern);
+	}
+}
+
+void
 xunloadfont(Font *f)
 {
 	XftFontClose(xw.dpy, f->match);
@@ -1117,6 +1185,9 @@ xinit(int cols, int rows)
 
 	usedfont = (opt_font == NULL)? font : opt_font;
 	xloadfonts(usedfont, 0);
+
+	/* spare font (font2) */
+	xloadsparefont();
 
 	/* colors */
 	xw.cmap = XDefaultColormap(xw.dpy, xw.scr);
@@ -1597,17 +1668,45 @@ xseticontitle(char *p)
 }
 
 void
-xsettitle(char *p)
+xfreetitlestack(void)
 {
-	XTextProperty prop;
-	DEFAULT(p, opt_title);
+	for (int i = 0; i < LEN(titlestack); i++) {
+		free(titlestack[i]);
+		titlestack[i] = NULL;
+	}
+}
 
-	if (Xutf8TextListToTextProperty(xw.dpy, &p, 1, XUTF8StringStyle,
-	                                &prop) != Success)
-		return;
+void
+xsettitle(char *p, int pop)
+{
+ 	XTextProperty prop;
+ 
+	free(titlestack[tstki]);
+	if (pop) {
+		titlestack[tstki] = NULL;
+		tstki = (tstki - 1 + TITLESTACKSIZE) % TITLESTACKSIZE;
+		p = titlestack[tstki] ? titlestack[tstki] : opt_title;
+	} else if (p) {
+		titlestack[tstki] = xstrdup(p);
+	} else {
+		titlestack[tstki] = NULL;
+		p = opt_title;
+	}
+ 
+ 	Xutf8TextListToTextProperty(xw.dpy, &p, 1, XUTF8StringStyle, &prop);
 	XSetWMName(xw.dpy, xw.win, &prop);
 	XSetTextProperty(xw.dpy, xw.win, &prop, xw.netwmname);
 	XFree(prop.value);
+}
+
+void
+xpushtitle(void)
+{
+	int tstkin = (tstki + 1) % TITLESTACKSIZE;
+
+	free(titlestack[tstkin]);
+	titlestack[tstkin] = titlestack[tstki] ? xstrdup(titlestack[tstki]) : NULL;
+	tstki = tstkin;
 }
 
 int
