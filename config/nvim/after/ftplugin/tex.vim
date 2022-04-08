@@ -6,21 +6,17 @@
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-setlocal textwidth=69
-setlocal colorcolumn=70
+setlocal textwidth=79
+setlocal colorcolumn=
 setlocal spell
 setlocal complete+=kspell
 setlocal spellcapcheck=\_[\])'"   ]\+
 
-let b:surround_{char2nr("'")} = "`\r'"
-let b:surround_{char2nr("\"")} = "``\r''"
+" let b:surround_{char2nr("'")} = "`\r'"
+" let b:surround_{char2nr("\"")} = "``\r''"
 
 " Quick item-s
-imap <C-j> <CR><C-h>it<Tab>
-
-" User-defined Commands
-command Main execute("edit ../*.tex")
-command Pre  execute("split ~/Notes/Archives/Miscellaneous Files/preamble.tex")
+imap <C-j> <CR><C-h>\item<Space>
 
 " Auto Commands
 autocmd VimLeave *.tex silent ! ${HOME}/.local/bin/removeTexDependencies
@@ -29,6 +25,7 @@ autocmd VimLeave *.tex silent ! ${HOME}/.local/bin/removeTexDependencies
 " The following section includes the most ironic pieces of code I've ever
 " written. This code makes me productive and unproductive at the same time.
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 nnoremap <leader>v :call ViewPDF()<CR>
 
 command! AddBibliography execute("call BiblatexCompile()")
@@ -42,12 +39,15 @@ function! ViewPDF()
 endfunction
 
 function! BiblatexCompile()
-    :! clear ; biber %:r
+    :! biber %:r
     silent call CompileSource()
 endfunction
 
 function! CompileSource()
-    :silent! execute("! clear && pdflatex %")
+  below split
+  resize 10
+  terminal pdflatex %
+  normal! G
 endfunction
 
 function! CompileParent()
@@ -57,13 +57,12 @@ function! CompileParent()
 endfunction
 
 function! CodeRunner()
-    write!
+    update
     let g:is_Source = system("${HOME}/.local/bin/sourceTexCheck")
-    if g:is_Source
+    if  g:is_Source
         call CompileSource()
     else
         call CompileParent()
     endif
-    silent! execute("! clear")
     redraw!
 endfunction

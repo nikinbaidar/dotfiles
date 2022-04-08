@@ -7,6 +7,6 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 function! CodeRunner()
-    :write!
+    :update
     :! g++ % -o ~/Documents/Common-Projects/cpp/runcode && ~/Documents/Common-Projects/cpp/runcode
 endfunction

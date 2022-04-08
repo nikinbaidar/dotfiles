@@ -9,7 +9,6 @@ vim.wo.cursorline     = true
 
 -- Searching: Patterns 
 vim.opt.hlsearch      = false
-vim.opt.incsearch     = false
 vim.opt.ignorecase    = true
 
 -- Searching: Files

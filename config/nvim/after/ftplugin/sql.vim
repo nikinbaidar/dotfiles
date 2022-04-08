@@ -7,7 +7,7 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 function! CodeRunner()
-    :write!
+    :update
     :let @d = 'm5vip rs`5'
     :normal! @d
 endfunction

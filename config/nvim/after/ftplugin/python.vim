@@ -6,7 +6,11 @@
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+setlocal colorcolumn=80
+
 function! CodeRunner()
-    :write!
-    :! python %
+  update
+  below split
+  resize 15
+  term python %
 endfunction

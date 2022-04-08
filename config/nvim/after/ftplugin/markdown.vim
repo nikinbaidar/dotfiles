@@ -8,7 +8,7 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 setlocal textwidth=69
-setlocal colorcolumn=70
+" setlocal colorcolumn=70
 setlocal spell
 setlocal complete+=kspell
 setlocal spellcapcheck=\_[\])'"   ]\+

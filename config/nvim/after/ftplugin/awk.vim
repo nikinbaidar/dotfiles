@@ -7,6 +7,6 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 function! CodeRunner()
- :write!
+ :update
  :! awk -f % /proc/loadavg
 endfunction

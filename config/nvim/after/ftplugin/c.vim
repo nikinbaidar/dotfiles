@@ -6,9 +6,11 @@
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-function! CodeRunner()
-    write!
-    ! gcc % -o ~/Documents/Common-Projects/c/.runcode -lm && ~/Documents/Common-Projects/c/.runcode
-endfunction
+setlocal cc=80
 
-command! PF execute("%s/print(/printf(")
+function! CodeRunner()
+  update
+  below split
+  resize 10
+  terminal gcc % -o /tmp/runcode && /tmp/runcode
+endfunction
