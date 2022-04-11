@@ -1,11 +1,11 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx  = 2;        /* border pixel of windows */
-static const unsigned int snap      = 32;       /* snap pixel */
-static const unsigned int gappx     = 5;        /* gaps between windows */
-static const int showbar            = 1;        /* 0 means no bar */
-static const int topbar             = 1;        /* 0 means bottom bar */
+static const unsigned int borderpx  = 2;    
+static const unsigned int snap      = 32; 
+static const unsigned int gappx     = 5;     
+static const int showbar            = 1;      
+static const int topbar             = 1;        
 static const char *fonts[]          = { "monospace:size=10" };
 static const char dmenufont[]       = "monospace:size=10";
 static const char col_gray1[]       = "#222222";
@@ -43,16 +43,16 @@ static const Rule rules[] = {
 };
 
 /* layout(s) */
-static const float mfact     = 0.55; /* factor of master area */
-static const int nmaster     = 1;    /* number of clients in master area */
-static const int resizehints = 0;    /* 1 means respect size hints */
+static const float mfact        = 0.55; 
+static const int nmaster        = 1;   
+static const int resizehints    = 0;   
 static const int lockfullscreen = 1; /* force focus on the fullscreen window */
 
 static const Layout layouts[] = {
     /* symbol     arrange function */
     { "[]=",      tile },    /* first entry is default */
-    { "[M]",      monocle },
     { "><>",      NULL },    /* no layout function means floating behavior */
+    { "[M]",      monocle },
 };
 
 /* key definitions */
@@ -65,13 +65,14 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0";
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", \
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn",      \
     dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", \
     col_gray3, NULL };
-static const char *termcmd[]        = { "st", "-e", "tmux", NULL };
-static const char *nop[]            = { "thisScriptDoesNothing", NULL };
-static const char *screenshotcmd[]  = { "grabScreenSelection", NULL };
-/* Select Monitor Setup */
+static const char *termcmd[]       = { "st", "tmux", NULL };
+static const char *nop[]           = { "no_operation", NULL };
+static const char *screenshotcmd[] = { "grabScreenSelection", NULL };
+
+/* Monitor Setup */
 static const char *dualmon[]        = { "dualmonitor", NULL };
 static const char *externalmon[]    = { "singlemonitor", NULL };
 
