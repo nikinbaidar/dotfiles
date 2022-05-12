@@ -7,8 +7,10 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 function! CodeRunner()
-    update
-    execute ("silent ! ${HOME}/.local/bin/reloadLocalFile")
+    if &modified
+        write!
+        execute ("silent ! ${HOME}/.local/bin/reloadLocalFile")
+    endif
 endfunction
 
 " autocmd BufWritecmd *.css call CodeRunner()

@@ -14,12 +14,10 @@ let g:colors_name = "ayu"
 
 let s:palette = {}
 
-"#0d0f0f"
-"#0F1419"
+let s:palette.bg        = {'dark': "#0d0f0f",  'light': "#FAFAFA",  'mirage': "#212733"}
 
-let s:palette.bg        = {'dark': "#0D0F0F",  'light': "#FAFAFA",  'mirage': "#212733"}
-
-let s:palette.comment   = {'dark': "#a89984",  'light': "#ABB0B6",  'mirage': "#5C6773"}
+let s:palette.comment   = {'dark': "#5C6773",  'light': "#ABB0B6",  'mirage': "#5C6773"}
+let s:palette.errorfg   = {'dark': "#ffffff",  'light': "#ABB0B6",  'mirage': "#5C6773"}
 let s:palette.markup    = {'dark': "#F07178",  'light': "#F07178",  'mirage': "#F07178"}
 let s:palette.constant  = {'dark': "#FFEE99",  'light': "#A37ACC",  'mirage': "#D4BFFF"}
 let s:palette.operator  = {'dark': "#E7C547",  'light': "#E7C547",  'mirage': "#80D4FF"}
@@ -28,13 +26,13 @@ let s:palette.regexp    = {'dark': "#95E6CB",  'light': "#4CBF99",  'mirage': "#
 let s:palette.string    = {'dark': "#B8CC52",  'light': "#86B300",  'mirage': "#BBE67E"}
 let s:palette.function  = {'dark': "#FFB454",  'light': "#F29718",  'mirage': "#FFD57F"}
 let s:palette.special   = {'dark': "#E6B673",  'light': "#E6B673",  'mirage': "#FFC44C"}
-let s:palette.entry     = {'dark': "#87afaf",  'light': "#E6B673",  'mirage': "#FFC44C"}
+let s:palette.entry     = {'dark': "#87AFAF",  'light': "#E6B673",  'mirage': "#FFC44C"}
 let s:palette.keyword   = {'dark': "#FF7733",  'light': "#FF7733",  'mirage': "#FFAE57"}
 
-let s:palette.error     = {'dark': "#FF3333",  'light': "#FF3333",  'mirage': "#FF3333"}
+let s:palette.error     = {'dark': "#cc241d",  'light': "#FF3333",  'mirage': "#FF3333"}
 let s:palette.accent    = {'dark': "#F29718",  'light': "#FF6A00",  'mirage': "#FFCC66"}
 let s:palette.panel     = {'dark': "#14191F",  'light': "#FFFFFF",  'mirage': "#272D38"}
-let s:palette.guide     = {'dark': "#bdae93",  'light': "#D9D8D7",  'mirage': "#3D4751"}
+let s:palette.guide     = {'dark': "#767676",  'light': "#D9D8D7",  'mirage': "#3D4751"}
 let s:palette.line      = {'dark': "#151A1E",  'light': "#F3F3F3",  'mirage': "#242B38"}
 let s:palette.red       = {'dark': "#fb4934",  'light': "#F3F3F3",  'mirage': "#242B38"}
 let s:palette.selection = {'dark': "#253340",  'light': "#F0EEE4",  'mirage': "#343F4C"}
@@ -100,7 +98,7 @@ exe "hi! Directory"     .s:fg_function    .s:bg_none        .s:fmt_none
 exe "hi! DiffAdd"       .s:fg_string      .s:bg_panel       .s:fmt_none
 exe "hi! DiffChange"    .s:fg_tag         .s:bg_panel       .s:fmt_none
 exe "hi! DiffText"      .s:fg_fg          .s:bg_panel       .s:fmt_none
-exe "hi! ErrorMsg"      .s:fg_fg          .s:bg_error       .s:fmt_stnd
+exe "hi! ErrorMsg"      .s:fg_error       .s:bg_errorfg       .s:fmt_stnd
 exe "hi! VertSplit"     .s:fg_bg          .s:bg_none        .s:fmt_none
 exe "hi! Folded"        .s:fg_fg_idle     .s:bg_panel       .s:fmt_none
 exe "hi! FoldColumn"    .s:fg_none        .s:bg_panel       .s:fmt_none
@@ -118,8 +116,8 @@ exe "hi! PmenuSel"      .s:fg_fg          .s:bg_selection   .s:fmt_revr
 exe "hi! Question"      .s:fg_string      .s:bg_none        .s:fmt_none
 exe "hi! Search"        .s:fg_bg          .s:bg_constant    .s:fmt_none
 exe "hi! SpecialKey"    .s:fg_entry       .s:bg_none        .s:fmt_none
-exe "hi! SpellCap"      .s:fg_none        .s:bg_none        .s:fmt_none
-exe "hi! SpellLocal"    .s:fg_keyword     .s:bg_none        .s:fmt_undr
+exe "hi! SpellCap"      .s:fg_none         .s:bg_none       .s:fmt_none
+exe "hi! SpellLocal"    .s:fg_keyword     .s:bg_none        .s:fmt_none
 exe "hi! SpellBad"      .s:fg_error       .s:bg_none        .s:fmt_undr
 exe "hi! SpellRare"     .s:fg_regexp      .s:bg_none        .s:fmt_undr
 exe "hi! StatusLine"    .s:fg_fg          .s:bg_panel       .s:fmt_none
@@ -183,7 +181,7 @@ exe "hi! Underlined"      .s:fg_tag       .s:bg_none        .s:fmt_undr
 
 exe "hi! Ignore"          .s:fg_none      .s:bg_none        .s:fmt_none
 
-exe "hi! Error"           .s:fg_fg        .s:bg_none       .s:fmt_none
+exe "hi! Error"           .s:fg_none        .s:bg_none       .s:fmt_none
 
 exe "hi! Todo"            .s:fg_markup    .s:bg_none        .s:fmt_none
 

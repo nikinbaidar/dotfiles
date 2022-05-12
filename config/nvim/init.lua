@@ -16,10 +16,6 @@ require('bindings')
 require('packages')
 require('config')
 
-require 'nvim-treesitter.configs'.setup {
-  highlight = { enable = true }
-}
-
 -- Auto-commands
 vim.cmd [[ 
 

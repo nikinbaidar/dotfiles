@@ -1,12 +1,6 @@
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Vim ftplugin file
-"
-" Language: Bash
-" Maintainer: Nikin Baidar <nikinbaidarr@gmai.com>
-"
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set cc=80
 
 function! CodeRunner()
-    :update
-    :! bash %
+    update!
+    ! bash %
 endfunction

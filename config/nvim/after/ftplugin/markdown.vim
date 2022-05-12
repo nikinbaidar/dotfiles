@@ -7,14 +7,14 @@
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-setlocal textwidth=69
-" setlocal colorcolumn=70
+setlocal textwidth=79
+setlocal colorcolumn=
 setlocal spell
 setlocal complete+=kspell
 setlocal spellcapcheck=\_[\])'"   ]\+
 
 " Title case an entire line
-command! Gt :s/\<\(\w\)\(\w*\)\>/\u\1\L\2/g
+command! MakeTitleCase :s/\<\(\w\)\(\w*\)\>/\u\1\L\2/g
 " Set the main heading to filename
 command! IH execute("call Create_h1()")
 command! Date :.! echo "\#\# $(date +'\%a \%b \%d \%Y')"

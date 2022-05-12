@@ -9,8 +9,8 @@
 setlocal spell
 
 function! CodeRunner()
-    update!
     if &modified
+        write!
         execute ("silent ! echo %:p > /tmp/localFilename")
         execute ("silent ! ~/.local/bin/reloadLocalFile")
     endif

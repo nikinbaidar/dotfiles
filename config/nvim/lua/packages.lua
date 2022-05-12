@@ -6,6 +6,7 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
 -- Plug 'mattn/emmet-vim'
 -- Plug 'kezhenxu94/vim-mysql-plugin'
 

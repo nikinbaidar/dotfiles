@@ -6,11 +6,11 @@
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-setlocal colorcolumn=80
-
 function! CodeRunner()
-  update
-  below split
-  resize 15
-  term python %
+    update!
+    below split
+    resize 15
+    term python %
 endfunction
+
+setlocal cc=80

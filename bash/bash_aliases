@@ -13,7 +13,8 @@ alias pqiv="pqiv >& /dev/null"
 alias zathura="zathura --fork"
 alias octave="octave --silent"
 alias R="R --silent"
-alias qrencode="qrencode --type utf8"
+alias genqr="xclip -o | qrencode --type utf8"
+alias dropbox="dropbox-cli"
 
 ## Works with .pptx and .docx FIXED DEPRECIATION
 alias convert2pdf="soffice --headless --convert-to pdf"

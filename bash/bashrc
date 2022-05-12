@@ -9,10 +9,20 @@
 PS1='\[\e[01;31m\][\[\e[01;33m\]\u\[\e[01;34m\]@\[\e[01;36m\]\h\[\e[01;37m\]:'\
 ' \[\e[01;35m\]\W\[\e[01;31m\]]\[\e[01;32m\]$\[\e[00;37m\] '
 
-export EDITOR=vim
-export LESS="eFRX"
-export GOPATH=$HOME/.config/go
-export PATH=$PATH:${HOME}/.local/bin:/opt/afni
+# XDG Base Directory Specs
+export XDG_CONFIG_HOME=$HOME/.config
+export XDG_DATA_HOME=$HOME/.local/share
+export GOPATH=$XDG_CONFIG_HOME/go
+export JUPYTER_CONFIG_DIR=$XDG_CONFIG_HOME/jupyter
+export STARDICT_DATA_DIR=$XDG_CONFIG_HOME
+export PYTHONPATH=$XDG_DATA_HOME/python
+export LESSHISTFILE=$XDG_DATA_HOME/lesshist
+export INPUTRC=$XDG_CONFIG_HOME/readline/inputrc
+
+export LESS="X"
+export EDITOR=nvim
+export PATH=$PATH:${HOME}/.local/bin:/opt/afni:/opt/fsl/bin
+export TF_CPP_MIN_LOG_LEVEL=1
 
 # Config for lf File Manager
 export LF_ICONS="tw=:st=:ow=:dt=:di=:fi=:ln=:or=:ex=:\
@@ -34,6 +44,6 @@ shopt -s checkjobs
 # Instead of adding all of you aliases here directly,
 # Put all your aliases into a separate file named ~/.bash_aliases
 
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
+if [ -f ~/.config/bash/bash_aliases ]; then
+    . ~/.config/bash/bash_aliases
 fi

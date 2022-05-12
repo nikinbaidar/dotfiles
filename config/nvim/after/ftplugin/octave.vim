@@ -5,10 +5,10 @@
 " Maintainer: Nikin Baidar <nikinbaidarr@gmai.com>
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-setlocal filetype="matlab"
+setlocal filetype=matlab
 
 function! CodeRunner()
-    :update
+    :write!
     :! octave %
 endfunction
+
