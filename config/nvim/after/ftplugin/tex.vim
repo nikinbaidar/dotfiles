@@ -38,7 +38,7 @@ function! ViewPDF()
     if empty(expand(glob(g:pdffile)))
         let g:pdffile = "../*.pdf"
     endif
-    execute ("silent ! zathura --fork") g:pdffile
+    execute ("silent ! jumanji") g:pdffile
 endfunction
 
 function! BiblatexCompile()
