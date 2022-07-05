@@ -1,5 +1,5 @@
 -- Don't create swap files
-vim.opt.swapfile      = false
+vim.opt.swapfile       = false
 
 -- Navigation 
 vim.opt.mouse          = "a"
@@ -50,10 +50,30 @@ require 'nvim-treesitter.configs'.setup {
   incremental_selection = {
     enable = true,
     keymaps = {
-      init_selection    = "<leader>tn", -- this node
-      node_incremental  = "<leader>in",
-      node_decremental  = "<leader>dn",
+      init_selection = "<leader>tn", -- this node
+      node_incremental = "<leader>in", -- increase node
+      node_decremental = "<leader>dn", -- decrease node
       scope_incremental = "grc"
     }
   } 
 }
+
+-- LSP config
+local lsp = require('lspconfig')
+
+lsp.pyright.setup {
+  autostart = false,
+  root_dir = function()
+    return vim.fn.getcwd()
+  end
+}
+
+-- Lua functions
+--
+
+function RecordSpellingMistakes()
+  vim.api.nvim_command("tabe ~/repos/dots/config/nvim/lua/abbreviations.lua")
+  vim.api.nvim_command("normal! GOgt")
+  vim.api.nvim_command("silent 0,$ normal! gg]sywgtiabbr pogT1z=")
+  vim.api.nvim_command("normal! gt")
+end

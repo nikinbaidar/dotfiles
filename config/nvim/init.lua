@@ -12,9 +12,10 @@
                               ||     ||
 --]]
 
-require('bindings')
 require('packages')
 require('config')
+require('bindings')
+require('abbreviations')
 
 -- Auto-commands
 vim.cmd [[ 

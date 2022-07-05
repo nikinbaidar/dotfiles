@@ -2,5 +2,7 @@ set cc=80
 
 function! CodeRunner()
     update!
-    ! bash %
+    below split
+    resize 15
+    term bash %
 endfunction

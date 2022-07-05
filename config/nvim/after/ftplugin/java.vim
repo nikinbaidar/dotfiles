@@ -7,6 +7,6 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 function! CodeRunner()
-    :write!
-    :! java %
+    update
+    term java %
 endfunction

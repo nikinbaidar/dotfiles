@@ -2,15 +2,15 @@
 " Vim ftplugin file
 "
 " Language: CSS
-" Maintainer: Nikin Baidar <nikinbaidarr@gmai.com>
+" Maintainer: Nikin Baidar <nikinbaidarr@gmail.com>
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 function! CodeRunner()
-    if &modified
-        write!
-        execute ("silent ! ${HOME}/.local/bin/reloadLocalFile")
-    endif
+  if &modified
+    write!
+    execute ("silent ! ~/.local/bin/reloadLocalFile")
+  endif
 endfunction
 
-" autocmd BufWritecmd *.css call CodeRunner()
+autocmd BufWritecmd *.css call CodeRunner()
